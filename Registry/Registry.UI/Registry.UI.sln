@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry.UI", "Registry.UI.csproj", "{64FB6368-AD76-41BA-8633-F5EC29FB06EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry.Permissions", "..\Registry.Permissions\Registry.Permissions.csproj", "{BB227AD4-2969-48E9-9F13-5FEE7282F729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry", "Registry\Registry.csproj", "{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{64FB6368-AD76-41BA-8633-F5EC29FB06EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64FB6368-AD76-41BA-8633-F5EC29FB06EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64FB6368-AD76-41BA-8633-F5EC29FB06EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB227AD4-2969-48E9-9F13-5FEE7282F729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB227AD4-2969-48E9-9F13-5FEE7282F729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB227AD4-2969-48E9-9F13-5FEE7282F729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB227AD4-2969-48E9-9F13-5FEE7282F729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

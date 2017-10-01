@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Registry.UI.UserControls.Admin.ChangeUser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Registry.UI.UserControls.Admin"
+             mc:Ignorable="d" Loaded="UserControl_Loaded" >
+    <Grid MinWidth="200"  HorizontalAlignment="Center" VerticalAlignment="Top" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0">Start typing of user login:</TextBlock>
+        <TextBox Name="UserFilterTextBox" Grid.Row="1" TextChanged="UserFilterTextBox_TextChanged"></TextBox>
+        <ListView Name="UsersListBox" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="UsersListBox_OnSelected">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                        <GridViewColumn Header="Login" DisplayMemberBinding="{Binding Path=Login}"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="BackButton" Grid.Row="3" Margin="0,10,0,0" Click="BackButton_Click">Back</Button>
+    </Grid>
+</UserControl>

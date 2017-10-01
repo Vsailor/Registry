@@ -12,21 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Registry.UI.UserControls;
+using Registry.Permissions;
+using Registry.UI.Extensions;
 
-namespace Registry.UI
+namespace Registry.UI.UserControls.Admin
 {
   /// <summary>
-  /// Interaction logic for MainWindow.xaml
+  /// Interaction logic for CreateUser.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class CreateUser : UserControl
   {
-    public MainWindow()
+    public CreateUser()
     {
       InitializeComponent();
-      RegistryCommon.Instance.MainGrid = MainGrid;
-      RegistryCommon.Instance.MainProgressBar = MainProgressBar;
-      MainGrid.Children.Add(new Login());
+      RoleCombobox.ItemsSource = Enum.GetNames(typeof (Role));
+    }
+
+    private void BackUserButton_Click(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new AdminMain());
     }
   }
 }

@@ -12,21 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Registry.UI.UserControls;
+using Registry.UI.Extensions;
+using Registry.UI.UserControls.Admin;
 
-namespace Registry.UI
+namespace Registry.UI.UserControls
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
+  public partial class AuthorizedUserBackground : UserControl
   {
-    public MainWindow()
+    public AuthorizedUserBackground()
     {
       InitializeComponent();
-      RegistryCommon.Instance.MainGrid = MainGrid;
-      RegistryCommon.Instance.MainProgressBar = MainProgressBar;
-      MainGrid.Children.Add(new Login());
+    }
+
+    private void SignOutButton_Click(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControl(new Login());
     }
   }
 }
