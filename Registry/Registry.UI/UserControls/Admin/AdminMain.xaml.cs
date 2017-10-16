@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
+using Registry.Common;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
 

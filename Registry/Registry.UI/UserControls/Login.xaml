@@ -14,9 +14,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0">Login:</TextBlock>
-        <TextBox Grid.Row="1" Margin="0,10,0,10"></TextBox>
+        <TextBox Grid.Row="1" Margin="0,10,0,10" Name="LoginTextBox"></TextBox>
         <TextBlock Grid.Row="2">Password:</TextBlock>
-        <PasswordBox Grid.Row="3" Margin="0,10,0,10" ></PasswordBox>
+        <PasswordBox Grid.Row="3" Margin="0,10,0,10" Name="PasswordTextBox"></PasswordBox>
         <Button Name="SignInButton" Grid.Row="4" Click="SignInButton_Click">Sign in</Button>
     </Grid>
 </UserControl>

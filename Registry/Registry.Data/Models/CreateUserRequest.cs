@@ -1,8 +1,8 @@
 ﻿using Registry.Common;
 
-namespace Registry.Models
+namespace Registry.Data.Models
 {
-  public class UserDetailedInfo
+  public class CreateUserRequest
   {
     public string Login { get; set; }
 
@@ -11,7 +11,5 @@ namespace Registry.Models
     public string Password { get; set; }
 
     public Role Role { get; set; }
-
-    public bool IsActive { get; set; }
   }
 }

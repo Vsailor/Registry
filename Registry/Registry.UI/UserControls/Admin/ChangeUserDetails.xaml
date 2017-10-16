@@ -34,8 +34,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Name="BackButton" Grid.Column="0" Margin="0,0,10,0" Click="BackButton_Click">Back</Button>
-            <Button Name="DeleteUserButton" Grid.Column="1" Margin="5,0,5,0">Delete</Button>
-            <Button Name="UpdateUserButton" Grid.Column="2" Margin="10,0,0,0">Update</Button>
+            <Button Name="DeleteUserButton" Grid.Column="1" Margin="5,0,5,0" Click="DeleteUserButton_Click">Delete</Button>
+            <Button Name="UpdateUserButton" Grid.Column="2" Margin="10,0,0,0" Click="UpdateUserButton_Click">Update</Button>
         </Grid>
     </Grid>
 </UserControl>

@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Registry.Permissions;
+using Microsoft.Practices.Unity;
+using Registry.Common;
+using Registry.Services.Abstract;
 using Registry.UI.Extensions;
 
 namespace Registry.UI.UserControls.Admin
@@ -22,15 +24,31 @@ namespace Registry.UI.UserControls.Admin
   /// </summary>
   public partial class CreateUser : UserControl
   {
+    private IUserService _userService;
+
     public CreateUser()
     {
       InitializeComponent();
       RoleCombobox.ItemsSource = Enum.GetNames(typeof (Role));
+      _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
     }
 
     private void BackUserButton_Click(object sender, RoutedEventArgs e)
     {
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new AdminMain());
+    }
+
+    private async void CreateUserButton_Click(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
+
+      await _userService.CreateUser(
+        LoginTextBox.Text, 
+        NameTextBox.Text, 
+        PasswordTextBox.Password,
+        (Role)Enum.Parse(typeof(Role), RoleCombobox.SelectedValue.ToString()));
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }
   }
 }

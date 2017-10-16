@@ -18,11 +18,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0">Name:</TextBlock>
-        <TextBox Grid.Row="1" ></TextBox>
+        <TextBox Grid.Row="1" Name="NameTextBox"></TextBox>
         <TextBlock Grid.Row="2" Margin="0,10,0,0">Login:</TextBlock>
-        <TextBox Grid.Row="3"></TextBox>
+        <TextBox Grid.Row="3" Name="LoginTextBox"></TextBox>
         <TextBlock Grid.Row="4" Margin="0,10,0,0">Password:</TextBlock>
-        <PasswordBox Grid.Row="5"></PasswordBox>
+        <PasswordBox Grid.Row="5" Name="PasswordTextBox"></PasswordBox>
         <TextBlock Grid.Row="6" Margin="0,10,0,0">Role:</TextBlock>
         <ComboBox Name="RoleCombobox"  Grid.Row="7"></ComboBox>
         <Grid Grid.Row="8" Margin="0,20,0,0">
@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Name="BackUserButton" Grid.Column="0" Margin="0,0,10,0" Click="BackUserButton_Click">Back</Button>
-            <Button Name="CreateUserButton" Grid.Column="1" Margin="10,0,0,0">Create</Button>
+            <Button Name="CreateUserButton" Grid.Column="1" Margin="10,0,0,0" Click="CreateUserButton_Click">Create</Button>
         </Grid>
     </Grid>
 </UserControl>

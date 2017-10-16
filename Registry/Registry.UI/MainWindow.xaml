@@ -14,6 +14,10 @@
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0">
             <Grid Name="MainGrid"></Grid>
         </ScrollViewer>
-        <ProgressBar Name="MainProgressBar" Height="20" Grid.Row="1" Visibility="Collapsed" IsIndeterminate="True"></ProgressBar>
+        <StatusBar Height="22" Grid.Row="1" Visibility="Visible">
+            <StatusBarItem>
+                <TextBlock Name="MainProgressBar"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

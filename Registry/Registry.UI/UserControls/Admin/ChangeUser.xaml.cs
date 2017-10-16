@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
+using Registry.Common;
 using Registry.Models;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
@@ -60,18 +61,9 @@ namespace Registry.UI.UserControls.Admin
 
     private async void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-      var getAllUsersTask = _userService.GetAllUsers();
-      RegistryCommon.Instance.MainProgressBar.Visibility = Visibility.Visible;
-
-      UsersListBox.ItemsSource = await getAllUsersTask.ContinueWith(task =>
-      {
-        Dispatcher.Invoke(() =>
-        {
-          RegistryCommon.Instance.MainProgressBar.Visibility = Visibility.Collapsed;
-        });
-
-        return task.Result;
-      });
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
+      UsersListBox.ItemsSource = await _userService.GetAllUsers();
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
   }
 }

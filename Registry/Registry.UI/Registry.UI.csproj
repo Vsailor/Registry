@@ -74,7 +74,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions\GridExtension.cs" />
-    <Compile Include="RegistryCommon.cs" />
     <Compile Include="UserControls\Admin\AdminMain.xaml.cs">
       <DependentUpon>AdminMain.xaml</DependentUpon>
     </Compile>
@@ -150,9 +149,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Registry.Permissions\Registry.Permissions.csproj">
-      <Project>{BB227AD4-2969-48E9-9F13-5FEE7282F729}</Project>
-      <Name>Registry.Permissions</Name>
+    <ProjectReference Include="..\Registry.Common\Registry.Common.csproj">
+      <Project>{BF630FEE-879A-4AD7-9D30-756B92F20100}</Project>
+      <Name>Registry.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Registry.Data\Registry.Data.csproj">
+      <Project>{66BF7ECF-0D91-40C0-8B36-80D1AD009464}</Project>
+      <Name>Registry.Data</Name>
     </ProjectReference>
     <ProjectReference Include="Registry\Registry.csproj">
       <Project>{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}</Project>

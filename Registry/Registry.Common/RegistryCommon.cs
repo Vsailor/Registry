@@ -1,7 +1,8 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using Microsoft.Practices.Unity;
 
-namespace Registry.UI
+namespace Registry.Common
 {
   public class RegistryCommon
   {
@@ -23,8 +24,8 @@ namespace Registry.UI
 
     public Grid MainGrid { get; set; }
 
-    public ProgressBar MainProgressBar { get; set; }
+    public TextBlock MainProgressBar { get; set; }
 
-    public IUnityContainer Container { get; set; }
+    public UnityContainer Container { get; set; }
   }
 }

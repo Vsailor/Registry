@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
+using Registry.Common;
 using Registry.Models;
-using Registry.Permissions;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
 
@@ -43,22 +43,73 @@ namespace Registry.UI.UserControls.Admin
 
     private async void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-      RegistryCommon.Instance.MainProgressBar.Visibility = Visibility.Visible;
-      UserDetailedInfo user = await _userService.GetUser(_login).ContinueWith(task =>
-      {
-        Dispatcher.Invoke(() =>
-        {
-          RegistryCommon.Instance.MainProgressBar.Visibility = Visibility.Collapsed;
-        });
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
-        return task.Result;
-      });
+      UserDetailedInfo user = await _userService.GetUser(_login);
 
       LoginTextBox.Text = user.Login;
       NameTextBox.Text = user.Name;
       IsActiveCheckBox.IsChecked = user.IsActive;
       RoleCombobox.ItemsSource = Enum.GetNames(typeof(Role));
       RoleCombobox.SelectedValue = user.Role.ToString();
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
+    }
+
+    private async void UpdateUserButton_Click(object sender, RoutedEventArgs e)
+    {
+      if (!CheckFields(LoginTextBox.Text, "Login") ||
+          !CheckFields(PasswordTextBox.Password, "Password") ||
+          !CheckFields(NameTextBox.Text, "Name"))
+      {
+        return;
+      }
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
+
+      await _userService.UpdateUser(
+        LoginTextBox.Text,
+        NameTextBox.Text,
+        PasswordTextBox.Password,
+        (Role) Enum.Parse(typeof (Role), RoleCombobox.SelectedValue.ToString()),
+        IsActiveCheckBox.IsChecked ?? false);
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
+    }
+
+    private bool CheckFields(string field, string name)
+    {
+      if (string.IsNullOrEmpty(field))
+      {
+        string errorMessage = $"{name} can't be empty";
+        MessageBox.Show(
+          errorMessage,
+          "Error",
+          MessageBoxButton.OK,
+          MessageBoxImage.Stop);
+
+        RegistryCommon.Instance.MainProgressBar.Text = errorMessage;
+        return false;
+      }
+
+      return true;
+    }
+
+    private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
+    {
+      MessageBoxResult result =  MessageBox.Show(
+        "You will not be able to undo this action",
+        "Confirm deletion",
+        MessageBoxButton.YesNoCancel,
+        MessageBoxImage.Asterisk);
+      if (result != MessageBoxResult.Yes)
+      {
+        return;
+      }
+
+      await _userService.DeleteUser(LoginTextBox.Text);
+
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new ChangeUser(_filter));
     }
   }
 }
