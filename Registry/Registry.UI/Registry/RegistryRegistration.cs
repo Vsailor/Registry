@@ -9,6 +9,7 @@ namespace Registry
     public static void Register(IUnityContainer container)
     {
       container.RegisterType<IUserService, UserService>();
+      container.RegisterType<ICategoryService, CategoryService>();
     }
   }
 }

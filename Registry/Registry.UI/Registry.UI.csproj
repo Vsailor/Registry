@@ -74,8 +74,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions\GridExtension.cs" />
-    <Compile Include="UserControls\Admin\AdminMain.xaml.cs">
-      <DependentUpon>AdminMain.xaml</DependentUpon>
+    <Compile Include="UserControls\Categories.xaml.cs">
+      <DependentUpon>Categories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Admin\ChangeUser.xaml.cs">
       <DependentUpon>ChangeUser.xaml</DependentUpon>
@@ -104,7 +107,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\Admin\AdminMain.xaml">
+    <Page Include="UserControls\Categories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

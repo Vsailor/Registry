@@ -35,7 +35,7 @@ namespace Registry.UI.UserControls.Admin
 
     private void BackUserButton_Click(object sender, RoutedEventArgs e)
     {
-      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new AdminMain());
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UserControls.MainMenu());
     }
 
     private async void CreateUserButton_Click(object sender, RoutedEventArgs e)

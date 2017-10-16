@@ -10,11 +10,8 @@ using Registry.Data.Services.Abstract;
 
 namespace Registry.Data.Services
 {
-  public class UserRepository : IUserRepository
+  public class UserRepository : BaseRepository, IUserRepository
   {
-    private readonly string _connectionString = 
-      ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
     public async Task CreateUser(CreateUserRequest request)
     {
       var parameters = new DynamicParameters();
@@ -23,7 +20,7 @@ namespace Registry.Data.Services
       parameters.Add("@password", request.Password);
       parameters.Add("@role", (int)request.Role);
 
-      using (IDbConnection conn = new SqlConnection(_connectionString))
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         await conn.ExecuteAsync(
           StoredProcedures.CreateUser, 
@@ -41,7 +38,7 @@ namespace Registry.Data.Services
       parameters.Add("@role", (int)request.Role);
       parameters.Add("@enabled", request.IsEnabled);
 
-      using (IDbConnection conn = new SqlConnection(_connectionString))
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         await conn.ExecuteAsync(
           StoredProcedures.UpdateUser,
@@ -55,7 +52,7 @@ namespace Registry.Data.Services
       var parameters = new DynamicParameters();
       parameters.Add("@login", login);
 
-      using (IDbConnection conn = new SqlConnection(_connectionString))
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         await conn.ExecuteAsync(
           StoredProcedures.DeleteUser,
@@ -67,7 +64,7 @@ namespace Registry.Data.Services
     public async Task<GetAllUsersResult[]> GetAllUsers()
     {
       IEnumerable<GetAllUsersResult> result;
-      using (IDbConnection conn = new SqlConnection(_connectionString))
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
          result = await conn.QueryAsync<GetAllUsersResult>(
           StoredProcedures.GetAllUsers,
@@ -88,7 +85,7 @@ namespace Registry.Data.Services
       parameters.Add("@login", login);
 
       IEnumerable<GetUserByLoginResult> result;
-      using (IDbConnection conn = new SqlConnection(_connectionString))
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         result = await conn.QueryAsync<GetUserByLoginResult>(
          StoredProcedures.GetUserByLogin,

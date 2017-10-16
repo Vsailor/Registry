@@ -9,6 +9,7 @@ namespace Registry.Data
     public static void Register(IUnityContainer container)
     {
       container.RegisterType<IUserRepository, UserRepository>();
+      container.RegisterType<ICategoryRepository, CategoryRepository>();
     }
   }
 }
