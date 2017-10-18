@@ -24,9 +24,9 @@
         <TextBox Name ="NameTextBox"  Grid.Row="3"></TextBox>
         <TextBlock Grid.Row="4" Margin="0,10,0,0">Password:</TextBlock>
         <PasswordBox Name="PasswordTextBox"  Grid.Row="5"></PasswordBox>
-        <TextBlock Grid.Row="6" Margin="0,10,0,0">Role:</TextBlock>
-        <ComboBox Name="RoleCombobox"  Grid.Row="7"></ComboBox>
-        <CheckBox Name="IsActiveCheckBox" IsChecked="True" Grid.Row="8" Margin="0,10,0,0">Active</CheckBox>
+        <CheckBox Name="IsActiveCheckBox" IsChecked="True" Grid.Row="6" Margin="0,10,0,0">Active</CheckBox>
+        <TextBlock Grid.Row="7" Margin="0,10,0,0" Name="PermissionsTextBlock">Permissions:</TextBlock>
+        <ListBox Grid.Row="8" Height="100" Name="PermissionsList"></ListBox>
         <Grid Grid.Row="9" Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Registry.Common;
 using Registry.Services.Abstract;
@@ -29,8 +30,15 @@ namespace Registry.UI.UserControls.Admin
     public CreateUser()
     {
       InitializeComponent();
-      RoleCombobox.ItemsSource = Enum.GetNames(typeof (Role));
       _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
+      PermissionCommon.Titles.ForEach(item =>
+      {
+        PermissionsList.Items.Add(new CheckBox
+        {
+          Name = item.Key.ToString(),
+          Content = item.Value
+        });
+      });
     }
 
     private void BackUserButton_Click(object sender, RoutedEventArgs e)
@@ -42,11 +50,20 @@ namespace Registry.UI.UserControls.Admin
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
 
+      var permissions = new List<Permission>();
+      foreach (CheckBox item in PermissionsList.Items)
+      {
+        if (item.IsChecked == true)
+        {
+          permissions.Add((Permission)Enum.Parse(typeof(Permission), item.Name));
+        }
+      }
+
       await _userService.CreateUser(
         LoginTextBox.Text, 
         NameTextBox.Text, 
         PasswordTextBox.Password,
-        (Role)Enum.Parse(typeof(Role), RoleCombobox.SelectedValue.ToString()));
+        permissions.ToArray());
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }

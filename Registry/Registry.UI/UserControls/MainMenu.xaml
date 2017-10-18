@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Button Name="NewUserButton" Grid.Row="0" MaxWidth="200" Click="NewUserButton_Click">New user</Button>
-        <Button Name="ChangeUserButton" Grid.Row="1" MaxWidth="200" Margin="0,10,0,0" Click="ChangeUserButton_Click">Change user</Button>
+        <Button Name="ChangeUserButton" Grid.Row="1" MaxWidth="200" Margin="0,10,0,0" Click="ChangeUserButton_Click">Users</Button>
         <Button Name="CategoriesButton" Grid.Row="2" MaxWidth="200" Margin="0,10,0,0" Click="CategoriesButton_Click">Categories</Button>
     </Grid>
 </UserControl>

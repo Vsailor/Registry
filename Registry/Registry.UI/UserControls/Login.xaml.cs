@@ -63,7 +63,8 @@ namespace Registry.UI.UserControls
 
       UserDetailedInfo result = await _userService.GetUser(LoginTextBox.Text);
       if (result == null ||
-        SecurityService.Crypt(PasswordTextBox.Password) != result.Password)
+        SecurityService.Crypt(PasswordTextBox.Password) != result.Password ||
+        !result.IsActive)
       {
         MessageBox.Show(
           StatusBarState.InvalidUserNameOrPassword,
@@ -76,6 +77,7 @@ namespace Registry.UI.UserControls
         return;
       }
 
+      RegistryCommon.Instance.UserPermissions = result.Permissions;
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new MainMenu());
       RegistryCommon.Instance.MainProgressBar.Text = $"Hi, {result.Name}";
     }

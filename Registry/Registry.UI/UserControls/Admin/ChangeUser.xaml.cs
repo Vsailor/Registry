@@ -53,6 +53,11 @@ namespace Registry.UI.UserControls.Admin
 
     private void UsersListBox_OnSelected(object sender, RoutedEventArgs e)
     {
+      if (!RegistryCommon.Instance.CheckPermissions(Permission.UpdateUser, Permission.DeleteUser))
+      {
+        return;
+      }
+
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(
         new ChangeUserDetails(
           UserFilterTextBox.Text, 

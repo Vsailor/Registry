@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryCommon.cs" />
-    <Compile Include="Role.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="StatusBarState.cs" />
   </ItemGroup>
   <ItemGroup>

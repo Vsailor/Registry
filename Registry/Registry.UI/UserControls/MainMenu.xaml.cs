@@ -11,6 +11,10 @@ namespace Registry.UI.UserControls
     public MainMenu()
     {
       InitializeComponent();
+
+      NewUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CreateUser);
+      ChangeUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.SeeUserList);
+      CategoriesButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.SeeCategoriesList);
     }
 
     private void NewUserButton_Click(object sender, RoutedEventArgs e)
@@ -18,7 +22,7 @@ namespace Registry.UI.UserControls
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new CreateUser());
     }
 
-    private async void ChangeUserButton_Click(object sender, RoutedEventArgs e)
+    private void ChangeUserButton_Click(object sender, RoutedEventArgs e)
     {
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new ChangeUser());
     }

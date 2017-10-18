@@ -11,7 +11,7 @@ namespace Registry.Services.Abstract
 
     Task<UserDetailedInfo> GetUser(string login);
 
-    Task CreateUser(string login, string name, string password, Role role);
+    Task CreateUser(string login, string name, string password, Permission[] permissions);
 
     Task DeleteUser(string login);
 
@@ -19,7 +19,8 @@ namespace Registry.Services.Abstract
       string login,
       string name,
       string password,
-      Role role,
-      bool isActive);
+      bool isActive,
+      bool cryptPassword,
+      Permission[] permissions);
   }
 }

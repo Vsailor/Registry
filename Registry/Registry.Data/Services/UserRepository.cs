@@ -18,7 +18,7 @@ namespace Registry.Data.Services
       parameters.Add("@login", request.Login);
       parameters.Add("@name", request.Name);
       parameters.Add("@password", request.Password);
-      parameters.Add("@role", (int)request.Role);
+      parameters.Add("@permissions", request.Permissions);
 
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -35,8 +35,8 @@ namespace Registry.Data.Services
       parameters.Add("@login", request.Login);
       parameters.Add("@name", request.Name);
       parameters.Add("@password", request.Password);
-      parameters.Add("@role", (int)request.Role);
       parameters.Add("@enabled", request.IsEnabled);
+      parameters.Add("@permissions", request.Permissions);
 
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -71,7 +71,7 @@ namespace Registry.Data.Services
           commandType: CommandType.StoredProcedure);
       }
 
-      if (result.Count() == 0)
+      if (!result.Any())
       {
         return new GetAllUsersResult[0];
       }
@@ -93,7 +93,7 @@ namespace Registry.Data.Services
          commandType: CommandType.StoredProcedure);
       }
 
-      if (result.Count() == 0)
+      if (!result.Any())
       {
         return null;
       }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
@@ -43,18 +44,28 @@ namespace Registry.Services
         Name = result.Name,
         IsActive = result.Enabled,
         Password = result.Password,
-        Role = (Role)result.Role
+        Permissions = GetPermissions(result.Permissions)
       };
     }
 
-    public async Task CreateUser(string login, string name, string password, Role role)
+    private Permission[] GetPermissions(string permissions)
+    {
+      if (string.IsNullOrEmpty(permissions))
+      {
+        return new Permission[0];
+      }
+
+      return permissions.Split(',').Select(item => (Permission) (int.Parse(item))).ToArray();
+    }
+
+    public async Task CreateUser(string login, string name, string password, Permission[] permissions)
     {
       await _userRepository.CreateUser(new CreateUserRequest
       {
         Name = name,
         Login = login,
-        Role = role,
-        Password = SecurityService.Crypt(password)
+        Password = SecurityService.Crypt(password),
+        Permissions = string.Join(",", permissions.Select(p => (int)p))
       });
     }
 
@@ -67,16 +78,17 @@ namespace Registry.Services
       string login, 
       string name, 
       string password, 
-      Role role,
-      bool isActive)
+      bool isActive, 
+      bool cryptPassword,
+      Permission[] permissions)
     {
       await _userRepository.UpdateUser(new UpdateUserRequest
       {
         Name = name,
         Login = login,
-        Role = role,
-        Password = SecurityService.Crypt(password),
-        IsEnabled = isActive
+        Password = cryptPassword ? SecurityService.Crypt(password) : password,
+        IsEnabled = isActive,
+        Permissions = string.Join(",", permissions.Select(p => (int)p))
       });
     }
   }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Registry.Common;
 using Registry.Models;
@@ -27,6 +28,7 @@ namespace Registry.UI.UserControls.Admin
   {
     private string _filter;
     private string _login;
+    private UserDetailedInfo _user;
     private readonly IUserService _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
 
     public ChangeUserDetails(string filter, string login)
@@ -34,6 +36,20 @@ namespace Registry.UI.UserControls.Admin
       InitializeComponent();
       _login = login;
       _filter = filter;
+
+      DeleteUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.DeleteUser);
+      UpdateUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.UpdateUser);
+      PermissionsList.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.UpdatePermissions);
+      PermissionsTextBlock.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.UpdatePermissions);
+
+      PermissionCommon.Titles.ForEach(item =>
+      {
+        PermissionsList.Items.Add(new CheckBox
+        {
+          Name = item.Key.ToString(),
+          Content = item.Value
+        });
+      });
     }
 
     private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -45,13 +61,20 @@ namespace Registry.UI.UserControls.Admin
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
-      UserDetailedInfo user = await _userService.GetUser(_login);
+      _user = await _userService.GetUser(_login);
 
-      LoginTextBox.Text = user.Login;
-      NameTextBox.Text = user.Name;
-      IsActiveCheckBox.IsChecked = user.IsActive;
-      RoleCombobox.ItemsSource = Enum.GetNames(typeof(Role));
-      RoleCombobox.SelectedValue = user.Role.ToString();
+      LoginTextBox.Text = _user.Login;
+      NameTextBox.Text = _user.Name;
+      IsActiveCheckBox.IsChecked = _user.IsActive;
+      PasswordTextBox.Password = _user.Password;
+
+      foreach (CheckBox item in PermissionsList.Items)
+      {
+        if (_user.Permissions.FirstOrDefault(p => p.ToString() == item.Name) != Permission.Unknown)
+        {
+          item.IsChecked = true;
+        }
+      }
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
@@ -59,20 +82,29 @@ namespace Registry.UI.UserControls.Admin
     private async void UpdateUserButton_Click(object sender, RoutedEventArgs e)
     {
       if (!CheckFields(LoginTextBox.Text, "Login") ||
-          !CheckFields(PasswordTextBox.Password, "Password") ||
           !CheckFields(NameTextBox.Text, "Name"))
       {
         return;
       }
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
+      
+      var permissions = new List<Permission>();
+      foreach (CheckBox item in PermissionsList.Items)
+      {
+        if (item.IsChecked == true)
+        {
+          permissions.Add((Permission)Enum.Parse(typeof(Permission), item.Name));
+        }
+      }
 
       await _userService.UpdateUser(
         LoginTextBox.Text,
         NameTextBox.Text,
         PasswordTextBox.Password,
-        (Role) Enum.Parse(typeof (Role), RoleCombobox.SelectedValue.ToString()),
-        IsActiveCheckBox.IsChecked ?? false);
+        isActive : IsActiveCheckBox.IsChecked ?? false,
+        cryptPassword: _user.Password != PasswordTextBox.Password,
+        permissions: permissions.ToArray());
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }

@@ -10,8 +10,8 @@ namespace Registry.Data.Models
 
     public string Password { get; set; }
 
-    public Role Role { get; set; }
-
     public bool IsEnabled { get; set; }
+
+    public string Permissions { get; set; }
   }
 }

@@ -6,8 +6,8 @@
 
     public string Password { get; set; }
 
-    public byte Role { get; set; }
-
     public bool Enabled { get; set; }
+
+    public string Permissions { get; set; }
   }
 }
