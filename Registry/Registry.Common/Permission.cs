@@ -13,7 +13,10 @@ namespace Registry.Common
     CreateCategory,
     UpdateCategory,
     DeleteCategory,
-    UpdatePermissions
+    UpdatePermissions,
+    SeeThemesList,
+    CreateTheme,
+    DeleteTheme
   }
 
   public class PermissionCommon
@@ -28,7 +31,10 @@ namespace Registry.Common
       { Permission.CreateCategory, "Can create category" },
       { Permission.UpdateCategory, "Can update category" },
       { Permission.DeleteCategory, "Can delete category" },
-      { Permission.UpdatePermissions, "Can update permissions" }
+      { Permission.UpdatePermissions, "Can update permissions" },
+      { Permission.SeeThemesList, "Can see list of themes" },
+      { Permission.CreateTheme, "Can create theme" },
+      { Permission.DeleteTheme, "Can delete theme" }
     };
   }
 }

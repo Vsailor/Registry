@@ -48,7 +48,7 @@ namespace Registry.UI.UserControls.Admin
 
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
-      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UserControls.MainMenu());
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new MainMenu());
     }
 
     private void UsersListBox_OnSelected(object sender, RoutedEventArgs e)

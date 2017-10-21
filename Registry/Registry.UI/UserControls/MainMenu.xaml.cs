@@ -15,6 +15,8 @@ namespace Registry.UI.UserControls
       NewUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CreateUser);
       ChangeUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.SeeUserList);
       CategoriesButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.SeeCategoriesList);
+      ThemesButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.SeeThemesList);
+      NewThemeButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CreateTheme);
     }
 
     private void NewUserButton_Click(object sender, RoutedEventArgs e)
@@ -30,6 +32,16 @@ namespace Registry.UI.UserControls
     private void CategoriesButton_Click(object sender, RoutedEventArgs e)
     {
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Categories());
+    }
+
+    private void ThemesButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Themes());
+    }
+
+    private void NewThemeButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new CreateTheme());
     }
   }
 }

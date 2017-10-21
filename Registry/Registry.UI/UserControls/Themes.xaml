@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Registry.UI.UserControls.Themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Registry.UI.UserControls"
+             mc:Ignorable="d" Loaded="UserControl_Loaded">
+    <Grid MinWidth="200"  HorizontalAlignment="Center" VerticalAlignment="Top" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0">Start typing name of theme:</TextBlock>
+        <TextBox Name="ThemeFilterTextBox" Grid.Row="1" TextChanged="ThemeFilterTextBox_OnTextChanged"></TextBox>
+        <ListView Name="ThemesListBox" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="ThemesListBox_OnSelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                        <GridViewColumn Header="Leader" DisplayMemberBinding="{Binding Path=UserName}"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="3" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="BackButton" Grid.Column="0" Margin="0,0,10,0" Click="BackButton_Click">Main menu</Button>
+            <Button Name="DeleteTheme" Grid.Column="1" Margin="10,0,0,0" Click="DeleteTheme_OnClick">Delete</Button>
+        </Grid>
+    </Grid>
+</UserControl>

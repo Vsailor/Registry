@@ -11,9 +11,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Name="NewUserButton" Grid.Row="0" MaxWidth="200" Click="NewUserButton_Click">New user</Button>
-        <Button Name="ChangeUserButton" Grid.Row="1" MaxWidth="200" Margin="0,10,0,0" Click="ChangeUserButton_Click">Users</Button>
+        <Button Name="ChangeUserButton" Grid.Row="0" MaxWidth="200" Click="ChangeUserButton_Click">Users</Button>
+        <Button Name="NewUserButton" Grid.Row="1" MaxWidth="200" Margin="0,10,0,0" Click="NewUserButton_Click">New user</Button>
         <Button Name="CategoriesButton" Grid.Row="2" MaxWidth="200" Margin="0,10,0,0" Click="CategoriesButton_Click">Categories</Button>
+        <Button Name="ThemesButton" Grid.Row="3" MaxWidth="200" Margin="0,10,0,0" Click="ThemesButton_OnClick">Themes</Button>
+        <Button Name="NewThemeButton" Grid.Row="4" MaxWidth="200" Margin="0,10,0,0" Click="NewThemeButton_OnClick">New theme</Button>
     </Grid>
 </UserControl>

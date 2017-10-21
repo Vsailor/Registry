@@ -12,5 +12,10 @@
     public const string UpdateCategory = "updateCategory";
     public const string DeleteCategory = "deleteCategory";
     public const string CreateCategory = "createCategory";
+
+    public const string CreateTheme = "createTheme";
+    public const string GetAllThemes = "getAllThemes";
+    public const string UpdateTheme = "updateTheme";
+    public const string DeleteTheme = "deleteTheme";
   }
 }

@@ -64,15 +64,18 @@
   <ItemGroup>
     <Compile Include="Models\CreateUserRequest.cs" />
     <Compile Include="Models\GetAllCategoriesResult.cs" />
+    <Compile Include="Models\GetAllThemesResult.cs" />
     <Compile Include="Models\GetAllUsersResult.cs" />
     <Compile Include="Models\GetUserByLoginResult.cs" />
     <Compile Include="Models\UpdateUserRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryDataRegistration.cs" />
     <Compile Include="Services\Abstract\ICategoryRepository.cs" />
+    <Compile Include="Services\Abstract\IThemeRepository.cs" />
     <Compile Include="Services\Abstract\IUserRepository.cs" />
     <Compile Include="Services\BaseRepository.cs" />
     <Compile Include="Services\CategoryRepository.cs" />
+    <Compile Include="Services\ThemeRepository.cs" />
     <Compile Include="Services\UserRepository.cs" />
     <Compile Include="StoredProcedures.cs" />
   </ItemGroup>

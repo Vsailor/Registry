@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Registry.UI"
         mc:Ignorable="d"
         Title="Registry of information resources" Height="450" Width="625">
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
