@@ -11,7 +11,5 @@ namespace Registry.Models
     public string Password { get; set; }
 
     public bool IsActive { get; set; }
-
-    public Permission[] Permissions { get; set; }
   }
 }

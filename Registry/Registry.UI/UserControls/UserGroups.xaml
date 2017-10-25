@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="Registry.UI.UserControls.Themes"
+﻿<UserControl x:Class="Registry.UI.UserControls.UserGroups"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Registry.UI.UserControls"
-             mc:Ignorable="d" Loaded="UserControl_Loaded">
+             mc:Ignorable="d" Loaded="UserGroups_OnLoaded">
     <Grid MinWidth="600"  HorizontalAlignment="Center" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -22,9 +22,9 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Введіть назву группи для пошуку:</TextBlock>
-                <TextBox Name="ThemeFilterTextBox" Grid.Row="1" TextChanged="ThemeFilterTextBox_OnTextChanged"></TextBox>
-                <ListBox Name="ThemesListBox" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="ThemesListBox_OnSelectionChanged">
+                <TextBlock Grid.Row="0">Введіть назву группи користувачів для пошуку:</TextBlock>
+                <TextBox Name="GroupsFilterTextBox" Grid.Row="1" TextChanged="GroupsFilterTextBox_OnTextChanged"></TextBox>
+                <ListBox Name="GroupsListBox" SelectionMode="Single" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="GroupsListBox_OnSelectionChanged">
                 </ListBox>
             </Grid>
             <Grid Grid.Column="1" Margin="10,0">
@@ -36,7 +36,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Назва групи:</TextBlock>
+                <TextBlock Grid.Row="0">Відредагуйте назву групи:</TextBlock>
                 <TextBox IsEnabled="False" Grid.Row="1" Name="GroupNameTextBox" TextChanged="GroupNameTextBox_OnTextChanged"></TextBox>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -46,16 +46,16 @@
                     <Button IsEnabled="False" Height="20" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteGroup" Click="DeleteGroup_OnClick">Видалити групу</Button>
                     <Button IsEnabled="False"  Height="20" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateGroup" Click="UpdateGroup_OnClick">Зберегти</Button>
                 </Grid>
-                <TextBlock Grid.Row="3">Назва нової групи ресурсів:</TextBlock>
-                <TextBox IsEnabled="False" Grid.Row="4" Name="NewGroupTextBox" TextChanged="NewGroupTextBox_OnTextChanged"></TextBox>
+                <TextBlock Grid.Row="3">Назва нової групи користувачів:</TextBlock>
+                <TextBox Grid.Row="4" Name="NewGroupTextBox" TextChanged="NewGroupTextBox_OnTextChanged"></TextBox>
                 <Grid Grid.Row="5">
-                    <Button Name="AddGroupButton" IsEnabled="False" Height="20" Margin="10" Width="200" Click="AddGroupButton_OnClick">Створити нову групу ресурсів</Button>
+                    <Button Name="AddGroupButton" IsEnabled="False" Height="20" Margin="10" Width="200" Click="AddGroupButton_OnClick">Створити нову групу</Button>
                 </Grid>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
-            <Button Margin="10" Width="100" Height="20" Name="BackButton" Click="BackButton_Click">Назад</Button>
+            <Button Margin="10" Width="100" Height="20" Name="BackButton" Click="BackButton_OnClick">Назад</Button>
         </Grid>
     </Grid>
 </UserControl>

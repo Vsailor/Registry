@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Registry.Data.Models;
 using Registry.Data.Services.Abstract;
+using System;
 
 namespace Registry.Data.Services
 {
@@ -71,11 +71,6 @@ namespace Registry.Data.Services
           commandType: CommandType.StoredProcedure);
       }
 
-      if (!result.Any())
-      {
-        return new GetAllUsersResult[0];
-      }
-
       return result.ToArray();
     }
 
@@ -99,6 +94,62 @@ namespace Registry.Data.Services
       }
 
       return result.Single();
+    }
+
+    public async Task CreateUserGroup(string name)
+    {
+      var parameters = new DynamicParameters();
+      parameters.Add("@name", name);
+
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
+      {
+        await conn.ExecuteAsync(
+          StoredProcedures.CreateUserGroup,
+          parameters,
+          commandType: CommandType.StoredProcedure);
+      }
+    }
+
+    public async Task UpdateUserGroup(UpdateUserGroupRequest request)
+    {
+      var parameters = new DynamicParameters();
+      parameters.Add("@id", request.Id);
+      parameters.Add("@name", request.Name);
+
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
+      {
+        await conn.ExecuteAsync(
+          StoredProcedures.UpdateUserGroup,
+          parameters,
+          commandType: CommandType.StoredProcedure);
+      }
+    }
+
+    public async Task<GetAllUserGroupsResult[]> GetUserGroups()
+    {
+      IEnumerable<GetAllUserGroupsResult> result;
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
+      {
+        result = await conn.QueryAsync<GetAllUserGroupsResult>(
+         StoredProcedures.GetAllUserGroups,
+         commandType: CommandType.StoredProcedure);
+      }
+
+      return result.ToArray();
+    }
+
+    public async Task DeleteUserGroup(Guid id)
+    {
+      var parameters = new DynamicParameters();
+      parameters.Add("@id", id);
+
+      using (IDbConnection conn = new SqlConnection(ConnectionString))
+      {
+        await conn.ExecuteAsync(
+          StoredProcedures.DeleteUserGroup,
+          parameters,
+          commandType: CommandType.StoredProcedure);
+      }
     }
   }
 }

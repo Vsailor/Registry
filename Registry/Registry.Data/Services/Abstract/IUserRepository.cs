@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Registry.Data.Models;
 
 namespace Registry.Data.Services.Abstract
@@ -14,5 +15,13 @@ namespace Registry.Data.Services.Abstract
     Task<GetAllUsersResult[]> GetAllUsers();
 
     Task<GetUserByLoginResult> GetUserByLogin(string login);
+
+    Task CreateUserGroup(string name);
+
+    Task UpdateUserGroup(UpdateUserGroupRequest request);
+
+    Task<GetAllUserGroupsResult[]> GetUserGroups();
+
+    Task DeleteUserGroup(Guid id);
   }
 }

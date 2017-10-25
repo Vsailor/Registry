@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
 using Registry.Common;
 using Registry.Data.Models;
-using Registry.Models;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
 
@@ -23,14 +10,10 @@ namespace Registry.UI.UserControls
 {
   public partial class Themes : UserControl
   {
-    private readonly IThemeService _themeService = RegistryCommon.Instance.Container.Resolve<IThemeService>();
+    private readonly IResourceGroupService _resourceGroupService = RegistryCommon.Instance.Container.Resolve<IResourceGroupService>();
     public Themes()
     {
       InitializeComponent();
-      DeleteTheme.IsEnabled = false;
-
-      DeleteTheme.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.DeleteTheme);
-      NewTheme.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CreateTheme);
     }
 
     public Themes(string filter) : this()
@@ -39,21 +22,25 @@ namespace Registry.UI.UserControls
       ThemeFilterTextBox.Text = filter;
     }
 
+    private void CreateTheme()
+    {
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Themes());
+    }
+
     private void ThemeFilterTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
     {
       ThemesListBox.Items.Filter = item =>
       {
-        var theme = (GetAllThemesResult)item;
+        var theme = (GetAllGroupsResult)item;
         return theme.Name.ToLowerInvariant().StartsWith(ThemeFilterTextBox.Text.ToLowerInvariant()) ||
                theme.Leader.ToLowerInvariant().StartsWith(ThemeFilterTextBox.Text.ToLowerInvariant());
       };
-
-      DeleteTheme.IsEnabled = false;
     }
 
     private void ThemesListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      DeleteTheme.IsEnabled = true;
     }
 
     private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -65,7 +52,7 @@ namespace Registry.UI.UserControls
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
-      ThemesListBox.ItemsSource = await _themeService.GetAllThemes();
+      ThemesListBox.ItemsSource = await _resourceGroupService.GetAllThemes();
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
@@ -73,8 +60,8 @@ namespace Registry.UI.UserControls
     private async void DeleteTheme_OnClick(object sender, RoutedEventArgs e)
     {
       MessageBoxResult result = MessageBox.Show(
-       "You will not be able to undo this action",
-       "Confirm deletion",
+       "Ви не зможете відмінити цю дію. Ви впевненні, що бажаєте видалити групу ресурсів?",
+       "Підтвердіть операцію",
        MessageBoxButton.YesNoCancel,
        MessageBoxImage.Asterisk);
       if (result != MessageBoxResult.Yes)
@@ -83,17 +70,37 @@ namespace Registry.UI.UserControls
       }
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
 
-      var theme = (GetAllThemesResult) ThemesListBox.SelectedValue;
+      var theme = (GetAllGroupsResult) ThemesListBox.SelectedValue;
 
-      await _themeService.DeleteTheme(theme.Id);
+      await _resourceGroupService.DeleteTheme(theme.Id);
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Themes());
     }
 
-    private void NewTheme_OnClick(object sender, RoutedEventArgs e)
+    private void GroupNameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new CreateTheme());
+      throw new System.NotImplementedException();
+    }
+
+    private void DeleteGroup_OnClick(object sender, RoutedEventArgs e)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    private void UpdateGroup_OnClick(object sender, RoutedEventArgs e)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    private void AddGroupButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    private void NewGroupTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+      throw new System.NotImplementedException();
     }
   }
 }

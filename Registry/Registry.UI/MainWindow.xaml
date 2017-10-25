@@ -12,9 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="0">
-            <Grid Name="MainGrid"></Grid>
-        </ScrollViewer>
+        <Grid Name="MainGrid" Grid.Row="0"></Grid>
         <StatusBar Height="22" Grid.Row="1" Visibility="Visible">
             <StatusBarItem>
                 <TextBlock Name="MainProgressBar"></TextBlock>

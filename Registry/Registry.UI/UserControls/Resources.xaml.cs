@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
 using Registry.Common;
 using Registry.Data.Models;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
-using Registry.UI.UserControls.Admin;
 
 namespace Registry.UI.UserControls
 {
@@ -31,7 +18,6 @@ namespace Registry.UI.UserControls
     public Resources()
     {
       InitializeComponent();
-      AddNewResourceButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CanCreateResource);
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
     }
 

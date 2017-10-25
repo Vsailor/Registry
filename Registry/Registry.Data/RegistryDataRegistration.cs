@@ -10,7 +10,7 @@ namespace Registry.Data
     {
       container.RegisterType<IUserRepository, UserRepository>();
       container.RegisterType<ICategoryRepository, CategoryRepository>();
-      container.RegisterType<IThemeRepository, ThemeRepository>();
+      container.RegisterType<IResourceGroupRepository, ResourceGroupRepository>();
       container.RegisterType<IResourceRepository, ResourceRepository>();
     }
   }

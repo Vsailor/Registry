@@ -1,6 +1,4 @@
-﻿using Registry.Common;
-
-namespace Registry.Data.Models
+﻿namespace Registry.Data.Models
 {
   public class UpdateUserRequest
   {

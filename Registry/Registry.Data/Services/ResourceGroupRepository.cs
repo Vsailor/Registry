@@ -10,27 +10,27 @@ using Registry.Data.Services.Abstract;
 
 namespace Registry.Data.Services
 {
-  public class ThemeRepository : BaseRepository, IThemeRepository
+  public class ResourceGroupRepository : BaseRepository, IResourceGroupRepository
   {
-    public async Task<GetAllThemesResult[]> GetAllThemes()
+    public async Task<GetAllGroupsResult[]> GetAllResourceGroups()
     {
-      IEnumerable<GetAllThemesResult> result;
+      IEnumerable<GetAllGroupsResult> result;
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
-        result = await conn.QueryAsync<GetAllThemesResult>(
+        result = await conn.QueryAsync<GetAllGroupsResult>(
           StoredProcedures.GetAllThemes,
           commandType: CommandType.StoredProcedure);
       }
 
       if (!result.Any())
       {
-        return new GetAllThemesResult[0];
+        return new GetAllGroupsResult[0];
       }
 
       return result.ToArray();
     }
 
-    public async Task UpdateTheme(Guid id, string name)
+    public async Task UpdateResourceGroup(Guid id, string name)
     {
       var parameters = new DynamicParameters();
       parameters.Add("@id", id);
@@ -45,7 +45,7 @@ namespace Registry.Data.Services
       }
     }
 
-    public async Task CreateTheme(string name, CreateThemeUserRequest[] createThemeUserRequest)
+    public async Task CreateGroup(string name, CreateGroupResourceRequest[] createGroupResourceRequest)
     {
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -55,7 +55,7 @@ namespace Registry.Data.Services
         dt.Columns.Add("UserLogin", typeof (string));
         dt.Columns.Add("Role", typeof (int));
 
-        foreach (var item in createThemeUserRequest)
+        foreach (var item in createGroupResourceRequest)
         {
           dt.Rows.Add(item.UserLogin, item.Role);
         }
@@ -74,7 +74,7 @@ namespace Registry.Data.Services
       }
     }
 
-    public async Task DeleteTheme(Guid id)
+    public async Task DeleteGroup(Guid id)
     {
       var parameters = new DynamicParameters();
       parameters.Add("@id", id);
@@ -88,7 +88,7 @@ namespace Registry.Data.Services
       }
     }
 
-    public async Task<string[]> GetThemes(string login)
+    public async Task<string[]> GetGroups(string login)
     {
       IEnumerable<string> result;
       var parameters = new DynamicParameters();

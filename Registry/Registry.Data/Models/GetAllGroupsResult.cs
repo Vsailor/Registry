@@ -2,7 +2,7 @@
 
 namespace Registry.Data.Models
 {
-  public class GetAllThemesResult
+  public class GetAllGroupsResult
   {
     public Guid Id { get; set; }
     public string Leader { get; set; }

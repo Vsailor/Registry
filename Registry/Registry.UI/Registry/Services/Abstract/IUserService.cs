@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Registry.Common;
+using Registry.Data.Models;
 using Registry.Models;
 
 namespace Registry.Services.Abstract
@@ -11,7 +13,7 @@ namespace Registry.Services.Abstract
 
     Task<UserDetailedInfo> GetUser(string login);
 
-    Task CreateUser(string login, string name, string password, Permission[] permissions);
+    Task CreateUser(string login, string name, string password);
 
     Task DeleteUser(string login);
 
@@ -20,7 +22,14 @@ namespace Registry.Services.Abstract
       string name,
       string password,
       bool isActive,
-      bool cryptPassword,
-      Permission[] permissions);
+      bool cryptPassword);
+
+    Task<GetAllUserGroupsResult[]> GetAllUserGroups();
+
+    Task CreateUserGroup(string name);
+
+    Task UpdateUserGroup(UpdateUserGroupRequest request);
+
+    Task DeleteUserGroup(Guid id);
   }
 }

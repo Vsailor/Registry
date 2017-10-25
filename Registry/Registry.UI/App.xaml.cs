@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Practices.Unity;
 using Registry.Common;
@@ -19,7 +18,7 @@ namespace Registry.UI
 
     private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-      MessageBox.Show("Unknown application error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+      MessageBox.Show("Невідома помилка програми", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
       e.Handled = true;
     }
   }

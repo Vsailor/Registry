@@ -43,29 +43,17 @@ namespace Registry.Services
         Login = login,
         Name = result.Name,
         IsActive = result.Enabled,
-        Password = result.Password,
-        Permissions = GetPermissions(result.Permissions)
+        Password = result.Password
       };
     }
 
-    private Permission[] GetPermissions(string permissions)
-    {
-      if (string.IsNullOrEmpty(permissions))
-      {
-        return new Permission[0];
-      }
-
-      return permissions.Split(',').Select(item => (Permission) (int.Parse(item))).ToArray();
-    }
-
-    public async Task CreateUser(string login, string name, string password, Permission[] permissions)
+    public async Task CreateUser(string login, string name, string password)
     {
       await _userRepository.CreateUser(new CreateUserRequest
       {
         Name = name,
         Login = login,
-        Password = SecurityService.Crypt(password),
-        Permissions = string.Join(",", permissions.Select(p => (int)p))
+        Password = SecurityService.Crypt(password)
       });
     }
 
@@ -79,17 +67,35 @@ namespace Registry.Services
       string name, 
       string password, 
       bool isActive, 
-      bool cryptPassword,
-      Permission[] permissions)
+      bool cryptPassword)
     {
       await _userRepository.UpdateUser(new UpdateUserRequest
       {
         Name = name,
         Login = login,
         Password = cryptPassword ? SecurityService.Crypt(password) : password,
-        IsEnabled = isActive,
-        Permissions = string.Join(",", permissions.Select(p => (int)p))
+        IsEnabled = isActive
       });
+    }
+
+    public async Task<GetAllUserGroupsResult[]> GetAllUserGroups()
+    {
+      return await _userRepository.GetUserGroups();
+    }
+
+    public async Task CreateUserGroup(string name)
+    {
+      await _userRepository.CreateUserGroup(name);
+    }
+
+    public async Task UpdateUserGroup(UpdateUserGroupRequest request)
+    {
+      await _userRepository.UpdateUserGroup(request);
+    }
+
+    public async Task DeleteUserGroup(Guid id)
+    {
+      await _userRepository.DeleteUserGroup(id);
     }
   }
 }

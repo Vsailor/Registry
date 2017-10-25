@@ -83,9 +83,6 @@
     <Compile Include="UserControls\CreateResource.xaml.cs">
       <DependentUpon>CreateResource.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CreateTheme.xaml.cs">
-      <DependentUpon>CreateTheme.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -113,6 +110,9 @@
     <Compile Include="UserControls\Themes.xaml.cs">
       <DependentUpon>Themes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UserGroups.xaml.cs">
+      <DependentUpon>UserGroups.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -134,10 +134,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\CreateResource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\CreateTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Themes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserGroups.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

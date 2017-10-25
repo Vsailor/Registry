@@ -1,9 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+﻿using System.Windows.Controls;
 using Microsoft.Practices.Unity;
-using Microsoft.SqlServer.Server;
 
 namespace Registry.Common
 {
@@ -31,24 +27,5 @@ namespace Registry.Common
 
     public UnityContainer Container { get; set; }
     public string Login { get; set; }
-
-    public Permission[] UserPermissions;
-
-    public Visibility CheckVisibility(params Permission[] permissions)
-    {
-      return CheckPermissions(permissions) ? Visibility.Visible : Visibility.Collapsed;
-    }
-
-    public bool CheckPermissions(params Permission[] permissions)
-    {
-      foreach (var p in permissions)
-      {
-        if (UserPermissions.Contains(p))
-        {
-          return true;
-        }
-      }
-      return false;
-    }
   }
 }

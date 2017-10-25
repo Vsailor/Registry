@@ -4,15 +4,15 @@ using Registry.Data.Models;
 
 namespace Registry.Services.Abstract
 {
-  public interface IThemeService
+  public interface IResourceGroupService
   {
-    Task<GetAllThemesResult[]> GetAllThemes();
+    Task<GetAllGroupsResult[]> GetAllThemes();
 
     Task UpdateTheme(Guid id, string name);
 
     Task DeleteTheme(Guid id);
 
-    Task CreateTheme(string name, CreateThemeUserRequest[] request);
+    Task CreateTheme(string name, CreateGroupResourceRequest[] request);
 
     Task<string[]> GetUserThemes(string login);
   }

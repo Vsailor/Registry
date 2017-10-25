@@ -71,12 +71,12 @@
     <Compile Include="RegistryRegistration.cs" />
     <Compile Include="Services\Abstract\ICategoryService.cs" />
     <Compile Include="Services\Abstract\IResourceService.cs" />
-    <Compile Include="Services\Abstract\IThemeService.cs" />
+    <Compile Include="Services\Abstract\IResourceGroupService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ResourceService.cs" />
     <Compile Include="Services\SecurityService.cs" />
-    <Compile Include="Services\ThemeService.cs" />
+    <Compile Include="Services\ResourceGroupService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

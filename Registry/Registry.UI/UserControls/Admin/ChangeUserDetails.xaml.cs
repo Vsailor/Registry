@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Registry.Common;
@@ -30,27 +21,13 @@ namespace Registry.UI.UserControls.Admin
     private string _login;
     private UserDetailedInfo _user;
     private readonly IUserService _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
-    private readonly IThemeService _themeService = RegistryCommon.Instance.Container.Resolve<IThemeService>();
+    private readonly IResourceGroupService _resourceGroupService = RegistryCommon.Instance.Container.Resolve<IResourceGroupService>();
 
     public ChangeUserDetails(string filter, string login)
     {
       InitializeComponent();
       _login = login;
       _filter = filter;
-
-      DeleteUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.DeleteUser);
-      UpdateUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.UpdateUser);
-      PermissionsList.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.UpdatePermissions);
-      PermissionsTextBlock.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.UpdatePermissions);
-
-      PermissionCommon.Titles.ForEach(item =>
-      {
-        PermissionsList.Items.Add(new CheckBox
-        {
-          Name = item.Key.ToString(),
-          Content = item.Value
-        });
-      });
     }
 
     private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -69,43 +46,25 @@ namespace Registry.UI.UserControls.Admin
       IsActiveCheckBox.IsChecked = _user.IsActive;
       PasswordTextBox.Password = _user.Password;
 
-      foreach (CheckBox item in PermissionsList.Items)
-      {
-        if (_user.Permissions.FirstOrDefault(p => p.ToString() == item.Name) != Permission.Unknown)
-        {
-          item.IsChecked = true;
-        }
-      }
-
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
 
     private async void UpdateUserButton_Click(object sender, RoutedEventArgs e)
     {
-      if (!CheckFields(LoginTextBox.Text, "Login") ||
-          !CheckFields(NameTextBox.Text, "Name"))
+      if (!CheckFields(LoginTextBox.Text, "Логін") ||
+          !CheckFields(NameTextBox.Text, "Ім'я"))
       {
         return;
       }
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
       
-      var permissions = new List<Permission>();
-      foreach (CheckBox item in PermissionsList.Items)
-      {
-        if (item.IsChecked == true)
-        {
-          permissions.Add((Permission)Enum.Parse(typeof(Permission), item.Name));
-        }
-      }
-
       await _userService.UpdateUser(
         LoginTextBox.Text,
         NameTextBox.Text,
         PasswordTextBox.Password,
         isActive : IsActiveCheckBox.IsChecked ?? false,
-        cryptPassword: _user.Password != PasswordTextBox.Password,
-        permissions: permissions.ToArray());
+        cryptPassword: _user.Password != PasswordTextBox.Password);
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }
@@ -114,10 +73,10 @@ namespace Registry.UI.UserControls.Admin
     {
       if (string.IsNullOrEmpty(field))
       {
-        string errorMessage = $"{name} can't be empty";
+        string errorMessage = $"{name} має бути заповненим";
         MessageBox.Show(
           errorMessage,
-          "Error",
+          "Помилка",
           MessageBoxButton.OK,
           MessageBoxImage.Stop);
 
@@ -131,26 +90,12 @@ namespace Registry.UI.UserControls.Admin
     private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
     {
       MessageBoxResult result =  MessageBox.Show(
-        "You will not be able to undo this action",
-        "Confirm deletion",
+        "Ви не зможете відмінити цю дію. Ви впевнені, що хочете видалити користувача?",
+        "Підтвердіть операцію",
         MessageBoxButton.YesNoCancel,
         MessageBoxImage.Asterisk);
       if (result != MessageBoxResult.Yes)
       {
-        return;
-      }
-
-      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Verifying;
-      string[] themes = await _themeService.GetUserThemes(LoginTextBox.Text);
-      if (themes.Any())
-      {
-        MessageBox.Show(
-          $"This user is leader of themes: {string.Join(", ", themes)}. Please, choose another leader for that themes before deletion.",
-          "Error",
-          MessageBoxButton.OK,
-          MessageBoxImage.Stop);
-
-        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
         return;
       }
 

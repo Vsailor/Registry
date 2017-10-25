@@ -22,5 +22,10 @@
 
     public const string CreateResource = "createResource";
     public const string GetAllResources = "getAllResources";
+
+    public const string GetAllUserGroups = "getAllUserGroups";
+    public const string CreateUserGroup = "createUserGroup";
+    public const string UpdateUserGroup = "updateUserGroup";
+    public const string DeleteUserGroup = "deleteUserGroup";
   }
 }

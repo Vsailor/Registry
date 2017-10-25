@@ -4,34 +4,67 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Registry.UI.UserControls.Admin"
-             mc:Ignorable="d" d:DesignWidth="200">
-    <Grid Width="200"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+             mc:Ignorable="d">
+    <Grid MinWidth="600"  HorizontalAlignment="Center" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0">Name:</TextBlock>
-        <TextBox Grid.Row="1" Name="NameTextBox"></TextBox>
-        <TextBlock Grid.Row="2" Margin="0,10,0,0">Login:</TextBlock>
-        <TextBox Grid.Row="3" Name="LoginTextBox"></TextBox>
-        <TextBlock Grid.Row="4" Margin="0,10,0,0">Password:</TextBlock>
-        <PasswordBox Grid.Row="5" Name="PasswordTextBox"></PasswordBox>
-        <TextBlock Grid.Row="6" Margin="0,10,0,0">Permissions:</TextBlock>
-        <ListBox Grid.Row="7" Height="100" Name="PermissionsList"></ListBox>
-        <Grid Grid.Row="8" Margin="0,20,0,0">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Ім'я:</TextBlock>
+                    <TextBox Grid.Row="1" Name="NameTextBox"></TextBox>
+                    <TextBlock Grid.Row="2" Margin="0,10,0,0">Логін:</TextBlock>
+                    <TextBox Grid.Row="3" Name="LoginTextBox"></TextBox>
+                    <TextBlock Grid.Row="4" Margin="0,10,0,0">Пароль:</TextBlock>
+                    <PasswordBox Grid.Row="5" Name="PasswordTextBox"></PasswordBox>
+                    <TextBlock Grid.Row="6" Margin="0,10,0,0">Тип користувача:</TextBlock>
+                    <Grid Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton Grid.Column="0" IsChecked="True">Звичайний користувач</RadioButton>
+                        <RadioButton Grid.Column="1">Адміністратор системи</RadioButton>
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Column="1" Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Виберіть групу до якої додати користувача:</TextBlock>
+                    <Grid Grid.Row="1">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListView Name="GroupsListView"></ListView>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="1" Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="BackUserButton" Grid.Column="0" Margin="0,0,10,0" Click="BackUserButton_Click">Back</Button>
-            <Button Name="CreateUserButton" Grid.Column="1" Margin="10,0,0,0" Click="CreateUserButton_Click">Create</Button>
+            <Button Name="BackUserButton" Width="100" HorizontalAlignment="Left" Grid.Column="0" Margin="0,0,10,0" Click="BackUserButton_Click">Назад</Button>
+            <Button Name="CreateUserButton" Width="100" HorizontalAlignment="Right" Grid.Column="1" Margin="10,0,0,0" Click="CreateUserButton_Click">Створити</Button>
         </Grid>
     </Grid>
 </UserControl>
