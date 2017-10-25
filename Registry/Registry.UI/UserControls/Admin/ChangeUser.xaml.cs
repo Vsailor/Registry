@@ -28,6 +28,7 @@ namespace Registry.UI.UserControls.Admin
     public ChangeUser()
     {
       InitializeComponent();
+      NewUserButton.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CreateUser);
     }
 
     public ChangeUser(string filter) : this()
@@ -69,6 +70,11 @@ namespace Registry.UI.UserControls.Admin
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
       UsersListBox.ItemsSource = await _userService.GetAllUsers();
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
+    }
+
+    private void NewUserButton_Click(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new CreateUser());
     }
   }
 }

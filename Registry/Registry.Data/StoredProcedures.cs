@@ -17,5 +17,10 @@
     public const string GetAllThemes = "getAllThemes";
     public const string UpdateTheme = "updateTheme";
     public const string DeleteTheme = "deleteTheme";
+    public const string GetUserThemes = "getUserThemes";
+    public const string CreateThemeUser = "createThemeUser";
+
+    public const string CreateResource = "createResource";
+    public const string GetAllResources = "getAllResources";
   }
 }

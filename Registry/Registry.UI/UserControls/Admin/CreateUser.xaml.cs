@@ -43,7 +43,7 @@ namespace Registry.UI.UserControls.Admin
 
     private void BackUserButton_Click(object sender, RoutedEventArgs e)
     {
-      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UserControls.MainMenu());
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new ChangeUser());
     }
 
     private async void CreateUserButton_Click(object sender, RoutedEventArgs e)
@@ -59,12 +59,21 @@ namespace Registry.UI.UserControls.Admin
         }
       }
 
+      var user = await _userService.GetUser(LoginTextBox.Text);
+      if (user != null)
+      {
+        MessageBox.Show($"User with login {user.Login} is already exist", "Duplication error", MessageBoxButton.OK, MessageBoxImage.Hand);
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
+        return;
+      }
+
       await _userService.CreateUser(
         LoginTextBox.Text, 
         NameTextBox.Text, 
         PasswordTextBox.Password,
         permissions.ToArray());
 
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new ChangeUser());
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }
   }

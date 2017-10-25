@@ -16,7 +16,9 @@ namespace Registry.Common
     UpdatePermissions,
     SeeThemesList,
     CreateTheme,
-    DeleteTheme
+    DeleteTheme,
+    CanSeeListOfResources,
+    CanCreateResource
   }
 
   public class PermissionCommon
@@ -34,7 +36,9 @@ namespace Registry.Common
       { Permission.UpdatePermissions, "Can update permissions" },
       { Permission.SeeThemesList, "Can see list of themes" },
       { Permission.CreateTheme, "Can create theme" },
-      { Permission.DeleteTheme, "Can delete theme" }
+      { Permission.DeleteTheme, "Can delete theme" },
+      { Permission.CanSeeListOfResources, "Can see list of resources" },
+      { Permission.CanCreateResource, "Can create resource" }
     };
   }
 }

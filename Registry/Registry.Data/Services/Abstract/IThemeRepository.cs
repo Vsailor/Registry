@@ -8,10 +8,12 @@ namespace Registry.Data.Services.Abstract
   {
     Task<GetAllThemesResult[]> GetAllThemes();
 
-    Task UpdateTheme(Guid id, string name, string ownerLogin);
-
-    Task CreateTheme(string ownerLogin, string name);
+    Task UpdateTheme(Guid id, string name);
 
     Task DeleteTheme(Guid id);
+
+    Task<string[]> GetThemes(string login);
+
+    Task CreateTheme(string name, CreateThemeUserRequest[] createThemeUserRequest);
   }
 }

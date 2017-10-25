@@ -30,6 +30,7 @@ namespace Registry.Common
     public TextBlock MainProgressBar { get; set; }
 
     public UnityContainer Container { get; set; }
+    public string Login { get; set; }
 
     public Permission[] UserPermissions;
 

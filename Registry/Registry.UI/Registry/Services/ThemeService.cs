@@ -21,9 +21,9 @@ namespace Registry.Services
       return await _themeRepository.GetAllThemes();
     }
 
-    public async Task UpdateTheme(Guid id, string name, string ownerLogin)
+    public async Task UpdateTheme(Guid id, string name)
     {
-      await _themeRepository.UpdateTheme(id, name, ownerLogin);
+      await _themeRepository.UpdateTheme(id, name);
     }
 
     public async Task DeleteTheme(Guid id)
@@ -31,9 +31,14 @@ namespace Registry.Services
       await _themeRepository.DeleteTheme(id);
     }
 
-    public async Task CreateTheme(string name, string ownerLogin)
+    public async Task CreateTheme(string name, CreateThemeUserRequest[] request)
     {
-      await _themeRepository.CreateTheme(ownerLogin, name);
+      await _themeRepository.CreateTheme(name, request);
+    }
+
+    public async Task<string[]> GetUserThemes(string login)
+    {
+      return await _themeRepository.GetThemes(login);
     }
   }
 }

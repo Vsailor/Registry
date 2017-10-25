@@ -30,6 +30,7 @@ namespace Registry.UI.UserControls.Admin
     private string _login;
     private UserDetailedInfo _user;
     private readonly IUserService _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
+    private readonly IThemeService _themeService = RegistryCommon.Instance.Container.Resolve<IThemeService>();
 
     public ChangeUserDetails(string filter, string login)
     {
@@ -138,6 +139,22 @@ namespace Registry.UI.UserControls.Admin
       {
         return;
       }
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Verifying;
+      string[] themes = await _themeService.GetUserThemes(LoginTextBox.Text);
+      if (themes.Any())
+      {
+        MessageBox.Show(
+          $"This user is leader of themes: {string.Join(", ", themes)}. Please, choose another leader for that themes before deletion.",
+          "Error",
+          MessageBoxButton.OK,
+          MessageBoxImage.Stop);
+
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
+        return;
+      }
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Deleting;
 
       await _userService.DeleteUser(LoginTextBox.Text);
 

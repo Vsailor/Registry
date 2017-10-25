@@ -77,6 +77,7 @@ namespace Registry.UI.UserControls
         return;
       }
 
+      RegistryCommon.Instance.Login = result.Login;
       RegistryCommon.Instance.UserPermissions = result.Permissions;
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new MainMenu());
       RegistryCommon.Instance.MainProgressBar.Text = $"Hi, {result.Name}";

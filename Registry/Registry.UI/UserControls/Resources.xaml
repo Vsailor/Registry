@@ -4,17 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Registry.UI.UserControls"
-             mc:Ignorable="d" >
-    <Grid MinWidth="200"  HorizontalAlignment="Center" VerticalAlignment="Top" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" Name="ResourcesListBox" Height="300">
-            <local:ResourceItem></local:ResourceItem>
-        </ListBox>
-        <Grid Grid.Column="1" MinWidth="200">
-            
+             mc:Ignorable="d" Loaded="UserControl_Loaded" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"  Width="720" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="15">Quick search:</TextBlock>
+            <TextBox Grid.Row="1" Name="QuickSearchBox"></TextBox>
+            <Button Name="AddNewResourceButton" Click="AddNewResourceButton_OnClick" Grid.Row="2" Margin="0,10,0,0" Width="200" HorizontalAlignment="Left">Add new resource</Button>
+        </Grid>
+        <Grid Grid.Row="1" MinWidth="700"  HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" Name="ResourcesListBox" MinHeight="355" VerticalAlignment="Top">
+                </ListBox>
+                <Button Grid.Row="1" Width="100" Name="BackButton" Click="BackButton_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0">Back</Button>
+            </Grid>
+           
+            <Grid Grid.Column="1" MinWidth="200" VerticalAlignment="Top" Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontSize="15">Filters:</TextBlock>
+                <Separator Grid.Row="1"/>
+                <TextBlock Grid.Row="2">Name:</TextBlock>
+                <TextBox Grid.Row="3" Name="NameTextBox"></TextBox>
+                <TextBlock Grid.Row="4" Margin="0,10,0,0">Tags:</TextBlock>
+                <TextBox Grid.Row="5" Name="TagsTextBox"></TextBox>
+                <TextBlock Grid.Row="6" Margin="0,10,0,0">Category:</TextBlock>
+                <ScrollViewer Grid.Row="7" CanContentScroll="True" Height="100">
+                    <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
+                    </TreeView>
+                </ScrollViewer>
+                <TextBlock Grid.Row="8" Margin="0,10,0,0">Themes:</TextBlock>
+                <ListBox Name="ThemesListBox" Height="100" Grid.Row="9"></ListBox>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

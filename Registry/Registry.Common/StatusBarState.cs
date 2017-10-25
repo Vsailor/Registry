@@ -8,5 +8,7 @@
     public const string Saved = "Saved";
     public const string Verifying = "Verifying...";
     public const string InvalidUserNameOrPassword = "Invalid login or password";
+    public const string Failed = "Failed";
+    public const string Deleting = "Deleting...";
   }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Registry.UI.UserControls"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
-    <Grid MinWidth="200"  HorizontalAlignment="Center" VerticalAlignment="Top" >
+    <Grid MinWidth="300"  HorizontalAlignment="Center" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -28,9 +28,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="BackButton" Grid.Column="0" Margin="0,0,10,0" Click="BackButton_Click">Main menu</Button>
-            <Button Name="DeleteTheme" Grid.Column="1" Margin="10,0,0,0" Click="DeleteTheme_OnClick">Delete</Button>
+            <Button Name="BackButton" Grid.Column="0" Margin="0,0,5,0" Click="BackButton_Click">Main menu</Button>
+            <Button Name="DeleteTheme" Grid.Column="1" Margin="5,0,5,0" Click="DeleteTheme_OnClick">Delete</Button>
+            <Button Name="NewTheme" Grid.Column="2" Margin="5,0,0,0" Click="NewTheme_OnClick">New theme</Button>
         </Grid>
     </Grid>
 </UserControl>

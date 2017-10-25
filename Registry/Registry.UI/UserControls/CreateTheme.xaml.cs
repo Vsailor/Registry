@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
 using Registry.Common;
+using Registry.Data.Models;
 using Registry.Models;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
@@ -28,11 +30,29 @@ namespace Registry.UI.UserControls
     private readonly IThemeService _themeService = RegistryCommon.Instance.Container.Resolve<IThemeService>();
     private readonly IUserService _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
     private UserBasicInfo _selectedUser;
+
+    public delegate void UnassignUser(AssignedUser userBasicInfo);
+    public event UnassignUser UserUnassigned;
+
+    private Dictionary<UserBasicInfo, Roles> _assignedUsers = new Dictionary<UserBasicInfo, Roles>();
+
     public CreateTheme()
     {
       InitializeComponent();
       CreateThemeButton.IsEnabled = false;
+      UserUnassigned += OnUserUnassigned;
     }
+
+    private void OnUserUnassigned(AssignedUser user)
+    {
+      AssignedUserListBox.Items.Remove(user);
+      _assignedUsers.Remove(_assignedUsers.Single(x => x.Key.Login == user.SelectedUser.Login).Key);
+      if (!_assignedUsers.Any())
+      {
+        CreateThemeButton.IsEnabled = false;
+      }
+    }
+
 
     private void UserFilterTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
     {
@@ -51,14 +71,20 @@ namespace Registry.UI.UserControls
 
     private void BackButton_OnClick(object sender, RoutedEventArgs e)
     {
-      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new MainMenu());
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Themes());
     }
 
     private async void CreateThemeButton_OnClick(object sender, RoutedEventArgs e)
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saving;
 
-      await _themeService.CreateTheme(NameTextBox.Text, _selectedUser.Login);
+      var request = _assignedUsers.Select(u => new CreateThemeUserRequest
+      {
+        Role = (int)u.Value,
+        UserLogin = u.Key.Login
+      });
+
+      await _themeService.CreateTheme(NameTextBox.Text, request.ToArray());
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Themes());
@@ -73,20 +99,15 @@ namespace Registry.UI.UserControls
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
 
-    private void UnassignLeaderButton_OnClick(object sender, RoutedEventArgs e)
-    {
-      UsersListBox.Visibility = Visibility.Visible;
-      UserFilterTextBox.Visibility = Visibility.Visible;
-      UserFilterTextBox.Text = string.Empty;
-      StartTypingOfLeaderAlert.Visibility = Visibility.Visible;
-      AssignUserGrid.Visibility = Visibility.Collapsed;
-      CreateThemeButton.IsEnabled = false;
-    }
-
     private void UsersListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       _selectedUser = (UserBasicInfo)UsersListBox.SelectedValue;
       if (_selectedUser == null)
+      {
+        return;
+      }
+
+      if (_assignedUsers.Any(u => u.Key.Login == _selectedUser.Login))
       {
         return;
       }
@@ -96,19 +117,14 @@ namespace Registry.UI.UserControls
         CreateThemeButton.IsEnabled = true;
       }
 
-      UsersListBox.Visibility = Visibility.Collapsed;
-      UserFilterTextBox.Visibility = Visibility.Collapsed;
-      StartTypingOfLeaderAlert.Visibility = Visibility.Collapsed;
-      AssignUserGrid.Visibility = Visibility.Visible;
-
-      AddedLeaderTextBlock.Text = $"{_selectedUser.Name} ({_selectedUser.Login})";
-      UsersListBox.SelectedValue = null;
+      _assignedUsers.Add(_selectedUser, Roles.None);
+      AssignedUserListBox.Items.Add(new AssignedUser(_selectedUser, UserUnassigned));
+      Thread.Sleep(200);
     }
 
     private void NameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-      if (string.IsNullOrEmpty(NameTextBox.Text) ||
-          AssignUserGrid.Visibility != Visibility.Visible)
+      if (string.IsNullOrEmpty(NameTextBox.Text))
       {
         CreateThemeButton.IsEnabled = false;
         return;

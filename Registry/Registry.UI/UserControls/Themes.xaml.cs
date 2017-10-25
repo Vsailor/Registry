@@ -30,6 +30,7 @@ namespace Registry.UI.UserControls
       DeleteTheme.IsEnabled = false;
 
       DeleteTheme.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.DeleteTheme);
+      NewTheme.Visibility = RegistryCommon.Instance.CheckVisibility(Permission.CreateTheme);
     }
 
     public Themes(string filter) : this()
@@ -88,6 +89,11 @@ namespace Registry.UI.UserControls
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Themes());
+    }
+
+    private void NewTheme_OnClick(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new CreateTheme());
     }
   }
 }

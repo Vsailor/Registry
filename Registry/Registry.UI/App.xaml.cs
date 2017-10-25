@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Threading;
 using Microsoft.Practices.Unity;
 using Registry.Common;
 using Registry.Data;
@@ -13,6 +15,12 @@ namespace Registry.UI
 
       RegistryRegistration.Register(RegistryCommon.Instance.Container);
       RegistryDataRegistration.Register(RegistryCommon.Instance.Container);
+    }
+
+    private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+      MessageBox.Show("Unknown application error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+      e.Handled = true;
     }
   }
 }

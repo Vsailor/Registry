@@ -11,6 +11,7 @@ namespace Registry
       container.RegisterType<IUserService, UserService>();
       container.RegisterType<ICategoryService, CategoryService>();
       container.RegisterType<IThemeService, ThemeService>();
+      container.RegisterType<IResourceService, ResourceService>();
     }
   }
 }

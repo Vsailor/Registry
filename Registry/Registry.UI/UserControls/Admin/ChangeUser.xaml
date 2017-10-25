@@ -24,6 +24,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="BackButton" Grid.Row="3" Margin="0,10,0,0" Click="BackButton_Click">Back</Button>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="BackButton" Grid.Column="0" Margin="0,10,5,0" Click="BackButton_Click">Back</Button>
+            <Button Name="NewUserButton"  Grid.Column="1" Margin="5,10,0,0" Click="NewUserButton_Click">New user</Button>
+        </Grid>
     </Grid>
 </UserControl>
