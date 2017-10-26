@@ -1,4 +1,5 @@
-﻿using Registry.Common;
+﻿using System;
+using Registry.Common;
 
 namespace Registry.Models
 {
@@ -11,5 +12,9 @@ namespace Registry.Models
     public string Password { get; set; }
 
     public bool IsActive { get; set; }
+     
+    public int GroupId { get; set; }
+
+    public string GroupName { get; set; }
   }
 }

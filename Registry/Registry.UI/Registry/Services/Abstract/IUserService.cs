@@ -22,7 +22,8 @@ namespace Registry.Services.Abstract
       string name,
       string password,
       bool isActive,
-      bool cryptPassword);
+      bool cryptPassword,
+      int groupId);
 
     Task<GetAllUserGroupsResult[]> GetAllUserGroups();
 
@@ -30,6 +31,6 @@ namespace Registry.Services.Abstract
 
     Task UpdateUserGroup(UpdateUserGroupRequest request);
 
-    Task DeleteUserGroup(Guid id);
+    Task DeleteUserGroup(int id);
   }
 }

@@ -1,4 +1,6 @@
-﻿namespace Registry.Data.Models
+﻿using System;
+
+namespace Registry.Data.Models
 {
   public class UpdateUserRequest
   {
@@ -10,6 +12,6 @@
 
     public bool IsEnabled { get; set; }
 
-    public string Permissions { get; set; }
+    public int GroupId { get; set; }
   }
 }

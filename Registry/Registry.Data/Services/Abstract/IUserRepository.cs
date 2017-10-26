@@ -22,6 +22,6 @@ namespace Registry.Data.Services.Abstract
 
     Task<GetAllUserGroupsResult[]> GetUserGroups();
 
-    Task DeleteUserGroup(Guid id);
+    Task DeleteUserGroup(int id);
   }
 }

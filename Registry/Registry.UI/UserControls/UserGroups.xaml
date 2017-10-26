@@ -7,7 +7,7 @@
              mc:Ignorable="d" Loaded="UserGroups_OnLoaded">
     <Grid MinWidth="600"  HorizontalAlignment="Center" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -16,16 +16,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Введіть назву группи користувачів для пошуку:</TextBlock>
-                <TextBox Name="GroupsFilterTextBox" Grid.Row="1" TextChanged="GroupsFilterTextBox_OnTextChanged"></TextBox>
-                <ListBox Name="GroupsListBox" SelectionMode="Single" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="GroupsListBox_OnSelectionChanged">
-                </ListBox>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Введіть назву группи користувачів для пошуку:</TextBlock>
+                    <TextBox Name="GroupsFilterTextBox" Grid.Row="1" TextChanged="GroupsFilterTextBox_OnTextChanged"></TextBox>
+                <ScrollViewer  Grid.Row="2" Margin="0,10,0,0" >
+                    <ListBox Name="GroupsListBox" SelectionMode="Single" SelectionChanged="GroupsListBox_OnSelectionChanged">
+                    </ListBox>
+                </ScrollViewer>    
+                
             </Grid>
             <Grid Grid.Column="1" Margin="10,0">
                 <Grid.RowDefinitions>

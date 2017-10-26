@@ -18,7 +18,7 @@ namespace Registry.Data.Services
       parameters.Add("@login", request.Login);
       parameters.Add("@name", request.Name);
       parameters.Add("@password", request.Password);
-      parameters.Add("@permissions", request.Permissions);
+      parameters.Add("@groupId", request.GroupId);
 
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -36,7 +36,7 @@ namespace Registry.Data.Services
       parameters.Add("@name", request.Name);
       parameters.Add("@password", request.Password);
       parameters.Add("@enabled", request.IsEnabled);
-      parameters.Add("@permissions", request.Permissions);
+      parameters.Add("@groupId", request.GroupId);
 
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -88,11 +88,6 @@ namespace Registry.Data.Services
          commandType: CommandType.StoredProcedure);
       }
 
-      if (!result.Any())
-      {
-        return null;
-      }
-
       return result.Single();
     }
 
@@ -138,7 +133,7 @@ namespace Registry.Data.Services
       return result.ToArray();
     }
 
-    public async Task DeleteUserGroup(Guid id)
+    public async Task DeleteUserGroup(int id)
     {
       var parameters = new DynamicParameters();
       parameters.Add("@id", id);

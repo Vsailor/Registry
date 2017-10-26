@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Registry.Common;
+using Registry.Data.Models;
 using Registry.Models;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
@@ -20,6 +21,9 @@ namespace Registry.UI.UserControls.Admin
     private string _filter;
     private string _login;
     private UserDetailedInfo _user;
+    private GetAllUserGroupsResult[] _userGroups;
+    private RadioButton _selectedRadioButton;
+
     private readonly IUserService _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
     private readonly IResourceGroupService _resourceGroupService = RegistryCommon.Instance.Container.Resolve<IResourceGroupService>();
 
@@ -40,6 +44,21 @@ namespace Registry.UI.UserControls.Admin
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
       _user = await _userService.GetUser(_login);
+      _userGroups = await _userService.GetAllUserGroups();
+      for (int i = 0; i < _userGroups.Length; i++)
+      {
+        var userGroupRadioButton = new RadioButton()
+        {
+          Content = _userGroups[i].Name,
+          Uid = _userGroups[i].Id.ToString(),
+          IsChecked = _user.GroupId == _userGroups[i].Id,
+        };
+
+        userGroupRadioButton.Checked += UserGroupRadioButtonOnChecked;
+        UserGroupListView.Items.Add(userGroupRadioButton);
+      }
+
+      _selectedRadioButton = UserGroupListView.Items[0] as RadioButton;
 
       LoginTextBox.Text = _user.Login;
       NameTextBox.Text = _user.Name;
@@ -47,6 +66,11 @@ namespace Registry.UI.UserControls.Admin
       PasswordTextBox.Password = _user.Password;
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
+    }
+
+    private void UserGroupRadioButtonOnChecked(object sender, RoutedEventArgs routedEventArgs)
+    {
+      _selectedRadioButton = (RadioButton)sender;
     }
 
     private async void UpdateUserButton_Click(object sender, RoutedEventArgs e)
@@ -64,7 +88,8 @@ namespace Registry.UI.UserControls.Admin
         NameTextBox.Text,
         PasswordTextBox.Password,
         isActive : IsActiveCheckBox.IsChecked ?? false,
-        cryptPassword: _user.Password != PasswordTextBox.Password);
+        cryptPassword: _user.Password != PasswordTextBox.Password,
+        groupId: int.Parse(_selectedRadioButton.Uid));
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }
