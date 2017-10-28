@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://schemas.microsoft.com/ws/2005/02/mex/bindings" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CommunicationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ICategoryRepository_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IResourceGroupRepository_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IUserRepository_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IResourceRepository_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://schemas.microsoft.com/ws/2005/02/mex/bindings" location="http://localhost:8181/RegistryRemoteService.svc?wsdl=wsdl0" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Registry.Data.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICategoryRepository_GetAllCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCategories" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_GetAllCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_UpdateCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_UpdateCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_CreateCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_CreateCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_DeleteCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICategoryRepository_DeleteCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_GetAllResourceGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourceGroups" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_GetAllResourceGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourceGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_UpdateResourceGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResourceGroup" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_UpdateResourceGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResourceGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_DeleteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_DeleteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_CreateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IResourceGroupRepository_CreateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_GetUserByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByLogin" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_GetUserByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_CreateUserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserGroup" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_CreateUserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_UpdateUserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserGroup" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_UpdateUserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_GetUserGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroups" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_GetUserGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_DeleteUserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserGroup" />
+  </wsdl:message>
+  <wsdl:message name="IUserRepository_DeleteUserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_CreateResource_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResource" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_CreateResource_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_GetAllResources_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResources" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_GetAllResources_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourcesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_GetCloudBlobConnectionString_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCloudBlobConnectionString" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_GetCloudBlobConnectionString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCloudBlobConnectionStringResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICategoryRepository">
+    <wsdl:operation name="GetAllCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/GetAllCategories" message="tns:ICategoryRepository_GetAllCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/GetAllCategoriesResponse" message="tns:ICategoryRepository_GetAllCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/UpdateCategory" message="tns:ICategoryRepository_UpdateCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/UpdateCategoryResponse" message="tns:ICategoryRepository_UpdateCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/CreateCategory" message="tns:ICategoryRepository_CreateCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/CreateCategoryResponse" message="tns:ICategoryRepository_CreateCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/DeleteCategory" message="tns:ICategoryRepository_DeleteCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/DeleteCategoryResponse" message="tns:ICategoryRepository_DeleteCategory_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IResourceGroupRepository">
+    <wsdl:operation name="GetAllResourceGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/GetAllResourceGroups" message="tns:IResourceGroupRepository_GetAllResourceGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/GetAllResourceGroupsResponse" message="tns:IResourceGroupRepository_GetAllResourceGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResourceGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/UpdateResourceGroup" message="tns:IResourceGroupRepository_UpdateResourceGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/UpdateResourceGroupResponse" message="tns:IResourceGroupRepository_UpdateResourceGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/DeleteGroup" message="tns:IResourceGroupRepository_DeleteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/DeleteGroupResponse" message="tns:IResourceGroupRepository_DeleteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/CreateGroup" message="tns:IResourceGroupRepository_CreateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/CreateGroupResponse" message="tns:IResourceGroupRepository_CreateGroup_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IUserRepository">
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/CreateUser" message="tns:IUserRepository_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/CreateUserResponse" message="tns:IUserRepository_CreateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/UpdateUser" message="tns:IUserRepository_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/UpdateUserResponse" message="tns:IUserRepository_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/DeleteUser" message="tns:IUserRepository_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/DeleteUserResponse" message="tns:IUserRepository_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/GetAllUsers" message="tns:IUserRepository_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/GetAllUsersResponse" message="tns:IUserRepository_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/GetUserByLogin" message="tns:IUserRepository_GetUserByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/GetUserByLoginResponse" message="tns:IUserRepository_GetUserByLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/CreateUserGroup" message="tns:IUserRepository_CreateUserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/CreateUserGroupResponse" message="tns:IUserRepository_CreateUserGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/UpdateUserGroup" message="tns:IUserRepository_UpdateUserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/UpdateUserGroupResponse" message="tns:IUserRepository_UpdateUserGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/GetUserGroups" message="tns:IUserRepository_GetUserGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/GetUserGroupsResponse" message="tns:IUserRepository_GetUserGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/DeleteUserGroup" message="tns:IUserRepository_DeleteUserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/DeleteUserGroupResponse" message="tns:IUserRepository_DeleteUserGroup_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IResourceRepository">
+    <wsdl:operation name="CreateResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/CreateResource" message="tns:IResourceRepository_CreateResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/CreateResourceResponse" message="tns:IResourceRepository_CreateResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResources">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetAllResources" message="tns:IResourceRepository_GetAllResources_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetAllResourcesResponse" message="tns:IResourceRepository_GetAllResources_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCloudBlobConnectionString">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString" message="tns:IResourceRepository_GetCloudBlobConnectionString_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse" message="tns:IResourceRepository_GetCloudBlobConnectionString_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ICommunication">
+    <wsdl:operation name="GetAllCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/GetAllCategories" message="tns:ICategoryRepository_GetAllCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/GetAllCategoriesResponse" message="tns:ICategoryRepository_GetAllCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/UpdateCategory" message="tns:ICategoryRepository_UpdateCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/UpdateCategoryResponse" message="tns:ICategoryRepository_UpdateCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/CreateCategory" message="tns:ICategoryRepository_CreateCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/CreateCategoryResponse" message="tns:ICategoryRepository_CreateCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/DeleteCategory" message="tns:ICategoryRepository_DeleteCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICategoryRepository/DeleteCategoryResponse" message="tns:ICategoryRepository_DeleteCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResourceGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/GetAllResourceGroups" message="tns:IResourceGroupRepository_GetAllResourceGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/GetAllResourceGroupsResponse" message="tns:IResourceGroupRepository_GetAllResourceGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResourceGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/UpdateResourceGroup" message="tns:IResourceGroupRepository_UpdateResourceGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/UpdateResourceGroupResponse" message="tns:IResourceGroupRepository_UpdateResourceGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/DeleteGroup" message="tns:IResourceGroupRepository_DeleteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/DeleteGroupResponse" message="tns:IResourceGroupRepository_DeleteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceGroupRepository/CreateGroup" message="tns:IResourceGroupRepository_CreateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceGroupRepository/CreateGroupResponse" message="tns:IResourceGroupRepository_CreateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/CreateResource" message="tns:IResourceRepository_CreateResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/CreateResourceResponse" message="tns:IResourceRepository_CreateResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResources">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetAllResources" message="tns:IResourceRepository_GetAllResources_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetAllResourcesResponse" message="tns:IResourceRepository_GetAllResources_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCloudBlobConnectionString">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString" message="tns:IResourceRepository_GetCloudBlobConnectionString_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse" message="tns:IResourceRepository_GetCloudBlobConnectionString_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/CreateUser" message="tns:IUserRepository_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/CreateUserResponse" message="tns:IUserRepository_CreateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/UpdateUser" message="tns:IUserRepository_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/UpdateUserResponse" message="tns:IUserRepository_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/DeleteUser" message="tns:IUserRepository_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/DeleteUserResponse" message="tns:IUserRepository_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/GetAllUsers" message="tns:IUserRepository_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/GetAllUsersResponse" message="tns:IUserRepository_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/GetUserByLogin" message="tns:IUserRepository_GetUserByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/GetUserByLoginResponse" message="tns:IUserRepository_GetUserByLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/CreateUserGroup" message="tns:IUserRepository_CreateUserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/CreateUserGroupResponse" message="tns:IUserRepository_CreateUserGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/UpdateUserGroup" message="tns:IUserRepository_UpdateUserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/UpdateUserGroupResponse" message="tns:IUserRepository_UpdateUserGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/GetUserGroups" message="tns:IUserRepository_GetUserGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/GetUserGroupsResponse" message="tns:IUserRepository_GetUserGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/DeleteUserGroup" message="tns:IUserRepository_DeleteUserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserRepository/DeleteUserGroupResponse" message="tns:IUserRepository_DeleteUserGroup_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_ICategoryRepository" type="tns:ICategoryRepository">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICategoryRepository_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetAllCategories">
+      <soap12:operation soapAction="http://tempuri.org/ICategoryRepository/GetAllCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICategoryRepository/UpdateCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICategoryRepository/CreateCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICategoryRepository/DeleteCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IResourceGroupRepository" type="tns:IResourceGroupRepository">
+    <wsp:PolicyReference URI="#NetTcpBinding_IResourceGroupRepository_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetAllResourceGroups">
+      <soap12:operation soapAction="http://tempuri.org/IResourceGroupRepository/GetAllResourceGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResourceGroup">
+      <soap12:operation soapAction="http://tempuri.org/IResourceGroupRepository/UpdateResourceGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <soap12:operation soapAction="http://tempuri.org/IResourceGroupRepository/DeleteGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <soap12:operation soapAction="http://tempuri.org/IResourceGroupRepository/CreateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IUserRepository" type="tns:IUserRepository">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUserRepository_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByLogin">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/GetUserByLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserGroup">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/CreateUserGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserGroup">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/UpdateUserGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroups">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/GetUserGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserGroup">
+      <soap12:operation soapAction="http://tempuri.org/IUserRepository/DeleteUserGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IResourceRepository" type="tns:IResourceRepository">
+    <wsp:PolicyReference URI="#NetTcpBinding_IResourceRepository_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreateResource">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/CreateResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResources">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/GetAllResources" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCloudBlobConnectionString">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CommunicationService">
+    <wsdl:port name="NetTcpBinding_ICategoryRepository" binding="tns:NetTcpBinding_ICategoryRepository">
+      <soap12:address location="net.tcp://localhost:8090/ICategoryRepository" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/ICategoryRepository</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>IVAN\Ivan-Laptop</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IResourceGroupRepository" binding="tns:NetTcpBinding_IResourceGroupRepository">
+      <soap12:address location="net.tcp://localhost:8090/IResourceGroupRepository" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/IResourceGroupRepository</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>IVAN\Ivan-Laptop</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IUserRepository" binding="tns:NetTcpBinding_IUserRepository">
+      <soap12:address location="net.tcp://localhost:8090/IUserRepository" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/IUserRepository</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>IVAN\Ivan-Laptop</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IResourceRepository" binding="tns:NetTcpBinding_IResourceRepository">
+      <soap12:address location="net.tcp://localhost:8090/IResourceRepository" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/IResourceRepository</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>IVAN\Ivan-Laptop</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="MetadataExchangeHttpBinding_ICommunication" binding="i0:MetadataExchangeHttpBinding_ICommunication">
+      <soap12:address location="http://localhost:8181/RegistryRemoteService.svc/mex" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8181/RegistryRemoteService.svc/mex</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

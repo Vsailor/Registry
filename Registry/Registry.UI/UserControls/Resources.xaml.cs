@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Microsoft.Practices.Unity;
 using Registry.Common;
-using Registry.Data.Models;
+using Registry.Communication;
 using Registry.Services.Abstract;
 using Registry.UI.Extensions;
 

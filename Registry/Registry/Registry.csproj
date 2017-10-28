@@ -56,6 +56,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +71,11 @@
     <Compile Include="Models\UserDetailedInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryRegistration.cs" />
+    <Compile Include="Service References\Communication\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Services\Abstract\ICategoryService.cs" />
     <Compile Include="Services\Abstract\IResourceService.cs" />
     <Compile Include="Services\Abstract\IResourceGroupService.cs" />
@@ -82,15 +89,61 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Service References\Communication\CommunicationService.wsdl" />
+    <None Include="Service References\Communication\Registry.Communication.GetAllCategoriesResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Communication\Registry.Communication.GetAllGroupsResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Communication\Registry.Communication.GetAllResourcesResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Communication\Registry.Communication.GetAllUserGroupsResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Communication\Registry.Communication.GetAllUsersResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Communication\Registry.Communication.GetUserByLoginResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Communication\RegistryRemoteService.wsdl" />
+    <None Include="Service References\Communication\RegistryRemoteService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Communication\RegistryRemoteService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Communication\RegistryRemoteService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Communication\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Communication\RegistryRemoteService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Communication\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Communication\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Communication\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Registry.Common\Registry.Common.csproj">
       <Project>{BF630FEE-879A-4AD7-9D30-756B92F20100}</Project>
       <Name>Registry.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Registry.Data\Registry.Data.csproj">
-      <Project>{66BF7ECF-0D91-40C0-8B36-80D1AD009464}</Project>
-      <Name>Registry.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

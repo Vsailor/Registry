@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using Registry.Common;
-using Registry.Data.Models;
+using Registry.Communication;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Registry.UI.UserControls

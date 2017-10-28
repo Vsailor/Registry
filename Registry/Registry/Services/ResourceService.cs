@@ -4,8 +4,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Registry.Common;
-using Registry.Data.Models;
-using Registry.Data.Services.Abstract;
+using Registry.Communication;
 using Registry.Services.Abstract;
 
 namespace Registry.Services
@@ -16,10 +15,8 @@ namespace Registry.Services
 
     public async Task<string> UploadToBlob(FileStream file, string name)
     {
-      string storageConnectionString =
-        "DefaultEndpointsProtocol=https;AccountName=registry2;AccountKey=4Vr6myhUO7RAblnMaZnvxEhmU5K8PPhqAIvR/2HR8BANQzvgVpGuLEMnUU3v0GqQ9Ryqvvhv2SKdTI82nIsaWA==;EndpointSuffix=core.windows.net";
-
-      CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
+      string connectionString = await _resourceRepository.GetCloudBlobConnectionStringAsync();
+      CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
       CloudBlobClient serviceClient = account.CreateCloudBlobClient();
 
       var container = serviceClient.GetContainerReference("registrycontainer");
@@ -31,12 +28,12 @@ namespace Registry.Services
 
     public async Task CreateResource(CreateResourceRequest request)
     {
-      await _resourceRepository.CreateResource(request);
+      await _resourceRepository.CreateResourceAsync(request);
     }
 
     public async Task<GetAllResourcesResult[]> GetAllResources()
     {
-      return await _resourceRepository.GetAllResources();
+      return await _resourceRepository.GetAllResourcesAsync();
     }
   }
 }

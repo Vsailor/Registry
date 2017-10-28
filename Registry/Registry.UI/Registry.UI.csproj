@@ -54,6 +54,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,9 +76,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions\GridExtension.cs" />
-    <Compile Include="UserControls\AssignedUser.xaml.cs">
-      <DependentUpon>AssignedUser.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Categories.xaml.cs">
       <DependentUpon>Categories.xaml</DependentUpon>
     </Compile>
@@ -125,10 +124,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\AssignedUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\Categories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,6 +183,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllCategoriesResult.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllCategoriesResult1.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllGroupsResult.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllGroupsResult1.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllResourcesResult.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllResourcesResult1.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllUserGroupsResult.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllUserGroupsResult1.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllUsersResult.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetAllUsersResult1.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetUserByLoginResult.datasource" />
+    <None Include="Properties\DataSources\Registry.Communication.GetUserByLoginResult1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -201,10 +208,6 @@
     <ProjectReference Include="..\Registry.Common\Registry.Common.csproj">
       <Project>{BF630FEE-879A-4AD7-9D30-756B92F20100}</Project>
       <Name>Registry.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Registry.Data\Registry.Data.csproj">
-      <Project>{66BF7ECF-0D91-40C0-8B36-80D1AD009464}</Project>
-      <Name>Registry.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Registry\Registry.csproj">
       <Project>{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}</Project>

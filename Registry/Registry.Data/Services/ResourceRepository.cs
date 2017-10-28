@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Registry.Data.Models;
 using Registry.Data.Services.Abstract;
 
@@ -46,6 +50,11 @@ namespace Registry.Data.Services
       }
 
       return result.ToArray();
+    }
+
+    public string GetCloudBlobConnectionString()
+    {
+      return ConfigurationManager.ConnectionStrings["AzureStorageConnection"].ConnectionString;
     }
   }
 }

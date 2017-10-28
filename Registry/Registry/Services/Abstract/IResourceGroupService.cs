@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Registry.Data.Models;
+using Registry.Communication;
 
 namespace Registry.Services.Abstract
 {

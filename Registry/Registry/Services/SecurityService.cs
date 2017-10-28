@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace Registry.Services
@@ -10,12 +9,12 @@ namespace Registry.Services
     {
       StringBuilder Sb = new StringBuilder();
 
-      using (SHA256 hash = SHA256Managed.Create())
+      using (SHA256 hash = SHA256.Create())
       {
         Encoding enc = Encoding.UTF8;
-        Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+        var result = hash.ComputeHash(enc.GetBytes(value));
 
-        foreach (Byte b in result)
+        foreach (var b in result)
           Sb.Append(b.ToString("x2"));
       }
 

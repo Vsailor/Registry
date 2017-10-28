@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Registry.Common;
-using Registry.Data.Models;
-using Registry.Data.Services.Abstract;
+using Registry.Communication;
 using Registry.Models;
 using Registry.Services.Abstract;
 
@@ -13,16 +12,11 @@ namespace Registry.Services
 {
   public class UserService : IUserService
   {
-    private IUserRepository _userRepository;
-
-    public UserService()
-    {
-      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
-    }
+    private IUserRepository _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
 
     public async Task<IEnumerable<UserBasicInfo>> GetAllUsers()
     {
-      GetAllUsersResult[] result = await _userRepository.GetAllUsers();
+      GetAllUsersResult[] result = await _userRepository.GetAllUsersAsync();
       return result.Select(item => new UserBasicInfo
       {
         Login = item.Login,
@@ -32,7 +26,7 @@ namespace Registry.Services
 
     public async Task<UserDetailedInfo> GetUser(string login)
     {
-      GetUserByLoginResult result = await _userRepository.GetUserByLogin(login);
+      GetUserByLoginResult result = await _userRepository.GetUserByLoginAsync(login);
       if (result == null)
       {
         return null;
@@ -56,7 +50,7 @@ namespace Registry.Services
       int groupId,
       bool isAdmin)
     {
-      await _userRepository.CreateUser(new CreateUserRequest
+      await _userRepository.CreateUserAsync(new CreateUserRequest
       {
         Name = name,
         Login = login,
@@ -68,7 +62,7 @@ namespace Registry.Services
 
     public async Task DeleteUser(string login)
     {
-      await _userRepository.DeleteUser(login);
+      await _userRepository.DeleteUserAsync(login);
     }
 
     public async Task UpdateUser(
@@ -80,7 +74,7 @@ namespace Registry.Services
       int groupId,
       bool isAdmin)
     {
-      await _userRepository.UpdateUser(new UpdateUserRequest
+      await _userRepository.UpdateUserAsync(new UpdateUserRequest
       {
         Name = name,
         Login = login,
@@ -93,22 +87,22 @@ namespace Registry.Services
 
     public async Task<GetAllUserGroupsResult[]> GetAllUserGroups()
     {
-      return await _userRepository.GetUserGroups();
+      return await _userRepository.GetUserGroupsAsync();
     }
 
     public async Task CreateUserGroup(string name)
     {
-      await _userRepository.CreateUserGroup(name);
+      await _userRepository.CreateUserGroupAsync(name);
     }
 
     public async Task UpdateUserGroup(UpdateUserGroupRequest request)
     {
-      await _userRepository.UpdateUserGroup(request);
+      await _userRepository.UpdateUserGroupAsync(request);
     }
 
     public async Task DeleteUserGroup(int id)
     {
-      await _userRepository.DeleteUserGroup(id);
+      await _userRepository.DeleteUserGroupAsync(id);
     }
   }
 }

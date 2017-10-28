@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Registry.Common;
-using Registry.Data.Models;
+using Registry.Communication;
 using Registry.Models;
 
 namespace Registry.Services.Abstract
