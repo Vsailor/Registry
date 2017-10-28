@@ -84,11 +84,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Registry.Common\Registry.Common.csproj">
+    <ProjectReference Include="..\Registry.Common\Registry.Common.csproj">
       <Project>{BF630FEE-879A-4AD7-9D30-756B92F20100}</Project>
       <Name>Registry.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Registry.Data\Registry.Data.csproj">
+    <ProjectReference Include="..\Registry.Data\Registry.Data.csproj">
       <Project>{66BF7ECF-0D91-40C0-8B36-80D1AD009464}</Project>
       <Name>Registry.Data</Name>
     </ProjectReference>

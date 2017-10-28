@@ -13,12 +13,10 @@
     public const string DeleteCategory = "deleteCategory";
     public const string CreateCategory = "createCategory";
 
-    public const string CreateTheme = "createTheme";
-    public const string GetAllThemes = "getAllThemes";
-    public const string UpdateTheme = "updateTheme";
-    public const string DeleteTheme = "deleteTheme";
-    public const string GetUserThemes = "getUserThemes";
-    public const string CreateThemeUser = "createThemeUser";
+    public const string GetAllResourceGroups = "getAllResourceGroups";
+    public const string UpdateResourceGroup = "updateResourceGroup";
+    public const string DeleteTheme = "deleteResourceGroup";
+    public const string CreateResourceGroup = "createResourceGroup";
 
     public const string CreateResource = "createResource";
     public const string GetAllResources = "getAllResources";

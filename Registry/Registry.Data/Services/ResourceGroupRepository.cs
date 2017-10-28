@@ -18,7 +18,7 @@ namespace Registry.Data.Services
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         result = await conn.QueryAsync<GetAllGroupsResult>(
-          StoredProcedures.GetAllThemes,
+          StoredProcedures.GetAllResourceGroups,
           commandType: CommandType.StoredProcedure);
       }
 
@@ -39,36 +39,22 @@ namespace Registry.Data.Services
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         await conn.ExecuteAsync(
-          StoredProcedures.UpdateTheme,
+          StoredProcedures.UpdateResourceGroup,
           parameters,
           commandType: CommandType.StoredProcedure);
       }
     }
 
-    public async Task CreateGroup(string name, CreateGroupResourceRequest[] createGroupResourceRequest)
+    public async Task CreateGroup(string name, string login)
     {
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
         var createThemeParam = new DynamicParameters();
         createThemeParam.Add("@name", name);
-        var dt = new DataTable();
-        dt.Columns.Add("UserLogin", typeof (string));
-        dt.Columns.Add("Role", typeof (int));
-
-        foreach (var item in createGroupResourceRequest)
-        {
-          dt.Rows.Add(item.UserLogin, item.Role);
-        }
-
-        SqlCommand cmd = new SqlCommand();
-        cmd.CommandType = CommandType.StoredProcedure;
-        SqlParameter dtparam = cmd.Parameters.AddWithValue("@request", dt);
-        dtparam.SqlDbType = SqlDbType.Structured;
-
-        createThemeParam.Add("@");
+        createThemeParam.Add("@login", login);
 
         await conn.ExecuteAsync(
-          StoredProcedures.CreateTheme,
+          StoredProcedures.CreateResourceGroup,
           createThemeParam,
           commandType: CommandType.StoredProcedure);
       }
@@ -86,28 +72,6 @@ namespace Registry.Data.Services
           parameters,
           commandType: CommandType.StoredProcedure);
       }
-    }
-
-    public async Task<string[]> GetGroups(string login)
-    {
-      IEnumerable<string> result;
-      var parameters = new DynamicParameters();
-      parameters.Add("@login", login);
-
-      using (IDbConnection conn = new SqlConnection(ConnectionString))
-      {
-        result = await conn.QueryAsync<string>(
-          StoredProcedures.GetUserThemes,
-          parameters,
-          commandType: CommandType.StoredProcedure);
-      }
-
-      if (!result.Any())
-      {
-        return new string[0];
-      }
-
-      return result.ToArray();
     }
   }
 }

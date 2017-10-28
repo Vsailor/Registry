@@ -2,16 +2,16 @@
 using System.Threading.Tasks;
 using Registry.Data.Models;
 
-namespace Registry.Data.Services.Abstract
+namespace Registry.Services.Abstract
 {
-  public interface IResourceGroupRepository
+  public interface IResourceGroupService
   {
     Task<GetAllGroupsResult[]> GetAllResourceGroups();
 
     Task UpdateResourceGroup(Guid id, string name);
 
-    Task DeleteGroup(Guid id);
+    Task DeleteResourceGroup(Guid id);
 
-    Task CreateGroup(string name, string login);
+    Task CreateResourceGroup(string name, string login);
   }
 }

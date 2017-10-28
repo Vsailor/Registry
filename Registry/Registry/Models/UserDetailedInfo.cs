@@ -16,5 +16,7 @@ namespace Registry.Models
     public int GroupId { get; set; }
 
     public string GroupName { get; set; }
+
+    public bool IsAdmin { get; set; }
   }
 }

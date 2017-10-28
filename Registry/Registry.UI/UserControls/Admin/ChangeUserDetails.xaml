@@ -24,6 +24,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0">Логін:</TextBlock>
                 <TextBox Name="LoginTextBox"  Grid.Row="1"  IsEnabled="False"></TextBox>
@@ -32,6 +34,15 @@
                 <TextBlock Grid.Row="4" Margin="0,10,0,0">Пароль:</TextBlock>
                 <PasswordBox Name="PasswordTextBox"  Grid.Row="5"></PasswordBox>
                 <CheckBox Name="IsActiveCheckBox" IsChecked="True" Grid.Row="6" Margin="0,10,0,0">Дозволити авторизовуватись в системі</CheckBox>
+                <TextBlock Grid.Row="7" Margin="0,10,0,0">Тип користувача:</TextBlock>
+                <Grid Grid.Row="8" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Grid.Column="0" IsChecked="True">Звичайний користувач</RadioButton>
+                    <RadioButton Grid.Column="1" Name="IsAdminRadioButton">Адміністратор системи</RadioButton>
+                </Grid>
             </Grid>
             <Grid Grid.Column="1" Margin="10,0,0,0">
                 <Grid.RowDefinitions>

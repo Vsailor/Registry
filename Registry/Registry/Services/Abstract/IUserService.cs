@@ -13,7 +13,7 @@ namespace Registry.Services.Abstract
 
     Task<UserDetailedInfo> GetUser(string login);
 
-    Task CreateUser(string login, string name, string password);
+    Task CreateUser(string login, string name, string password, int groupId, bool isAdmin);
 
     Task DeleteUser(string login);
 
@@ -23,7 +23,8 @@ namespace Registry.Services.Abstract
       string password,
       bool isActive,
       bool cryptPassword,
-      int groupId);
+      int groupId,
+      bool isAdmin);
 
     Task<GetAllUserGroupsResult[]> GetAllUserGroups();
 

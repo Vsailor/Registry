@@ -51,7 +51,8 @@ namespace Registry.UI.UserControls
       var newTreeItem = new TreeViewItem
       {
         Header = baseItem.Name,
-        Uid = baseItem.Id.ToString()
+        Uid = baseItem.Id.ToString(),
+        IsExpanded = true
       };
 
       CategoriesTree.Items.Add(newTreeItem);
@@ -68,7 +69,8 @@ namespace Registry.UI.UserControls
         var newItem = new TreeViewItem
         {
           Header = item.Name,
-          Uid = item.Id.ToString()
+          Uid = item.Id.ToString(),
+          IsExpanded = true
         };
 
         baseItem.Items.Add(newItem);

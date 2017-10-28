@@ -25,7 +25,6 @@ namespace Registry.UI.UserControls.Admin
     private RadioButton _selectedRadioButton;
 
     private readonly IUserService _userService = RegistryCommon.Instance.Container.Resolve<IUserService>();
-    private readonly IResourceGroupService _resourceGroupService = RegistryCommon.Instance.Container.Resolve<IResourceGroupService>();
 
     public ChangeUserDetails(string filter, string login)
     {
@@ -58,6 +57,8 @@ namespace Registry.UI.UserControls.Admin
         UserGroupListView.Items.Add(userGroupRadioButton);
       }
 
+      IsAdminRadioButton.IsChecked = _user.IsAdmin;
+
       _selectedRadioButton = UserGroupListView.Items[0] as RadioButton;
 
       LoginTextBox.Text = _user.Login;
@@ -89,7 +90,8 @@ namespace Registry.UI.UserControls.Admin
         PasswordTextBox.Password,
         isActive : IsActiveCheckBox.IsChecked ?? false,
         cryptPassword: _user.Password != PasswordTextBox.Password,
-        groupId: int.Parse(_selectedRadioButton.Uid));
+        groupId: int.Parse(_selectedRadioButton.Uid),
+        isAdmin: IsAdminRadioButton.IsChecked == true);
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
     }

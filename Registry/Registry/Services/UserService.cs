@@ -33,23 +33,36 @@ namespace Registry.Services
     public async Task<UserDetailedInfo> GetUser(string login)
     {
       GetUserByLoginResult result = await _userRepository.GetUserByLogin(login);
+      if (result == null)
+      {
+        return null;
+      }
+
       return new UserDetailedInfo
       {
         Login = login,
         Name = result.Name,
         IsActive = result.Enabled,
         Password = result.Password,
-        GroupId = result.GroupId
+        GroupId = result.GroupId,
+        IsAdmin = result.IsAdmin
       };
     }
 
-    public async Task CreateUser(string login, string name, string password)
+    public async Task CreateUser(
+      string login, 
+      string name, 
+      string password,
+      int groupId,
+      bool isAdmin)
     {
       await _userRepository.CreateUser(new CreateUserRequest
       {
         Name = name,
         Login = login,
-        Password = SecurityService.Crypt(password)
+        Password = SecurityService.Crypt(password),
+        IsAdmin = isAdmin,
+        GroupId = groupId
       });
     }
 
@@ -64,7 +77,8 @@ namespace Registry.Services
       string password, 
       bool isActive, 
       bool cryptPassword,
-      int groupId)
+      int groupId,
+      bool isAdmin)
     {
       await _userRepository.UpdateUser(new UpdateUserRequest
       {
@@ -72,7 +86,8 @@ namespace Registry.Services
         Login = login,
         Password = cryptPassword ? SecurityService.Crypt(password) : password,
         IsEnabled = isActive,
-        GroupId = groupId
+        GroupId = groupId,
+        IsAdmin = isAdmin
       });
     }
 

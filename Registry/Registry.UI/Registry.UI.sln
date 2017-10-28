@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry.UI", "Registry.UI.csproj", "{64FB6368-AD76-41BA-8633-F5EC29FB06EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry", "Registry\Registry.csproj", "{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry", "..\Registry\Registry.csproj", "{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry.Data", "..\Registry.Data\Registry.Data.csproj", "{66BF7ECF-0D91-40C0-8B36-80D1AD009464}"
 EndProject

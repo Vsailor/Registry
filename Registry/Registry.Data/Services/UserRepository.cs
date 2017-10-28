@@ -19,6 +19,7 @@ namespace Registry.Data.Services
       parameters.Add("@name", request.Name);
       parameters.Add("@password", request.Password);
       parameters.Add("@groupId", request.GroupId);
+      parameters.Add("@isAdmin", request.IsAdmin);
 
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -37,6 +38,7 @@ namespace Registry.Data.Services
       parameters.Add("@password", request.Password);
       parameters.Add("@enabled", request.IsEnabled);
       parameters.Add("@groupId", request.GroupId);
+      parameters.Add("@isAdmin", request.IsAdmin);
 
       using (IDbConnection conn = new SqlConnection(ConnectionString))
       {
@@ -88,7 +90,12 @@ namespace Registry.Data.Services
          commandType: CommandType.StoredProcedure);
       }
 
-      return result.Single();
+      if (result.Any())
+      {
+        return result.Single();
+      }
+
+      return null;
     }
 
     public async Task CreateUserGroup(string name)

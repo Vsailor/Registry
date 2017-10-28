@@ -206,7 +206,7 @@
       <Project>{66BF7ECF-0D91-40C0-8B36-80D1AD009464}</Project>
       <Name>Registry.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="Registry\Registry.csproj">
+    <ProjectReference Include="..\Registry\Registry.csproj">
       <Project>{D8A3B3B9-54A4-47B1-A296-12EA8DDE7CFB}</Project>
       <Name>Registry</Name>
     </ProjectReference>

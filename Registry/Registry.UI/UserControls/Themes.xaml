@@ -5,55 +5,69 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Registry.UI.UserControls"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
-    <Grid MinWidth="600"  HorizontalAlignment="Center" VerticalAlignment="Top" >
+    <Grid MinWidth="900"  HorizontalAlignment="Center" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Введіть назву группи для пошуку:</TextBlock>
-                <TextBox Name="ThemeFilterTextBox" Grid.Row="1" TextChanged="ThemeFilterTextBox_OnTextChanged"></TextBox>
-                <ListBox Name="ThemesListBox" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="ThemesListBox_OnSelectionChanged">
-                </ListBox>
-            </Grid>
-            <Grid Grid.Column="1" Margin="10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Назва групи:</TextBlock>
-                <TextBox IsEnabled="False" Grid.Row="1" Name="GroupNameTextBox" TextChanged="GroupNameTextBox_OnTextChanged"></TextBox>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button IsEnabled="False" Height="20" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteGroup" Click="DeleteGroup_OnClick">Видалити групу</Button>
-                    <Button IsEnabled="False"  Height="20" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateGroup" Click="UpdateGroup_OnClick">Зберегти</Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0">Введіть назву группи для пошуку:</TextBlock>
+                            <TextBox Name="ThemeFilterTextBox" Grid.Row="1" TextChanged="ThemeFilterTextBox_OnTextChanged"></TextBox>
+                            <ListView Name="GroupsListBox" Grid.Row="2" Margin="0,10,0,0" MaxHeight="200" SelectionChanged="GroupsListBox_OnSelectionChanged">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridView.Columns>
+                                            <GridViewColumn Width="500" Header="Назва" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                                            <GridViewColumn Width="200" Header="Власник" DisplayMemberBinding="{Binding Path=Login}"></GridViewColumn>
+                                        </GridView.Columns>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
-                <TextBlock Grid.Row="3">Назва нової групи ресурсів:</TextBlock>
-                <TextBox IsEnabled="False" Grid.Row="4" Name="NewGroupTextBox" TextChanged="NewGroupTextBox_OnTextChanged"></TextBox>
-                <Grid Grid.Row="5">
-                    <Button Name="AddGroupButton" IsEnabled="False" Height="20" Margin="10" Width="200" Click="AddGroupButton_OnClick">Створити нову групу ресурсів</Button>
+                <Grid Grid.Column="1" Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0">Назва групи:</TextBlock>
+                    <TextBox IsEnabled="False" Grid.Row="1" Name="GroupNameTextBox" TextChanged="GroupNameTextBox_OnTextChanged"></TextBox>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button IsEnabled="False" Height="20" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteGroup" Click="DeleteGroup_OnClick">Видалити групу</Button>
+                        <Button IsEnabled="False"  Height="20" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateGroup" Click="UpdateGroup_OnClick">Зберегти</Button>
+                    </Grid>
+                    <TextBlock Grid.Row="3">Назва нової групи ресурсів:</TextBlock>
+                    <TextBox Grid.Row="4" Name="NewGroupTextBox" TextChanged="NewGroupTextBox_OnTextChanged"></TextBox>
+                    <Grid Grid.Row="5">
+                        <Button Name="AddGroupButton" IsEnabled="False" Height="20" Margin="10" Width="200" Click="AddGroupButton_OnClick">Створити нову групу ресурсів</Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
-
         <Grid Grid.Row="1">
             <Button Margin="10" Width="100" Height="20" Name="BackButton" Click="BackButton_Click">Назад</Button>
         </Grid>
