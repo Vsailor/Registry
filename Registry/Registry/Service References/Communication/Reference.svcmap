@@ -24,6 +24,7 @@
   <Metadata>
     <MetadataFile FileName="CommunicationService.wsdl" MetadataType="Wsdl" ID="5de7c2a2-9d5d-418f-a1fc-1a93ebf285e7" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl" />
     <MetadataFile FileName="RegistryRemoteService.xsd" MetadataType="Schema" ID="83e24962-2192-4745-961f-119440095373" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd1" />
+    <MetadataFile FileName="RegistryRemoteService3.xsd" MetadataType="Schema" ID="0585935a-921a-4e9d-80a3-4ee60dfe59f5" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd3" />
     <MetadataFile FileName="RegistryRemoteService.wsdl" MetadataType="Wsdl" ID="f7d93dac-c24d-49f9-9e27-1904391eef6a" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl=wsdl0" />
     <MetadataFile FileName="RegistryRemoteService1.xsd" MetadataType="Schema" ID="1be37791-29d4-4cf3-8b41-81f71f75e6a7" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd0" />
     <MetadataFile FileName="RegistryRemoteService.disco" MetadataType="Disco" ID="0f84f7b7-4cb7-478f-92c9-bffc8b41b785" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?disco" />

@@ -16,9 +16,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" FontSize="15">Quick search:</TextBlock>
-            <TextBox Grid.Row="1" Name="QuickSearchBox"></TextBox>
-            <Button Name="AddNewResourceButton" Click="AddNewResourceButton_OnClick" Grid.Row="2" Margin="0,10,0,0" Width="200" HorizontalAlignment="Left">Add new resource</Button>
+            <TextBlock Grid.Row="0" FontSize="15">Швидкий пошук по назві ресурсу, його ключовим словам, категоріям, групам ресурсів:</TextBlock>
+            <TextBox Grid.Row="1" Name="QuickSearchBox" TextChanged="QuickSearchBox_OnTextChanged"></TextBox>
+            <Button Name="AddNewResourceButton" Click="AddNewResourceButton_OnClick" Grid.Row="2" Margin="0,10,0,0" Width="200" HorizontalAlignment="Left">Створити новий ресурс</Button>
         </Grid>
         <Grid Grid.Row="1" MinWidth="700"  HorizontalAlignment="Center" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                 </Grid.RowDefinitions>
                 <ListBox Grid.Row="0" Name="ResourcesListBox" MinHeight="355" VerticalAlignment="Top">
                 </ListBox>
-                <Button Grid.Row="1" Width="100" Name="BackButton" Click="BackButton_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0">Back</Button>
+                <Button Grid.Row="1" Width="100" Name="BackButton" Click="BackButton_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0">Назад</Button>
             </Grid>
            
             <Grid Grid.Column="1" MinWidth="200" VerticalAlignment="Top" Margin="10,0,0,0">
@@ -48,18 +48,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="15">Filters:</TextBlock>
+                <TextBlock Grid.Row="0" FontSize="15">Фільтри:</TextBlock>
                 <Separator Grid.Row="1"/>
-                <TextBlock Grid.Row="2">Name:</TextBlock>
+                <TextBlock Grid.Row="2">Назва:</TextBlock>
                 <TextBox Grid.Row="3" Name="NameTextBox"></TextBox>
-                <TextBlock Grid.Row="4" Margin="0,10,0,0">Tags:</TextBlock>
+                <TextBlock Grid.Row="4" Margin="0,10,0,0">Ключові слова:</TextBlock>
                 <TextBox Grid.Row="5" Name="TagsTextBox"></TextBox>
-                <TextBlock Grid.Row="6" Margin="0,10,0,0">Category:</TextBlock>
+                <TextBlock Grid.Row="6" Margin="0,10,0,0">Категорії:</TextBlock>
                 <ScrollViewer Grid.Row="7" CanContentScroll="True" Height="100">
                     <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
                     </TreeView>
                 </ScrollViewer>
-                <TextBlock Grid.Row="8" Margin="0,10,0,0">Themes:</TextBlock>
+                <TextBlock Grid.Row="8" Margin="0,10,0,0">Групи ресурсів:</TextBlock>
                 <ListBox Name="ThemesListBox" Height="100" Grid.Row="9"></ListBox>
             </Grid>
         </Grid>

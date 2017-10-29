@@ -9,6 +9,7 @@ using System.ServiceModel.Description;
 using Microsoft.Practices.Unity;
 using Registry.Data;
 using Registry.Data.Services;
+using StackExchange.Redis;
 
 namespace Registry.RemoteService
 {

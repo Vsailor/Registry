@@ -703,6 +703,9 @@ namespace Registry.Communication {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CategoryIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -715,7 +718,13 @@ namespace Registry.Communication {
         private string OwnerLoginField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TagsField;
+        private System.Guid[] ResourceGroupsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SaveDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] TagsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UrlField;
@@ -727,6 +736,19 @@ namespace Registry.Communication {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CategoryId {
+            get {
+                return this.CategoryIdField;
+            }
+            set {
+                if ((this.CategoryIdField.Equals(value) != true)) {
+                    this.CategoryIdField = value;
+                    this.RaisePropertyChanged("CategoryId");
+                }
             }
         }
         
@@ -783,7 +805,33 @@ namespace Registry.Communication {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Tags {
+        public System.Guid[] ResourceGroups {
+            get {
+                return this.ResourceGroupsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResourceGroupsField, value) != true)) {
+                    this.ResourceGroupsField = value;
+                    this.RaisePropertyChanged("ResourceGroups");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SaveDate {
+            get {
+                return this.SaveDateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SaveDateField, value) != true)) {
+                    this.SaveDateField = value;
+                    this.RaisePropertyChanged("SaveDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Tags {
             get {
                 return this.TagsField;
             }
@@ -838,6 +886,9 @@ namespace Registry.Communication {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SaveDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UrlField;
@@ -900,6 +951,19 @@ namespace Registry.Communication {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SaveDate {
+            get {
+                return this.SaveDateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SaveDateField, value) != true)) {
+                    this.SaveDateField = value;
+                    this.RaisePropertyChanged("SaveDate");
                 }
             }
         }

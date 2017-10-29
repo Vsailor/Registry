@@ -1,4 +1,6 @@
-﻿namespace Registry.Data.Models
+﻿using System;
+
+namespace Registry.Data.Models
 {
   public class CreateResourceRequest
   {
@@ -10,8 +12,14 @@
 
     public string Url { get; set; }
 
-    public string Tags { get; set; }
+    public string[] Tags { get; set; }
 
     public string FileName { get; set; }
+
+    public Guid CategoryId { get; set; }
+
+    public Guid[] ResourceGroups { get; set; } 
+
+    public string SaveDate { get; set; }
   }
 }

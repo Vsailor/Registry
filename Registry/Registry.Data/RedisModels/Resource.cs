@@ -1,11 +1,7 @@
-﻿using System;
-
-namespace Registry.Data.Models
+﻿namespace Registry.Data.RedisModels
 {
-  public class GetAllResourcesResult
+  public class Resource
   {
-    public Guid Id { get; set; }
-
     public string Name { get; set; }
 
     public string Description { get; set; }
@@ -13,6 +9,8 @@ namespace Registry.Data.Models
     public string Url { get; set; }
 
     public string FileName { get; set; }
+
+    public string Owner { get; set; }
 
     public string SaveDate { get; set; }
   }
