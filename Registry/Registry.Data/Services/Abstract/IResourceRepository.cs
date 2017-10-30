@@ -13,7 +13,7 @@ namespace Registry.Data.Services.Abstract
     Task CreateResource(CreateResourceRequest request);
 
     [OperationContract]
-    Task<GetAllResourcesResult[]> GetAllResources();
+    Task<GetAllResourcesResult[]> GetAllResources(int count, int endId);
 
     [OperationContract]
     string GetCloudBlobConnectionString();

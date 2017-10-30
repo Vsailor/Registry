@@ -1,3 +1,7 @@
 [1020] 29 Oct 13:41:02.120 * Redis 3.2.100 (00000000/0) 64 bit, standalone mode, port 6379, pid 1020 ready to start.
 [1020] 29 Oct 13:41:02.121 # Server started, Redis version 3.2.100
 [1020] 29 Oct 13:41:02.122 * The server is now ready to accept connections on port 6379
+[2852] 29 Oct 22:58:13.786 * Redis 3.2.100 (00000000/0) 64 bit, standalone mode, port 6379, pid 2852 ready to start.
+[2852] 29 Oct 22:58:13.818 # Server started, Redis version 3.2.100
+[2852] 29 Oct 22:58:13.917 * DB loaded from disk: 0.093 seconds
+[2852] 29 Oct 22:58:13.917 * The server is now ready to accept connections on port 6379

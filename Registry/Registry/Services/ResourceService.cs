@@ -31,9 +31,9 @@ namespace Registry.Services
       await _resourceRepository.CreateResourceAsync(request);
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources()
+    public async Task<GetAllResourcesResult[]> GetAllResources(int count, int? id)
     {
-      return await _resourceRepository.GetAllResourcesAsync();
+      return await _resourceRepository.GetAllResourcesAsync(count, id.HasValue ? id.Value : -1);
     }
   }
 }

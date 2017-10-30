@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="07c84b83-d8ab-46f5-93fc-da14506098c1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fde6fe14-20d2-4d7e-92b3-0be1e1d7301d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost:8181/RegistryRemoteService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CommunicationService.wsdl" MetadataType="Wsdl" ID="5de7c2a2-9d5d-418f-a1fc-1a93ebf285e7" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl" />
-    <MetadataFile FileName="RegistryRemoteService.xsd" MetadataType="Schema" ID="83e24962-2192-4745-961f-119440095373" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd1" />
-    <MetadataFile FileName="RegistryRemoteService3.xsd" MetadataType="Schema" ID="0585935a-921a-4e9d-80a3-4ee60dfe59f5" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd3" />
-    <MetadataFile FileName="RegistryRemoteService.wsdl" MetadataType="Wsdl" ID="f7d93dac-c24d-49f9-9e27-1904391eef6a" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="RegistryRemoteService1.xsd" MetadataType="Schema" ID="1be37791-29d4-4cf3-8b41-81f71f75e6a7" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd0" />
-    <MetadataFile FileName="RegistryRemoteService.disco" MetadataType="Disco" ID="0f84f7b7-4cb7-478f-92c9-bffc8b41b785" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?disco" />
-    <MetadataFile FileName="RegistryRemoteService2.xsd" MetadataType="Schema" ID="ae07d8d6-240d-41ec-bc41-7ad42eabee5a" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CommunicationService.wsdl" MetadataType="Wsdl" ID="3703aa7d-12a5-46e5-bc9f-59aca2b8066f" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl" />
+    <MetadataFile FileName="RegistryRemoteService.xsd" MetadataType="Schema" ID="cdbd3a08-7ed3-4202-a54a-a41d7e7a6d27" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd1" />
+    <MetadataFile FileName="RegistryRemoteService1.xsd" MetadataType="Schema" ID="cc53ff87-0a29-4b3b-b32d-0f9dd6412509" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd3" />
+    <MetadataFile FileName="RegistryRemoteService.wsdl" MetadataType="Wsdl" ID="136c72de-86cd-4344-ac3e-9fb75d4e3bdc" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="RegistryRemoteService2.xsd" MetadataType="Schema" ID="c221ec34-e0f4-4651-a034-dd296712dc6b" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd0" />
+    <MetadataFile FileName="RegistryRemoteService.disco" MetadataType="Disco" ID="2cd55dcf-d688-4545-93e8-ccc5faac74c9" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?disco" />
+    <MetadataFile FileName="RegistryRemoteService3.xsd" MetadataType="Schema" ID="dab750c9-adcd-4655-8905-70d83bf2e420" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -10,6 +10,6 @@ namespace Registry.Services.Abstract
 
     Task CreateResource(CreateResourceRequest request);
 
-    Task<GetAllResourcesResult[]> GetAllResources();
+    Task<GetAllResourcesResult[]> GetAllResources(int count, int? endId);
   }
 }

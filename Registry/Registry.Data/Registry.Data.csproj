@@ -107,6 +107,7 @@
     <Compile Include="Models\GetUserByLoginResult.cs" />
     <Compile Include="Models\UpdateUserGroupRequest.cs" />
     <Compile Include="Models\UpdateUserRequest.cs" />
+    <Compile Include="Models\UseFiltersRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedisModels\Resource.cs" />
     <Compile Include="RedisModels\Resources.cs" />

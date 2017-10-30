@@ -882,7 +882,7 @@ namespace Registry.Communication {
         private string FileNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid IdField;
+        private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -930,12 +930,12 @@ namespace Registry.Communication {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id {
+        public string Id {
             get {
                 return this.IdField;
             }
             set {
-                if ((this.IdField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
                 }
@@ -1339,10 +1339,10 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task CreateResourceAsync(Registry.Communication.CreateResourceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetAllResources();
+        Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync();
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         string GetCloudBlobConnectionString();
@@ -1386,12 +1386,12 @@ namespace Registry.Communication {
             return base.Channel.CreateResourceAsync(request);
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetAllResources() {
-            return base.Channel.GetAllResources();
+        public Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId) {
+            return base.Channel.GetAllResources(count, endId);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync() {
-            return base.Channel.GetAllResourcesAsync();
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId) {
+            return base.Channel.GetAllResourcesAsync(count, endId);
         }
         
         public string GetCloudBlobConnectionString() {
@@ -1462,10 +1462,10 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task CreateResourceAsync(Registry.Communication.CreateResourceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetAllResources();
+        Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync();
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         string GetCloudBlobConnectionString();
@@ -1627,12 +1627,12 @@ namespace Registry.Communication {
             return base.Channel.CreateResourceAsync(request);
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetAllResources() {
-            return base.Channel.GetAllResources();
+        public Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId) {
+            return base.Channel.GetAllResources(count, endId);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync() {
-            return base.Channel.GetAllResourcesAsync();
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId) {
+            return base.Channel.GetAllResourcesAsync(count, endId);
         }
         
         public string GetCloudBlobConnectionString() {

@@ -4,7 +4,7 @@ namespace Registry.Data.Models
 {
   public class GetAllResourcesResult
   {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
 
     public string Name { get; set; }
 

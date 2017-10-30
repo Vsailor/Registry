@@ -5,6 +5,6 @@ namespace Registry.Data.RedisModels
 {
   public class Resources
   {
-    public List<Guid> ResourcesIds { get; set; }
+    public List<string> ResourcesIds { get; set; }
   }
 }

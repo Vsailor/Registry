@@ -47,7 +47,10 @@ namespace Registry.UI.UserControls
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Verifying;
 
+      SignInButton.IsEnabled = false;
       UserDetailedInfo result = await _userService.GetUser(LoginTextBox.Text);
+      SignInButton.IsEnabled = true;
+
       if (result == null ||
         SecurityService.Crypt(PasswordTextBox.Password) != result.Password ||
         !result.IsActive)

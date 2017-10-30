@@ -60,9 +60,9 @@ namespace Registry.Data.Services
       await _resourceRepository.CreateResource(request);
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources()
+    public async Task<GetAllResourcesResult[]> GetAllResources(int count, int endId)
     {
-      return await _resourceRepository.GetAllResources();
+      return await _resourceRepository.GetAllResources(count, endId);
     }
 
     public string GetCloudBlobConnectionString()
