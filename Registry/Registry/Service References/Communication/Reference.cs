@@ -991,6 +991,99 @@ namespace Registry.Communication {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UseFiltersRequest", Namespace="http://schemas.datacontract.org/2004/07/Registry.Data.Models")]
+    [System.SerializableAttribute()]
+    public partial class UseFiltersRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CategoryIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> ResourceGroupIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] TagsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CategoryId {
+            get {
+                return this.CategoryIdField;
+            }
+            set {
+                if ((this.CategoryIdField.Equals(value) != true)) {
+                    this.CategoryIdField = value;
+                    this.RaisePropertyChanged("CategoryId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> ResourceGroupId {
+            get {
+                return this.ResourceGroupIdField;
+            }
+            set {
+                if ((this.ResourceGroupIdField.Equals(value) != true)) {
+                    this.ResourceGroupIdField = value;
+                    this.RaisePropertyChanged("ResourceGroupId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Tags {
+            get {
+                return this.TagsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TagsField, value) != true)) {
+                    this.TagsField = value;
+                    this.RaisePropertyChanged("Tags");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Communication.ICategoryRepository")]
     public interface ICategoryRepository {
@@ -1349,6 +1442,12 @@ namespace Registry.Communication {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         System.Threading.Tasks.Task<string> GetCloudBlobConnectionStringAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
+        Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1400,6 +1499,14 @@ namespace Registry.Communication {
         
         public System.Threading.Tasks.Task<string> GetCloudBlobConnectionStringAsync() {
             return base.Channel.GetCloudBlobConnectionStringAsync();
+        }
+        
+        public Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
+            return base.Channel.GetResources(filter, count, endId);
+        }
+        
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
+            return base.Channel.GetResourcesAsync(filter, count, endId);
         }
     }
     
@@ -1472,6 +1579,12 @@ namespace Registry.Communication {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         System.Threading.Tasks.Task<string> GetCloudBlobConnectionStringAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
+        Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserRepository/CreateUser", ReplyAction="http://tempuri.org/IUserRepository/CreateUserResponse")]
         void CreateUser(Registry.Communication.CreateUserRequest request);
@@ -1641,6 +1754,14 @@ namespace Registry.Communication {
         
         public System.Threading.Tasks.Task<string> GetCloudBlobConnectionStringAsync() {
             return base.Channel.GetCloudBlobConnectionStringAsync();
+        }
+        
+        public Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
+            return base.Channel.GetResources(filter, count, endId);
+        }
+        
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
+            return base.Channel.GetResourcesAsync(filter, count, endId);
         }
         
         public void CreateUser(Registry.Communication.CreateUserRequest request) {

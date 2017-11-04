@@ -20,6 +20,7 @@ namespace Registry.Data.Services
     private const string CategoriesName = "Categories";
     private const string ResourceGroupsName = "ResourceGroups";
     private const string TagsName = "Tags";
+    private const string Names = "ReourcesNames";
 
     public async Task CreateResource(CreateResourceRequest request)
     {
@@ -36,6 +37,8 @@ namespace Registry.Data.Services
       {
         await UpdateRelationsRecord(TagsName, item, resourceId);
       }
+
+      await RegistryCommon.RedisDb.HashSetAsync(Names, request.Name, resourceId);
     }
 
     private async Task CreateResourceRecord(CreateResourceRequest request, string resourceId)
@@ -109,6 +112,93 @@ namespace Registry.Data.Services
       }
 
       return result.ToArray();
+    }
+
+    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId)
+    {
+      var resources = (await RegistryCommon.RedisDb.HashKeysAsync(ResourcesName)).Select(k => k.ToString()).ToList();
+      RedisValue response;
+      if (!string.IsNullOrEmpty(filter.Name))
+      {
+        var filterByName = (await RegistryCommon.RedisDb.HashKeysAsync(Names)).Select(f => f.ToString())
+          .Where(f => f.ToString().ToLowerInvariant().Contains(filter.Name.ToLowerInvariant()));
+        var filterByNameValues = (await RegistryCommon.RedisDb.HashGetAsync(Names, filterByName.Select(f => (RedisValue)f).ToArray())).Select(f => f.ToString()).ToArray();
+        if (!filterByNameValues.Any())
+        {
+          resources.Clear();
+        }
+
+        resources =  resources.Where(r => filterByNameValues.Contains(r)).ToList();
+      }
+
+      if (filter.CategoryId.HasValue)
+      {
+        response = await RegistryCommon.RedisDb.HashGetAsync(CategoriesName, filter.CategoryId.Value.ToString());
+        if (response.HasValue)
+        {
+          var resourcesInCategory = JsonConvert.DeserializeObject<Resources>(response.ToString()).ResourcesIds;
+          resources = resources.Where(r => resourcesInCategory.Contains(r)).ToList();
+        }
+        else
+        {
+          resources.Clear();
+        }
+      }
+
+      if (filter.ResourceGroupId.HasValue)
+      {
+        response = await RegistryCommon.RedisDb.HashGetAsync(ResourceGroupsName, filter.ResourceGroupId.Value.ToString());
+        if (response.HasValue)
+        {
+          var resourcesInGroup = JsonConvert.DeserializeObject<Resources>(response.ToString()).ResourcesIds;
+          resources = resources.Where(r => resourcesInGroup.Contains(r)).ToList();
+        }
+        else
+        {
+          resources.Clear();
+        }
+      }
+
+      if (filter.Tags != null && filter.Tags.Length != 0)
+      {
+        var allKeys = await RegistryCommon.RedisDb.HashKeysAsync(TagsName);
+        var keys = new List<string>();
+        foreach (string tag in filter.Tags)
+        {
+          keys.AddRange(allKeys.Where(k => k.ToString().ToLowerInvariant().Contains(tag.ToLowerInvariant())).Select(k => k.ToString()));
+        }
+
+        var filterByTags = new Dictionary<string, string[]>();
+        foreach (var key in keys)
+        {
+          response = await RegistryCommon.RedisDb.HashGetAsync(TagsName, key);
+          filterByTags.Add(key, JsonConvert.DeserializeObject<Resources>(response.ToString()).ResourcesIds.ToArray());
+        }
+
+        var resourcesByTags = filterByTags.Select(f => f.Value).ToArray();
+        for (int i = 0; i < resourcesByTags.GetLength(0)-1; i++)
+        {
+          resourcesByTags[i+1] = resourcesByTags[i].Union(resourcesByTags[i + 1]).ToArray();
+        }
+
+        if (!resourcesByTags.Any())
+        {
+          resources.Clear();
+        }
+
+        resources = resources.Where(r => resourcesByTags.Last().Contains(r.ToString())).ToList();
+      }
+
+      var allResourcesResults = new List<GetAllResourcesResult>();
+      for (int i = 0; i < resources.Count; i++)
+      {
+        response = await RegistryCommon.RedisDb.HashGetAsync(ResourcesName, resources[i]);
+        var res = JsonConvert.DeserializeObject<GetAllResourcesResult>(response.ToString());
+        res.Id = resources[i];
+        allResourcesResults.Add(res);
+      }
+
+      return allResourcesResults.ToArray();
     }
 
     public string GetCloudBlobConnectionString()

@@ -70,6 +70,11 @@ namespace Registry.Data.Services
       return _resourceRepository.GetCloudBlobConnectionString();
     }
 
+    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId)
+    {
+      return await _resourceRepository.GetResources(filter, count, endId);
+    }
+
     public async Task CreateUser(CreateUserRequest request)
     {
       await _userRepository.CreateUser(request);

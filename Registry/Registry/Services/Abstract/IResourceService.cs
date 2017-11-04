@@ -11,5 +11,7 @@ namespace Registry.Services.Abstract
     Task CreateResource(CreateResourceRequest request);
 
     Task<GetAllResourcesResult[]> GetAllResources(int count, int? endId);
+
+    Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId);
   }
 }

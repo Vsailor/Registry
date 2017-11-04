@@ -18,7 +18,7 @@ namespace Registry.UI.UserControls
     private readonly ICategoryService _categoryService = RegistryCommon.Instance.Container.Resolve<ICategoryService>();
     private GetAllGroupsResult _selectedGroup;
     private GetAllGroupsResult[] _allGroups;
-    private const int ResourcesPerLoad = 2;
+    private const int ResourcesPerLoad = 50;
     private int lastResId = -1;
 
     private Button _loadNextResources = new Button
@@ -129,34 +129,61 @@ namespace Registry.UI.UserControls
         FillCategories(newItem, item, allCategories);
       });
     }
-    private void UseFiltersButton_Click(object sender, RoutedEventArgs e)
+
+    private async void UseFiltersButton_Click(object sender, RoutedEventArgs e)
     {
+      var request = new UseFiltersRequest();
 
-      //if (string.IsNullOrEmpty(TagsTextBox.Text))
-      //{
-      //  request.Tags = new string[0];
-      //}
-      //else
-      //{
-      //  var tags = ResourceTags.Text.Split(',');
-      //  for (int i = 0; i < tags.Length; i++)
-      //  {
-      //    int count = 0;
-      //    for (int j = 0; j < tags[i].Length; j++)
-      //    {
-      //      if (tags[i][j] != ' ')
-      //      {
-      //        break;
-      //      }
+      request.Name = NameTextBox.Text;
 
-      //      count++;
-      //    }
+      if (CategoriesTree.SelectedItem != null)
+      {
+        request.CategoryId = Guid.Parse(((TreeViewItem) CategoriesTree.SelectedItem).Uid);
+      }
 
-      //    tags[i] = tags[i].Remove(0, count);
-      //  }
+      if (GroupsListBox.SelectedItems.Count != 0)
+      {
+        request.ResourceGroupId = _allGroups.First(x => x.Name == GroupsListBox.SelectedItems[0].ToString()).Id;
+      }
 
-      //  request.Tags = tags;
-      //}
+      if (string.IsNullOrEmpty(TagsTextBox.Text))
+      {
+        request.Tags = new string[0];
+      }
+      else
+      {
+        var tags = TagsTextBox.Text.Split(',');
+        for (int i = 0; i < tags.Length; i++)
+        {
+          int count = 0;
+          for (int j = 0; j < tags[i].Length; j++)
+          {
+            if (tags[i][j] != ' ')
+            {
+              break;
+            }
+
+            count++;
+          }
+
+          tags[i] = tags[i].Remove(0, count);
+        }
+
+        request.Tags = tags;
+      }
+
+      ResourcesListBox.Items.Clear();
+
+      var filteredResources = await _resourceService.GetResources(request, ResourcesPerLoad, -1);
+      foreach (var res in filteredResources)
+      {
+        ResourcesListBox.Items.Add(new ResourceItem(res));
+      }
+    }
+
+    private void ClearFiltersButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Resources());
     }
   }
 }

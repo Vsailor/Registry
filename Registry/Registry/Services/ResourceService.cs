@@ -35,5 +35,10 @@ namespace Registry.Services
     {
       return await _resourceRepository.GetAllResourcesAsync(count, id.HasValue ? id.Value : -1);
     }
+
+    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId)
+    {
+      return await _resourceRepository.GetResourcesAsync(filter, count, endId);
+    }
   }
 }

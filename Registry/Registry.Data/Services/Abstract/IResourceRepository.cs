@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Blob;
 using Registry.Data.Models;
 
 namespace Registry.Data.Services.Abstract
@@ -17,5 +15,8 @@ namespace Registry.Data.Services.Abstract
 
     [OperationContract]
     string GetCloudBlobConnectionString();
+
+    [OperationContract]
+    Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId);
   }
 }

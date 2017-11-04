@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Practices.Unity;
 using Registry.Common;
@@ -48,8 +49,21 @@ namespace Registry.UI.UserControls
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Verifying;
 
       SignInButton.IsEnabled = false;
-      UserDetailedInfo result = await _userService.GetUser(LoginTextBox.Text);
-      SignInButton.IsEnabled = true;
+      UserDetailedInfo result = null;
+      try
+      {
+        result = await _userService.GetUser(LoginTextBox.Text);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+        return;
+      }
+      finally
+      {
+        SignInButton.IsEnabled = true;
+      }
+
 
       if (result == null ||
         SecurityService.Crypt(PasswordTextBox.Password) != result.Password ||

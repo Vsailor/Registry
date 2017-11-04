@@ -19,10 +19,13 @@ namespace Registry.UI.UserControls
     public ResourceItem(GetAllResourcesResult res)
     {
       InitializeComponent();
+      ResourceId = int.Parse(res.Id);
       allResources = res;
       ResourceName.Text = res.Name;
       ResourceDescription.Text = res.Description;
     }
+
+    public int ResourceId { get; set; }
 
     private async void DownloadButton_Click(object sender, RoutedEventArgs e)
     {

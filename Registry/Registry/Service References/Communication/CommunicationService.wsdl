@@ -245,6 +245,12 @@
   <wsdl:message name="IResourceRepository_GetCloudBlobConnectionString_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCloudBlobConnectionStringResponse" />
   </wsdl:message>
+  <wsdl:message name="IResourceRepository_GetResources_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResources" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_GetResources_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResourcesResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICategoryRepository">
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/GetAllCategories" message="tns:ICategoryRepository_GetAllCategories_InputMessage" />
@@ -332,6 +338,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString" message="tns:IResourceRepository_GetCloudBlobConnectionString_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse" message="tns:IResourceRepository_GetCloudBlobConnectionString_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetResources">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetResources" message="tns:IResourceRepository_GetResources_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetResourcesResponse" message="tns:IResourceRepository_GetResources_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunication">
     <wsdl:operation name="GetAllCategories">
@@ -377,6 +387,10 @@
     <wsdl:operation name="GetCloudBlobConnectionString">
       <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString" message="tns:IResourceRepository_GetCloudBlobConnectionString_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse" message="tns:IResourceRepository_GetCloudBlobConnectionString_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResources">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetResources" message="tns:IResourceRepository_GetResources_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetResourcesResponse" message="tns:IResourceRepository_GetResources_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/CreateUser" message="tns:IUserRepository_CreateUser_InputMessage" />
@@ -603,6 +617,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCloudBlobConnectionString">
       <soap12:operation soapAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResources">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/GetResources" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
