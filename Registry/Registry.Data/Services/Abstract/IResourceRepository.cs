@@ -18,5 +18,8 @@ namespace Registry.Data.Services.Abstract
 
     [OperationContract]
     Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId);
+
+    [OperationContract]
+    Task<GetResourceDetailsResult> GetResourceDetails(int resourceId);
   }
 }

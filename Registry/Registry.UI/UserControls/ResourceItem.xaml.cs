@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using Registry.Common;
 using Registry.Communication;
+using Registry.UI.Extensions;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Registry.UI.UserControls
@@ -15,12 +18,15 @@ namespace Registry.UI.UserControls
   /// </summary>
   public partial class ResourceItem : UserControl
   {
-    private GetAllResourcesResult allResources;
-    public ResourceItem(GetAllResourcesResult res)
+    private GetAllResourcesResult currentResource;
+    private GetAllResourcesResult[] _allResources;
+
+    public ResourceItem(GetAllResourcesResult res, GetAllResourcesResult[] allResources)
     {
       InitializeComponent();
+      _allResources = allResources;
       ResourceId = int.Parse(res.Id);
-      allResources = res;
+      currentResource = res;
       ResourceName.Text = res.Name;
       ResourceDescription.Text = res.Description;
     }
@@ -43,11 +49,16 @@ namespace Registry.UI.UserControls
       using (WebClient client = new WebClient())
       {
         await Task.Run(() => 
-          client.DownloadFileAsync(new Uri(allResources.Url), $"{dlg.SelectedPath}{allResources.FileName}"));
+          client.DownloadFileAsync(new Uri(currentResource.Url), $"{dlg.SelectedPath}{currentResource.FileName}"));
       }
 
       Process.Start(dlg.SelectedPath);
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
+    }
+
+    private void ResourceItemMainGrid_OnClick(object sender, RoutedEventArgs e)
+    {
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UpdateResource(_allResources.First(r => int.Parse(r.Id) == ResourceId)));
     }
   }
 }

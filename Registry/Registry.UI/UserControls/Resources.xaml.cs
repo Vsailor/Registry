@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Registry.Common;
@@ -20,6 +21,7 @@ namespace Registry.UI.UserControls
     private GetAllGroupsResult[] _allGroups;
     private const int ResourcesPerLoad = 50;
     private int lastResId = -1;
+    private GetAllResourcesResult[] _allResources;
 
     private Button _loadNextResources = new Button
     {
@@ -42,17 +44,17 @@ namespace Registry.UI.UserControls
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
       ResourcesListBox.Items.Remove(_loadNextResources);
-      GetAllResourcesResult[] resources = await _resourceService.GetAllResources(ResourcesPerLoad, lastResId);
+      _allResources = await _resourceService.GetAllResources(ResourcesPerLoad, lastResId);
 
-      foreach (var res in resources)
+      foreach (var res in _allResources)
       {
-        ResourcesListBox.Items.Add(new ResourceItem(res));
+        ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
       }
 
-      var lastRes = resources.LastOrDefault();
+      var lastRes = _allResources.LastOrDefault();
       lastResId = lastRes == null ? -1 : int.Parse(lastRes.Id);
 
-      if (resources.Length == ResourcesPerLoad)
+      if (_allResources.Length == ResourcesPerLoad)
       {
         ResourcesListBox.Items.Add(_loadNextResources);
       }
@@ -79,19 +81,21 @@ namespace Registry.UI.UserControls
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
-      GetAllResourcesResult[] allResources = await _resourceService.GetAllResources(ResourcesPerLoad, null);
-      foreach (var res in allResources)
+      _allResources = await _resourceService.GetAllResources(ResourcesPerLoad, null);
+      foreach (var res in _allResources)
       {
-        ResourcesListBox.Items.Add(new ResourceItem(res));
+        ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
       }
 
-      var lastRes = allResources.LastOrDefault();
+      var lastRes = _allResources.LastOrDefault();
       lastResId = lastRes == null ? -1 : int.Parse(lastRes.Id);
 
-      if (allResources.Length == ResourcesPerLoad)
+      if (_allResources.Length == ResourcesPerLoad)
       {
         ResourcesListBox.Items.Add(_loadNextResources);
       }
+
+      ResourcesListBox.SelectionChanged += ResourcesListBoxOnSelectionChanged;
 
       _allGroups = await _resourceGroupService.GetAllResourceGroups();
       GroupsListBox.ItemsSource = _allGroups.Select(g => g.Name).ToArray();
@@ -109,6 +113,11 @@ namespace Registry.UI.UserControls
       FillCategories(CategoriesTree.Items[0] as TreeViewItem, baseItem, allCategories);
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
+    }
+
+    private void ResourcesListBoxOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+    {
+     
     }
 
     private void FillCategories(
@@ -177,7 +186,7 @@ namespace Registry.UI.UserControls
       var filteredResources = await _resourceService.GetResources(request, ResourcesPerLoad, -1);
       foreach (var res in filteredResources)
       {
-        ResourcesListBox.Items.Add(new ResourceItem(res));
+        ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
       }
     }
 

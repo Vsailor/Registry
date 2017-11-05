@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Registry.UI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="50" MinWidth="500">
+             d:DesignHeight="50" Width="500">
     <Grid>
         <Border BorderBrush="Gray" BorderThickness="1">
             <Grid>
@@ -13,7 +13,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" Width="500">
                     <Button BorderBrush="{x:Null}" Style="{StaticResource ResourceItemStyle}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -26,12 +26,16 @@
                                 </Grid.Background>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock FontWeight="Bold" Grid.Row="0" Name="ResourceName"></TextBlock>
-                                <TextBlock Grid.Row="1" TextWrapping="Wrap" Name="ResourceDescription"></TextBlock>
+                                <Button BorderBrush="{x:Null}" Style="{StaticResource ResourceItemStyle}" Name="ResourceItemMainGrid" Click="ResourceItemMainGrid_OnClick">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock FontWeight="Bold" Grid.Row="0" Name="ResourceName"></TextBlock>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Name="ResourceDescription"></TextBlock>
+                                    </Grid>
+                                </Button>
                             </Grid>
                         </Grid>
                     </Button>
@@ -41,7 +45,6 @@
                 </Grid>
             </Grid>
         </Border>
-
         <!--<Button Style="{StaticResource ResourceItemStyle}">
             
         </Button>-->

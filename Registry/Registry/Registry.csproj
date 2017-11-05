@@ -105,6 +105,9 @@
     <None Include="Service References\Communication\Registry.Communication.GetAllUsersResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\Communication\Registry.Communication.GetResourceDetailsResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Communication\Registry.Communication.GetUserByLoginResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

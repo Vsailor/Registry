@@ -75,6 +75,11 @@ namespace Registry.Data.Services
       return await _resourceRepository.GetResources(filter, count, endId);
     }
 
+    public async Task<GetResourceDetailsResult> GetResourceDetails(int resourceId)
+    {
+      return await _resourceRepository.GetResourceDetails(resourceId);
+    }
+
     public async Task CreateUser(CreateUserRequest request)
     {
       await _userRepository.CreateUser(request);

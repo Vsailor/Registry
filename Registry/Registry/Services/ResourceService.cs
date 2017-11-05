@@ -40,5 +40,10 @@ namespace Registry.Services
     {
       return await _resourceRepository.GetResourcesAsync(filter, count, endId);
     }
+
+    public async Task<GetResourceDetailsResult> GetResourceDetails(int resourceId)
+    {
+      return await _resourceRepository.GetResourceDetailsAsync(resourceId);
+    }
   }
 }

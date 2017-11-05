@@ -120,6 +120,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetResourceDetails">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/GetResourceDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateUser">
       <soap12:operation soapAction="http://tempuri.org/IUserRepository/CreateUser" style="document" />
       <wsdl:input>

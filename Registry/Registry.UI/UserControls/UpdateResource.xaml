@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Registry.UI.UserControls.UpdateResource"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Registry.UI.UserControls"
+             mc:Ignorable="d" d:DesignWidth="900" Loaded="UpdateResource_OnLoaded">
+
+    <Grid Width="900"  HorizontalAlignment="Center" VerticalAlignment="Top" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0">Назва:</TextBlock>
+            <TextBox Grid.Row="1" Name="ResourceTitle"></TextBox>
+            <TextBlock Grid.Row="2" Margin="0,10,0,0">Опис:</TextBlock>
+            <TextBox Grid.Row="3" TextWrapping="Wrap" Height="100" Name="ResourceDescription"></TextBox>
+            <TextBlock Grid.Row="4" Margin="0,10,0,0">Ключові слова:</TextBlock>
+            <TextBox Grid.Row="5" Name="ResourceTags"></TextBox>
+            <TextBlock Grid.Row="6" Margin="0,10,0,0">Файл ресурсу:</TextBlock>
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="FileNameTextBox"></TextBox>
+                <Button Grid.Column="1" Name="BrowseButton" Click="BrowseButton_OnClick">Вибрати</Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Margin="10,0,0,0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0">Категорія:</TextBlock>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
+                </TreeView>
+            </ScrollViewer>
+            <TextBlock Grid.Row="2" Margin="0,10,0,0">Групи ресурсів:</TextBlock>
+            <ListBox Name="GroupsListBox" Grid.Row="3">
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Button Name="BackButton" Click="BackButton_OnClick" Width="100" Margin="0,10,0,0">Назад</Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Button Name="SaveButton" Width="100" Margin="0,10,0,0" Click="SaveButton_OnClick">Зберегти</Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -41,6 +41,48 @@ namespace Registry.Data.Services
       await RegistryCommon.RedisDb.HashSetAsync(Names, request.Name, resourceId);
     }
 
+    public async Task<GetResourceDetailsResult> GetResourceDetails(int resourceId)
+    {
+      var result = new GetResourceDetailsResult();
+      var allCategories = await RegistryCommon.RedisDb.HashGetAllAsync(CategoriesName);
+      for (int i = 0; i < allCategories.Length; i++)
+      {
+        Resources res = JsonConvert.DeserializeObject<Resources>(allCategories[i].Value.ToString());
+        if (res.ResourcesIds.Any(r => r == resourceId.ToString()))
+        {
+          result.Category = Guid.Parse(allCategories[i].Name);
+          break;
+        }
+      }
+
+      var allTags = await RegistryCommon.RedisDb.HashGetAllAsync(TagsName);
+      var tags = new List<string>();
+      for (int i = 0; i < allTags.Length; i++)
+      {
+        Resources res = JsonConvert.DeserializeObject<Resources>(allTags[i].Value.ToString());
+        if (res.ResourcesIds.Any(r => r == resourceId.ToString()))
+        {
+          tags.Add(allTags[i].Name);
+        }
+      }
+
+      result.Tags = tags.ToArray();
+
+      var allResourceGroups = await RegistryCommon.RedisDb.HashGetAllAsync(ResourceGroupsName);
+      var resourceGroups = new List<string>();
+      for (int i = 0; i < allResourceGroups.Length; i++)
+      {
+        Resources res = JsonConvert.DeserializeObject<Resources>(allResourceGroups[i].Value.ToString());
+        if (res.ResourcesIds.Any(r => r == resourceId.ToString()))
+        {
+          resourceGroups.Add(allResourceGroups[i].Name);
+        }
+      }
+
+      result.ResourceGroups = resourceGroups.Select(Guid.Parse).ToArray();
+      return result;
+    }
+
     private async Task CreateResourceRecord(CreateResourceRequest request, string resourceId)
     {
       var resource = new Resource

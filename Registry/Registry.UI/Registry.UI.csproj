@@ -109,6 +109,9 @@
     <Compile Include="UserControls\Themes.xaml.cs">
       <DependentUpon>Themes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UpdateResource.xaml.cs">
+      <DependentUpon>UpdateResource.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UserGroups.xaml.cs">
       <DependentUpon>UserGroups.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Themes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UpdateResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

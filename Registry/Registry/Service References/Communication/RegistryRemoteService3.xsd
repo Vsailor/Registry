@@ -134,4 +134,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UseFiltersRequest" nillable="true" type="tns:UseFiltersRequest" />
+  <xs:complexType name="GetResourceDetailsResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Category" type="ser:guid" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ResourceGroups" nillable="true" type="q4:ArrayOfguid" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q5:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetResourceDetailsResult" nillable="true" type="tns:GetResourceDetailsResult" />
 </xs:schema>

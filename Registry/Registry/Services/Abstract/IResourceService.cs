@@ -13,5 +13,7 @@ namespace Registry.Services.Abstract
     Task<GetAllResourcesResult[]> GetAllResources(int count, int? endId);
 
     Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId);
+
+    Task<GetResourceDetailsResult> GetResourceDetails(int resourceId);
   }
 }
