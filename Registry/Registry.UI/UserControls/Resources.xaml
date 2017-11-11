@@ -42,6 +42,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -49,18 +51,20 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" FontSize="15">Фільтри:</TextBlock>
                     <Separator Grid.Row="1"/>
-                    <TextBlock Grid.Row="2">Назва:</TextBlock>
-                    <TextBox Grid.Row="3" Name="NameTextBox"></TextBox>
-                    <TextBlock Grid.Row="4" Margin="0,10,0,0">Ключові слова:</TextBlock>
-                    <TextBox Grid.Row="5" Name="TagsTextBox"></TextBox>
-                    <TextBlock Grid.Row="6" Margin="0,10,0,0">Категорії:</TextBlock>
-                    <ScrollViewer Grid.Row="7" CanContentScroll="True">
+                    <TextBlock Grid.Row="2">Унікальний ідентифікатор:</TextBlock>
+                    <TextBox Grid.Row="3" Name="UniqueIdentifier"></TextBox>
+                    <TextBlock Grid.Row="4" Margin="0,10,0,0">Назва:</TextBlock>
+                    <TextBox Grid.Row="5" Name="NameTextBox"></TextBox>
+                    <TextBlock Grid.Row="6" Margin="0,10,0,0">Ключові слова:</TextBlock>
+                    <TextBox Grid.Row="7" Name="TagsTextBox"></TextBox>
+                    <TextBlock Grid.Row="8" Margin="0,10,0,0">Категорії:</TextBlock>
+                    <ScrollViewer Grid.Row="9" CanContentScroll="True">
                         <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
                         </TreeView>
                     </ScrollViewer>
-                    <TextBlock Grid.Row="8" Margin="0,10,0,0">Групи ресурсів:</TextBlock>
-                    <ListBox Name="GroupsListBox" Grid.Row="9"></ListBox>
-                    <Grid Grid.Row="10">
+                    <TextBlock Grid.Row="10" Margin="0,10,0,0">Групи ресурсів:</TextBlock>
+                    <ListBox Name="GroupsListBox" Grid.Row="11"></ListBox>
+                    <Grid Grid.Row="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>

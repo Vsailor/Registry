@@ -26,15 +26,19 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0">Назва:</TextBlock>
-            <TextBox Grid.Row="1" Name="ResourceTitle"></TextBox>
-            <TextBlock Grid.Row="2" Margin="0,10,0,0">Опис:</TextBlock>
-            <TextBox Grid.Row="3" TextWrapping="Wrap" Height="100" Name="ResourceDescription"></TextBox>
-            <TextBlock Grid.Row="4" Margin="0,10,0,0">Ключові слова:</TextBlock>
-            <TextBox Grid.Row="5" Name="ResourceTags"></TextBox>
-            <TextBlock Grid.Row="6" Margin="0,10,0,0">Файл ресурсу:</TextBlock>
-            <Grid Grid.Row="7">
+            <TextBlock Grid.Row="0">Унікальний ідентифікатор:</TextBlock>
+            <TextBox Grid.Row="1" Name="UniqueIdentifier" IsReadOnly="True"></TextBox>
+            <TextBlock Grid.Row="2" Margin="0,10,0,0">Назва:</TextBlock>
+            <TextBox Grid.Row="3" Name="ResourceTitle"></TextBox>
+            <TextBlock Grid.Row="4" Margin="0,10,0,0">Опис:</TextBlock>
+            <TextBox Grid.Row="5" TextWrapping="Wrap" Height="100" Name="ResourceDescription"></TextBox>
+            <TextBlock Grid.Row="6" Margin="0,10,0,0">Ключові слова:</TextBlock>
+            <TextBox Grid.Row="7" Name="ResourceTags"></TextBox>
+            <TextBlock Grid.Row="8" Margin="0,10,0,0">Файл ресурсу:</TextBlock>
+            <Grid Grid.Row="9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>

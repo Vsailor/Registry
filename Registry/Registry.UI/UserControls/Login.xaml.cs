@@ -49,21 +49,15 @@ namespace Registry.UI.UserControls
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Verifying;
 
       SignInButton.IsEnabled = false;
-      UserDetailedInfo result = null;
+      UserDetailedInfo result;
       try
       {
         result = await _userService.GetUser(LoginTextBox.Text);
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show(ex.Message);
-        return;
       }
       finally
       {
         SignInButton.IsEnabled = true;
       }
-
 
       if (result == null ||
         SecurityService.Crypt(PasswordTextBox.Password) != result.Password ||

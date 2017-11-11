@@ -38,6 +38,7 @@ namespace Registry.UI.UserControls
     {
       InitializeComponent();
       _selectedResource = resource;
+      UniqueIdentifier.Text = _selectedResource.Id;
     }
 
     private void BackButton_OnClick(object sender, RoutedEventArgs e)

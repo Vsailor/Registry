@@ -24,7 +24,6 @@ namespace Registry.Data.Services
 
     public async Task CreateResource(CreateResourceRequest request)
     {
-      Console.WriteLine("\n##################################################################\n");
       var resourceId = request.SaveDate;
       await CreateResourceRecord(request, resourceId);
       await UpdateRelationsRecord(CategoriesName, request.CategoryId.ToString(), resourceId);
@@ -160,6 +159,19 @@ namespace Registry.Data.Services
     {
       var resources = (await RegistryCommon.RedisDb.HashKeysAsync(ResourcesName)).Select(k => k.ToString()).ToList();
       RedisValue response;
+      if (filter.Id.HasValue)
+      {
+        response = await RegistryCommon.RedisDb.HashGetAsync(ResourcesName, filter.Id);
+        if (response.HasValue)
+        {
+          GetAllResourcesResult result = JsonConvert.DeserializeObject<GetAllResourcesResult>(response.ToString());
+          result.Id = filter.Id.ToString();
+          return new[] {result};
+        }
+
+        return new GetAllResourcesResult[0];
+      }
+
       if (!string.IsNullOrEmpty(filter.Name))
       {
         var filterByName = (await RegistryCommon.RedisDb.HashKeysAsync(Names)).Select(f => f.ToString())

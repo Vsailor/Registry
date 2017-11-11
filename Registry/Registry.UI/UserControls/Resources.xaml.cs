@@ -145,6 +145,24 @@ namespace Registry.UI.UserControls
 
       request.Name = NameTextBox.Text;
 
+      if (!string.IsNullOrEmpty(UniqueIdentifier.Text))
+      {
+        int id;
+        if (int.TryParse(UniqueIdentifier.Text, out id))
+        {
+          request.Id = id;
+        }
+        else
+        {
+          MessageBox.Show(
+            "Унікальний ідентифікатор має не вірний формат",
+            "Помилка",
+            MessageBoxButton.OK,
+            MessageBoxImage.Error);
+          return;
+        }
+      }
+
       if (CategoriesTree.SelectedItem != null)
       {
         request.CategoryId = Guid.Parse(((TreeViewItem) CategoriesTree.SelectedItem).Uid);

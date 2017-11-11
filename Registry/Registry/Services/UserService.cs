@@ -12,10 +12,11 @@ namespace Registry.Services
 {
   public class UserService : IUserService
   {
-    private IUserRepository _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
+    private IUserRepository _userRepository;
 
     public async Task<IEnumerable<UserBasicInfo>> GetAllUsers()
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       GetAllUsersResult[] result = await _userRepository.GetAllUsersAsync();
       return result.Select(item => new UserBasicInfo
       {
@@ -26,6 +27,7 @@ namespace Registry.Services
 
     public async Task<UserDetailedInfo> GetUser(string login)
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       GetUserByLoginResult result = await _userRepository.GetUserByLoginAsync(login);
       if (result == null)
       {
@@ -50,6 +52,7 @@ namespace Registry.Services
       int groupId,
       bool isAdmin)
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       await _userRepository.CreateUserAsync(new CreateUserRequest
       {
         Name = name,
@@ -62,6 +65,7 @@ namespace Registry.Services
 
     public async Task DeleteUser(string login)
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       await _userRepository.DeleteUserAsync(login);
     }
 
@@ -74,6 +78,7 @@ namespace Registry.Services
       int groupId,
       bool isAdmin)
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       await _userRepository.UpdateUserAsync(new UpdateUserRequest
       {
         Name = name,
@@ -87,11 +92,13 @@ namespace Registry.Services
 
     public async Task<GetAllUserGroupsResult[]> GetAllUserGroups()
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       return await _userRepository.GetUserGroupsAsync();
     }
 
     public async Task CreateUserGroup(string name)
     {
+      _userRepository = RegistryCommon.Instance.Container.Resolve<IUserRepository>();
       await _userRepository.CreateUserGroupAsync(name);
     }
 

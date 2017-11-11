@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.CodeDom;
+using System.ServiceModel;
+using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Practices.Unity;
 using Registry.Common;
@@ -15,6 +17,13 @@ namespace Registry.UI
 
     private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
+      if (e.Exception.GetType() == typeof (EndpointNotFoundException))
+      {
+        RegistryCommon.Instance.MainProgressBar.Text = "Неможливо під'єднатися до віддаленого сервера";
+        e.Handled = true;
+        return;
+      }
+
       MessageBox.Show("Невідома помилка програми", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
       e.Handled = true;
     }

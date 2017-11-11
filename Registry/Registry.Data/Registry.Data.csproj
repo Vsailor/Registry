@@ -124,6 +124,7 @@
     <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\ResourceRepository.cs" />
     <Compile Include="Services\ResourceGroupRepository.cs" />
+    <Compile Include="Services\Tracer.cs" />
     <Compile Include="Services\UserRepository.cs" />
     <Compile Include="StoredProcedures.cs" />
   </ItemGroup>

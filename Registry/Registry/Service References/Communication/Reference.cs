@@ -1004,6 +1004,9 @@ namespace Registry.Communication {
         private System.Nullable<System.Guid> CategoryIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1031,6 +1034,19 @@ namespace Registry.Communication {
                 if ((this.CategoryIdField.Equals(value) != true)) {
                     this.CategoryIdField = value;
                     this.RaisePropertyChanged("CategoryId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }

@@ -41,7 +41,7 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Margin="10" Width="60" Height="20" Name="DownloadButton" Click="DownloadButton_Click">Download</Button>
+                    <Button Margin="10" Width="60" Height="20" Name="DownloadButton" Click="DownloadButton_Click">Скачати</Button>
                 </Grid>
             </Grid>
         </Border>
