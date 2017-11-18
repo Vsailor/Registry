@@ -106,6 +106,7 @@
     <Compile Include="Models\GetAllUsersResult.cs" />
     <Compile Include="Models\GetResourceDetailsResult.cs" />
     <Compile Include="Models\GetUserByLoginResult.cs" />
+    <Compile Include="Models\UpdateResourceRequest.cs" />
     <Compile Include="Models\UpdateUserGroupRequest.cs" />
     <Compile Include="Models\UpdateUserRequest.cs" />
     <Compile Include="Models\UseFiltersRequest.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.Storage;
@@ -26,24 +27,44 @@ namespace Registry.Services
       return blockBlob.Uri.ToString();
     }
 
+    public async Task DeleteFromBlob(string url)
+    {
+      string connectionString = await _resourceRepository.GetCloudBlobConnectionStringAsync();
+      CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+      CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+      var container = serviceClient.GetContainerReference("registrycontainer");
+      var blob = container.GetBlockBlobReference(url.Split('/').Last());
+      await blob.DeleteIfExistsAsync();
+    }
+
     public async Task CreateResource(CreateResourceRequest request)
     {
       await _resourceRepository.CreateResourceAsync(request);
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources(int count, int? id)
+    public async Task UpdateResource(UpdateResourceRequest request)
     {
-      return await _resourceRepository.GetAllResourcesAsync(count, id.HasValue ? id.Value : -1);
+      await _resourceRepository.UpdateResourceAsync(request);
     }
 
-    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId)
+    public async Task<GetAllResourcesResult[]> GetAllResources()
     {
-      return await _resourceRepository.GetResourcesAsync(filter, count, endId);
+      return await _resourceRepository.GetAllResourcesAsync();
     }
 
-    public async Task<GetResourceDetailsResult> GetResourceDetails(int resourceId)
+    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter)
+    {
+      return await _resourceRepository.GetResourcesAsync(filter);
+    }
+
+    public async Task<GetResourceDetailsResult> GetResourceDetails(string resourceId)
     {
       return await _resourceRepository.GetResourceDetailsAsync(resourceId);
+    }
+
+    public async Task DeleteResource(string id)
+    {
+      await _resourceRepository.DeleteResourceAsync(id);
     }
   }
 }

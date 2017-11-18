@@ -143,4 +143,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetResourceDetailsResult" nillable="true" type="tns:GetResourceDetailsResult" />
+  <xs:complexType name="UpdateResourceRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CreateResourceRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UpdateResourceRequest" nillable="true" type="tns:UpdateResourceRequest" />
 </xs:schema>

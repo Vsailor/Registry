@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using Newtonsoft.Json;
 
 namespace Registry.Data.Services
@@ -27,6 +28,13 @@ namespace Registry.Data.Services
       Console.WriteLine(
         $"{DateTime.Now.ToString("yyyy.MM.dd, hh:mm:ss")} | {memberName} returned = <{JsonConvert.SerializeObject(obj)}>");
       return obj;
+    }
+
+    public static void TraceMessage(string message)
+    {
+      Console.ForegroundColor = ConsoleColor.Green;
+      Console.WriteLine($"{DateTime.Now.ToString("yyyy.MM.dd, hh:mm:ss")} | {message}");
+      Console.ForegroundColor = ConsoleColor.White;
     }
   }
 }

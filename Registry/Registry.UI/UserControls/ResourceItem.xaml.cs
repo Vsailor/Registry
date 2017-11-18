@@ -25,13 +25,13 @@ namespace Registry.UI.UserControls
     {
       InitializeComponent();
       _allResources = allResources;
-      ResourceId = int.Parse(res.Id);
+      ResourceId = res.Id;
       currentResource = res;
       ResourceName.Text = res.Name;
       ResourceDescription.Text = res.Description;
     }
 
-    public int ResourceId { get; set; }
+    public string ResourceId { get; set; }
 
     private async void DownloadButton_Click(object sender, RoutedEventArgs e)
     {
@@ -58,7 +58,7 @@ namespace Registry.UI.UserControls
 
     private void ResourceItemMainGrid_OnClick(object sender, RoutedEventArgs e)
     {
-      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UpdateResource(_allResources.First(r => int.Parse(r.Id) == ResourceId)));
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UpdateResource(_allResources.First(r => r.Id == ResourceId)));
     }
   }
 }

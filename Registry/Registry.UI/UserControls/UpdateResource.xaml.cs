@@ -82,14 +82,15 @@ namespace Registry.UI.UserControls
         }
       }
 
-      var request = new CreateResourceRequest
+      var request = new UpdateResourceRequest
       {
+        Id = _selectedResource.Id,
         Name = ResourceTitle.Text,
         Description = ResourceDescription.Text,
         OwnerLogin = RegistryCommon.Instance.Login,
         CategoryId = Guid.Parse(selectedCategory.Uid),
         ResourceGroups = resourceGroups.ToArray(),
-        SaveDate = ((int) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds)).ToString()
+        SaveDate = _selectedResource.Id
       };
 
       if (string.IsNullOrEmpty(ResourceTags.Text))
@@ -120,17 +121,20 @@ namespace Registry.UI.UserControls
 
       try
       {
-        using (var fileStream = new FileStream(FileNameTextBox.Text, FileMode.Open))
+        if (SetNewFileRadioButton.IsChecked == true)
         {
-          request.FileName =
-            FileNameTextBox.Text.Substring(FileNameTextBox.Text.LastIndexOf("\\", StringComparison.Ordinal));
-          request.Url =
-            await
-              _resourceService.UploadToBlob(fileStream,
-                $"{request.SaveDate.ToString(CultureInfo.InvariantCulture)}_{request.FileName}");
+          using (var fileStream = new FileStream(FileNameTextBox.Text, FileMode.Open))
+          {
+            request.FileName =
+              FileNameTextBox.Text.Substring(FileNameTextBox.Text.LastIndexOf("\\", StringComparison.Ordinal));
+            request.Url =
+              await
+                _resourceService.UploadToBlob(fileStream,
+                  $"{request.SaveDate.ToString(CultureInfo.InvariantCulture)}_{request.FileName}");
+          }
         }
 
-        await _resourceService.CreateResource(request);
+        await _resourceService.UpdateResource(request);
 
         RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Resources());
         RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
@@ -144,7 +148,7 @@ namespace Registry.UI.UserControls
 
     private bool ValidateFields()
     {
-      if (!File.Exists(FileNameTextBox.Text))
+      if (SetNewFileRadioButton.IsChecked == true && !File.Exists(FileNameTextBox.Text))
       {
         MessageBox.Show(
           "Шлях до файлу вибрано не вірно",
@@ -186,7 +190,7 @@ namespace Registry.UI.UserControls
 
       GetAllCategoriesResult[] result = await _categoryService.GetAllCategories();
       var baseItem = result.Single(item => item.ParentId == null);
-      var resourceDetails = await _resourceService.GetResourceDetails(int.Parse(_selectedResource.Id));
+      var resourceDetails = await _resourceService.GetResourceDetails(_selectedResource.Id);
       var newTreeItem = new TreeViewItem
       {
         Header = baseItem.Name,
@@ -235,6 +239,39 @@ namespace Registry.UI.UserControls
         baseItem.Items.Add(newItem);
         FillCategories(newItem, item, allCategories, selectedId);
       });
+    }
+
+    private void SetOldFileRadioButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      SelectFileGrid.IsEnabled = false;
+      FileNameTextBox.Text = string.Empty;
+    }
+
+    private void SetNewFileRadioButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      SelectFileGrid.IsEnabled = true;
+    }
+
+    private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+      MessageBoxResult result = MessageBox.Show(
+      "Ви не зможете відмінити цю дію. Ви впевнені, що хочете видалити ресурс?",
+      "Підтвердіть операцію",
+      MessageBoxButton.YesNoCancel,
+      MessageBoxImage.Asterisk);
+      if (result != MessageBoxResult.Yes)
+      {
+        return;
+      }
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Deleting;
+
+      DeleteButton.IsEnabled = false;
+      await _resourceService.DeleteFromBlob(_selectedResource.Url);
+      await _resourceService.DeleteResource(_selectedResource.Id);
+
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
+      RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Resources());
     }
   }
 }

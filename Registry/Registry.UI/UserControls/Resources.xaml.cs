@@ -19,17 +19,7 @@ namespace Registry.UI.UserControls
     private readonly ICategoryService _categoryService = RegistryCommon.Instance.Container.Resolve<ICategoryService>();
     private GetAllGroupsResult _selectedGroup;
     private GetAllGroupsResult[] _allGroups;
-    private const int ResourcesPerLoad = 50;
-    private int lastResId = -1;
     private GetAllResourcesResult[] _allResources;
-
-    private Button _loadNextResources = new Button
-    {
-      HorizontalAlignment = HorizontalAlignment.Center,
-      FontSize = 15,
-      Width = 500,
-      Content = $"Загрузити наступні {ResourcesPerLoad} ресурсів"
-    };
 
     private readonly IResourceGroupService _resourceGroupService = RegistryCommon.Instance.Container.Resolve<IResourceGroupService>();
 
@@ -37,26 +27,16 @@ namespace Registry.UI.UserControls
     {
       InitializeComponent();
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
-      _loadNextResources.Click += LoadNextResourcesOnClick;
     }
 
     private async void LoadNextResourcesOnClick(object sender, RoutedEventArgs routedEventArgs)
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
-      ResourcesListBox.Items.Remove(_loadNextResources);
-      _allResources = await _resourceService.GetAllResources(ResourcesPerLoad, lastResId);
+      _allResources = await _resourceService.GetAllResources();
 
       foreach (var res in _allResources)
       {
         ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
-      }
-
-      var lastRes = _allResources.LastOrDefault();
-      lastResId = lastRes == null ? -1 : int.Parse(lastRes.Id);
-
-      if (_allResources.Length == ResourcesPerLoad)
-      {
-        ResourcesListBox.Items.Add(_loadNextResources);
       }
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
@@ -81,18 +61,10 @@ namespace Registry.UI.UserControls
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
-      _allResources = await _resourceService.GetAllResources(ResourcesPerLoad, null);
+      _allResources = await _resourceService.GetAllResources();
       foreach (var res in _allResources)
       {
         ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
-      }
-
-      var lastRes = _allResources.LastOrDefault();
-      lastResId = lastRes == null ? -1 : int.Parse(lastRes.Id);
-
-      if (_allResources.Length == ResourcesPerLoad)
-      {
-        ResourcesListBox.Items.Add(_loadNextResources);
       }
 
       ResourcesListBox.SelectionChanged += ResourcesListBoxOnSelectionChanged;
@@ -201,7 +173,7 @@ namespace Registry.UI.UserControls
 
       ResourcesListBox.Items.Clear();
 
-      var filteredResources = await _resourceService.GetResources(request, ResourcesPerLoad, -1);
+      var filteredResources = await _resourceService.GetResources(request);
       foreach (var res in filteredResources)
       {
         ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));

@@ -257,6 +257,18 @@
   <wsdl:message name="IResourceRepository_GetResourceDetails_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetResourceDetailsResponse" />
   </wsdl:message>
+  <wsdl:message name="IResourceRepository_UpdateResource_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResource" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_UpdateResource_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_DeleteResource_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResource" />
+  </wsdl:message>
+  <wsdl:message name="IResourceRepository_DeleteResource_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResourceResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICategoryRepository">
     <wsdl:operation name="GetAllCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ICategoryRepository/GetAllCategories" message="tns:ICategoryRepository_GetAllCategories_InputMessage" />
@@ -352,6 +364,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetResourceDetails" message="tns:IResourceRepository_GetResourceDetails_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetResourceDetailsResponse" message="tns:IResourceRepository_GetResourceDetails_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/UpdateResource" message="tns:IResourceRepository_UpdateResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/UpdateResourceResponse" message="tns:IResourceRepository_UpdateResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/DeleteResource" message="tns:IResourceRepository_DeleteResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/DeleteResourceResponse" message="tns:IResourceRepository_DeleteResource_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICommunication">
     <wsdl:operation name="GetAllCategories">
@@ -405,6 +425,14 @@
     <wsdl:operation name="GetResourceDetails">
       <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/GetResourceDetails" message="tns:IResourceRepository_GetResourceDetails_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/GetResourceDetailsResponse" message="tns:IResourceRepository_GetResourceDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/UpdateResource" message="tns:IResourceRepository_UpdateResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/UpdateResourceResponse" message="tns:IResourceRepository_UpdateResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResourceRepository/DeleteResource" message="tns:IResourceRepository_DeleteResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResourceRepository/DeleteResourceResponse" message="tns:IResourceRepository_DeleteResource_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserRepository/CreateUser" message="tns:IUserRepository_CreateUser_InputMessage" />
@@ -649,6 +677,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetResourceDetails">
       <soap12:operation soapAction="http://tempuri.org/IResourceRepository/GetResourceDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResource">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/UpdateResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteResource">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/DeleteResource" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -697,6 +697,7 @@ namespace Registry.Communication {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateResourceRequest", Namespace="http://schemas.datacontract.org/2004/07/Registry.Data.Models")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Registry.Communication.UpdateResourceRequest))]
     public partial class CreateResourceRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -862,6 +863,29 @@ namespace Registry.Communication {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpdateResourceRequest", Namespace="http://schemas.datacontract.org/2004/07/Registry.Data.Models")]
+    [System.SerializableAttribute()]
+    public partial class UpdateResourceRequest : Registry.Communication.CreateResourceRequest {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
             }
         }
     }
@@ -1525,10 +1549,10 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task CreateResourceAsync(Registry.Communication.CreateResourceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId);
+        Registry.Communication.GetAllResourcesResult[] GetAllResources();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId);
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         string GetCloudBlobConnectionString();
@@ -1537,16 +1561,28 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task<string> GetCloudBlobConnectionStringAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId);
+        Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId);
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResourceDetails", ReplyAction="http://tempuri.org/IResourceRepository/GetResourceDetailsResponse")]
-        Registry.Communication.GetResourceDetailsResult GetResourceDetails(int resourceId);
+        Registry.Communication.GetResourceDetailsResult GetResourceDetails(string resourceId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResourceDetails", ReplyAction="http://tempuri.org/IResourceRepository/GetResourceDetailsResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(int resourceId);
+        System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(string resourceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/UpdateResource", ReplyAction="http://tempuri.org/IResourceRepository/UpdateResourceResponse")]
+        void UpdateResource(Registry.Communication.UpdateResourceRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/UpdateResource", ReplyAction="http://tempuri.org/IResourceRepository/UpdateResourceResponse")]
+        System.Threading.Tasks.Task UpdateResourceAsync(Registry.Communication.UpdateResourceRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/DeleteResource", ReplyAction="http://tempuri.org/IResourceRepository/DeleteResourceResponse")]
+        void DeleteResource(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/DeleteResource", ReplyAction="http://tempuri.org/IResourceRepository/DeleteResourceResponse")]
+        System.Threading.Tasks.Task DeleteResourceAsync(string id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1584,12 +1620,12 @@ namespace Registry.Communication {
             return base.Channel.CreateResourceAsync(request);
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId) {
-            return base.Channel.GetAllResources(count, endId);
+        public Registry.Communication.GetAllResourcesResult[] GetAllResources() {
+            return base.Channel.GetAllResources();
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId) {
-            return base.Channel.GetAllResourcesAsync(count, endId);
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync() {
+            return base.Channel.GetAllResourcesAsync();
         }
         
         public string GetCloudBlobConnectionString() {
@@ -1600,20 +1636,36 @@ namespace Registry.Communication {
             return base.Channel.GetCloudBlobConnectionStringAsync();
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
-            return base.Channel.GetResources(filter, count, endId);
+        public Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter) {
+            return base.Channel.GetResources(filter);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
-            return base.Channel.GetResourcesAsync(filter, count, endId);
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter) {
+            return base.Channel.GetResourcesAsync(filter);
         }
         
-        public Registry.Communication.GetResourceDetailsResult GetResourceDetails(int resourceId) {
+        public Registry.Communication.GetResourceDetailsResult GetResourceDetails(string resourceId) {
             return base.Channel.GetResourceDetails(resourceId);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(int resourceId) {
+        public System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(string resourceId) {
             return base.Channel.GetResourceDetailsAsync(resourceId);
+        }
+        
+        public void UpdateResource(Registry.Communication.UpdateResourceRequest request) {
+            base.Channel.UpdateResource(request);
+        }
+        
+        public System.Threading.Tasks.Task UpdateResourceAsync(Registry.Communication.UpdateResourceRequest request) {
+            return base.Channel.UpdateResourceAsync(request);
+        }
+        
+        public void DeleteResource(string id) {
+            base.Channel.DeleteResource(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteResourceAsync(string id) {
+            return base.Channel.DeleteResourceAsync(id);
         }
     }
     
@@ -1676,10 +1728,10 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task CreateResourceAsync(Registry.Communication.CreateResourceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId);
+        Registry.Communication.GetAllResourcesResult[] GetAllResources();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId);
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         string GetCloudBlobConnectionString();
@@ -1688,16 +1740,28 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task<string> GetCloudBlobConnectionStringAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId);
+        Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResources", ReplyAction="http://tempuri.org/IResourceRepository/GetResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId);
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResourceDetails", ReplyAction="http://tempuri.org/IResourceRepository/GetResourceDetailsResponse")]
-        Registry.Communication.GetResourceDetailsResult GetResourceDetails(int resourceId);
+        Registry.Communication.GetResourceDetailsResult GetResourceDetails(string resourceId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetResourceDetails", ReplyAction="http://tempuri.org/IResourceRepository/GetResourceDetailsResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(int resourceId);
+        System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(string resourceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/UpdateResource", ReplyAction="http://tempuri.org/IResourceRepository/UpdateResourceResponse")]
+        void UpdateResource(Registry.Communication.UpdateResourceRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/UpdateResource", ReplyAction="http://tempuri.org/IResourceRepository/UpdateResourceResponse")]
+        System.Threading.Tasks.Task UpdateResourceAsync(Registry.Communication.UpdateResourceRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/DeleteResource", ReplyAction="http://tempuri.org/IResourceRepository/DeleteResourceResponse")]
+        void DeleteResource(string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/DeleteResource", ReplyAction="http://tempuri.org/IResourceRepository/DeleteResourceResponse")]
+        System.Threading.Tasks.Task DeleteResourceAsync(string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserRepository/CreateUser", ReplyAction="http://tempuri.org/IUserRepository/CreateUserResponse")]
         void CreateUser(Registry.Communication.CreateUserRequest request);
@@ -1853,12 +1917,12 @@ namespace Registry.Communication {
             return base.Channel.CreateResourceAsync(request);
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetAllResources(int count, int endId) {
-            return base.Channel.GetAllResources(count, endId);
+        public Registry.Communication.GetAllResourcesResult[] GetAllResources() {
+            return base.Channel.GetAllResources();
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int count, int endId) {
-            return base.Channel.GetAllResourcesAsync(count, endId);
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync() {
+            return base.Channel.GetAllResourcesAsync();
         }
         
         public string GetCloudBlobConnectionString() {
@@ -1869,20 +1933,36 @@ namespace Registry.Communication {
             return base.Channel.GetCloudBlobConnectionStringAsync();
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
-            return base.Channel.GetResources(filter, count, endId);
+        public Registry.Communication.GetAllResourcesResult[] GetResources(Registry.Communication.UseFiltersRequest filter) {
+            return base.Channel.GetResources(filter);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter, int count, int endId) {
-            return base.Channel.GetResourcesAsync(filter, count, endId);
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetResourcesAsync(Registry.Communication.UseFiltersRequest filter) {
+            return base.Channel.GetResourcesAsync(filter);
         }
         
-        public Registry.Communication.GetResourceDetailsResult GetResourceDetails(int resourceId) {
+        public Registry.Communication.GetResourceDetailsResult GetResourceDetails(string resourceId) {
             return base.Channel.GetResourceDetails(resourceId);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(int resourceId) {
+        public System.Threading.Tasks.Task<Registry.Communication.GetResourceDetailsResult> GetResourceDetailsAsync(string resourceId) {
             return base.Channel.GetResourceDetailsAsync(resourceId);
+        }
+        
+        public void UpdateResource(Registry.Communication.UpdateResourceRequest request) {
+            base.Channel.UpdateResource(request);
+        }
+        
+        public System.Threading.Tasks.Task UpdateResourceAsync(Registry.Communication.UpdateResourceRequest request) {
+            return base.Channel.UpdateResourceAsync(request);
+        }
+        
+        public void DeleteResource(string id) {
+            base.Channel.DeleteResource(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteResourceAsync(string id) {
+            return base.Channel.DeleteResourceAsync(id);
         }
         
         public void CreateUser(Registry.Communication.CreateUserRequest request) {

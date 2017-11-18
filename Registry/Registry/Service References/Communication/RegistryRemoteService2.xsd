@@ -226,10 +226,7 @@
   </xs:element>
   <xs:element name="GetAllResources">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="count" type="xs:int" />
-        <xs:element minOccurs="0" name="endId" type="xs:int" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="GetAllResourcesResponse">
@@ -255,8 +252,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Registry.Data.Models" minOccurs="0" name="filter" nillable="true" type="q16:UseFiltersRequest" />
-        <xs:element minOccurs="0" name="count" type="xs:int" />
-        <xs:element minOccurs="0" name="endId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -270,7 +265,7 @@
   <xs:element name="GetResourceDetails">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="resourceId" type="xs:int" />
+        <xs:element minOccurs="0" name="resourceId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -279,6 +274,30 @@
       <xs:sequence>
         <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Registry.Data.Models" minOccurs="0" name="GetResourceDetailsResult" nillable="true" type="q18:GetResourceDetailsResult" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateResource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Registry.Data.Models" minOccurs="0" name="request" nillable="true" type="q19:UpdateResourceRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateResourceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteResource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteResourceResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

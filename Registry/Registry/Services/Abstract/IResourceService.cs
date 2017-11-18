@@ -10,10 +10,14 @@ namespace Registry.Services.Abstract
 
     Task CreateResource(CreateResourceRequest request);
 
-    Task<GetAllResourcesResult[]> GetAllResources(int count, int? endId);
+    Task UpdateResource(UpdateResourceRequest request);
 
-    Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId);
+    Task<GetAllResourcesResult[]> GetAllResources();
 
-    Task<GetResourceDetailsResult> GetResourceDetails(int resourceId);
+    Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter);
+
+    Task<GetResourceDetailsResult> GetResourceDetails(string resourceId);
+    Task DeleteResource(string id);
+    Task DeleteFromBlob(string url);
   }
 }

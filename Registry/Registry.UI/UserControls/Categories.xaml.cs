@@ -113,6 +113,16 @@ namespace Registry.UI.UserControls
 
     private async void DeleteCategory_Click(object sender, RoutedEventArgs e)
     {
+      MessageBoxResult result = MessageBox.Show(
+        "Ви не зможете відмінити цю дію. Ви впевнені, що хочете видалити категорiю?",
+        "Підтвердіть операцію",
+        MessageBoxButton.YesNoCancel,
+        MessageBoxImage.Asterisk);
+      if (result != MessageBoxResult.Yes)
+      {
+        return;
+      }
+
       var selectedItem = (TreeViewItem)CategoriesTree.SelectedItem;
       await _categoryService.DeleteCategory(Guid.Parse(selectedItem.Uid));
       await LoadCategories();

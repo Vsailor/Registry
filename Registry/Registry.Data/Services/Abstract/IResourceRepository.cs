@@ -11,15 +11,21 @@ namespace Registry.Data.Services.Abstract
     Task CreateResource(CreateResourceRequest request);
 
     [OperationContract]
-    Task<GetAllResourcesResult[]> GetAllResources(int count, int endId);
+    Task<GetAllResourcesResult[]> GetAllResources();
 
     [OperationContract]
     string GetCloudBlobConnectionString();
 
     [OperationContract]
-    Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId);
+    Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter);
 
     [OperationContract]
-    Task<GetResourceDetailsResult> GetResourceDetails(int resourceId);
+    Task<GetResourceDetailsResult> GetResourceDetails(string resourceId);
+
+    [OperationContract]
+    Task UpdateResource(UpdateResourceRequest request);
+
+    [OperationContract]
+    Task DeleteResource(string id);
   }
 }

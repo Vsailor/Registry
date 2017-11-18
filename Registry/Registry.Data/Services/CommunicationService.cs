@@ -75,10 +75,9 @@ namespace Registry.Data.Services
       Tracer.TraceExit();
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources(int count, int endId)
+    public async Task<GetAllResourcesResult[]> GetAllResources()
     {
-      Tracer.TraceEnter($"count = {count}, endId = {endId}");
-      return Tracer.TraceReturn(await _resourceRepository.GetAllResources(count, endId));
+      return await _resourceRepository.GetAllResources();
     }
 
     public string GetCloudBlobConnectionString()
@@ -87,16 +86,25 @@ namespace Registry.Data.Services
       return Tracer.TraceReturn(_resourceRepository.GetCloudBlobConnectionString());
     }
 
-    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId)
+    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter)
     {
-      Tracer.TraceEnter($"filter = <{JsonConvert.SerializeObject(filter)}>, count = {count}, endId = {endId}");
-      return Tracer.TraceReturn(await _resourceRepository.GetResources(filter, count, endId));
+      return await _resourceRepository.GetResources(filter);
     }
 
-    public async Task<GetResourceDetailsResult> GetResourceDetails(int resourceId)
+    public async Task<GetResourceDetailsResult> GetResourceDetails(string resourceId)
     {
       Tracer.TraceEnter($"resourceId = {resourceId}");
       return Tracer.TraceReturn(await _resourceRepository.GetResourceDetails(resourceId));
+    }
+
+    public  async Task UpdateResource(UpdateResourceRequest request)
+    {
+      await _resourceRepository.UpdateResource(request);
+    }
+
+    public async Task DeleteResource(string id)
+    {
+      await _resourceRepository.DeleteResource(id);
     }
 
     public async Task CreateUser(CreateUserRequest request)

@@ -4,8 +4,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.Practices.ObjectBuilder2;
 using Newtonsoft.Json;
 using Registry.Data.Models;
 using Registry.Data.RedisModels;
@@ -24,8 +26,8 @@ namespace Registry.Data.Services
 
     public async Task CreateResource(CreateResourceRequest request)
     {
-      var resourceId = request.SaveDate;
-      await CreateResourceRecord(request, resourceId);
+      var resourceId = Guid.NewGuid().ToString();
+      await CreateOrUpdateResourceRecord(request, resourceId);
       await UpdateRelationsRecord(CategoriesName, request.CategoryId.ToString(), resourceId);
       foreach (var item in request.ResourceGroups)
       {
@@ -37,16 +39,72 @@ namespace Registry.Data.Services
         await UpdateRelationsRecord(TagsName, item, resourceId);
       }
 
-      await RegistryCommon.RedisDb.HashSetAsync(Names, request.Name, resourceId);
+      await Redis.HashSetAsync(Names, resourceId, request.Name);
     }
 
-    public async Task<GetResourceDetailsResult> GetResourceDetails(int resourceId)
+    public async Task UpdateResource(UpdateResourceRequest request)
+    {
+      Tracer.TraceMessage($"Updating of resource : {request.Id}");
+      Tracer.TraceMessage($"Deletion of relations from table <{CategoriesName}>");
+      await DeleteRelationsRecord(CategoriesName, request.Id);
+
+      Tracer.TraceMessage($"Deletion of relations from table <{ResourceGroupsName}>");
+      await DeleteRelationsRecord(ResourceGroupsName, request.Id);
+
+      Tracer.TraceMessage($"Deletion of relation from table <{Names}>");
+      await Redis.HashDeleteAsync(Names, request.Id);
+
+      Tracer.TraceMessage($"Deletion of relations from table <{TagsName}>");
+      await DeleteRelationsRecord(TagsName, request.Id);
+
+      Tracer.TraceMessage("Updating of <Resource> table");
+      await CreateOrUpdateResourceRecord(request, request.Id);
+
+      await CreateResourceInternal(request, request.Id);
+    }
+
+    private async Task CreateResourceInternal(CreateResourceRequest request, string resourceId)
+    {
+      await CreateOrUpdateResourceRecord(request, resourceId);
+      await UpdateRelationsRecord(CategoriesName, request.CategoryId.ToString(), resourceId);
+      foreach (var item in request.ResourceGroups)
+      {
+        await UpdateRelationsRecord(ResourceGroupsName, item.ToString(), resourceId);
+      }
+
+      foreach (var item in request.Tags)
+      {
+        await UpdateRelationsRecord(TagsName, item, resourceId);
+      }
+
+      await Redis.HashSetAsync(Names, resourceId, request.Name);
+    }
+
+    public async Task DeleteResource(string id)
+    {
+      Tracer.TraceMessage($"Deletion of resource : {id}");
+      await Redis.HashDeleteAsync(ResourcesName, id);
+
+      Tracer.TraceMessage($"Deletion of relations from table <{CategoriesName}>");
+      await DeleteRelationsRecord(CategoriesName, id);
+
+      Tracer.TraceMessage($"Deletion of relations from table <{ResourceGroupsName}>");
+      await DeleteRelationsRecord(ResourceGroupsName, id);
+
+      Tracer.TraceMessage($"Deletion of relation from table <{Names}>");
+      await Redis.HashDeleteAsync(Names, id);
+
+      Tracer.TraceMessage($"Deletion of relations from table <{TagsName}>");
+      await DeleteRelationsRecord(TagsName, id);
+    }
+
+    public async Task<GetResourceDetailsResult> GetResourceDetails(string resourceId)
     {
       var result = new GetResourceDetailsResult();
-      var allCategories = await RegistryCommon.RedisDb.HashGetAllAsync(CategoriesName);
+      var allCategories = await Redis.HashGetAllAsync(CategoriesName);
       for (int i = 0; i < allCategories.Length; i++)
       {
-        Resources res = JsonConvert.DeserializeObject<Resources>(allCategories[i].Value.ToString());
+        Resources res = Unpack<Resources>(allCategories[i].Value.ToString());
         if (res.ResourcesIds.Any(r => r == resourceId.ToString()))
         {
           result.Category = Guid.Parse(allCategories[i].Name);
@@ -54,11 +112,11 @@ namespace Registry.Data.Services
         }
       }
 
-      var allTags = await RegistryCommon.RedisDb.HashGetAllAsync(TagsName);
+      var allTags = await Redis.HashGetAllAsync(TagsName);
       var tags = new List<string>();
       for (int i = 0; i < allTags.Length; i++)
       {
-        Resources res = JsonConvert.DeserializeObject<Resources>(allTags[i].Value.ToString());
+        Resources res = Unpack<Resources>(allTags[i].Value.ToString());
         if (res.ResourcesIds.Any(r => r == resourceId.ToString()))
         {
           tags.Add(allTags[i].Name);
@@ -67,11 +125,11 @@ namespace Registry.Data.Services
 
       result.Tags = tags.ToArray();
 
-      var allResourceGroups = await RegistryCommon.RedisDb.HashGetAllAsync(ResourceGroupsName);
+      var allResourceGroups = await Redis.HashGetAllAsync(ResourceGroupsName);
       var resourceGroups = new List<string>();
       for (int i = 0; i < allResourceGroups.Length; i++)
       {
-        Resources res = JsonConvert.DeserializeObject<Resources>(allResourceGroups[i].Value.ToString());
+        Resources res = Unpack<Resources>(allResourceGroups[i].Value.ToString());
         if (res.ResourcesIds.Any(r => r == resourceId.ToString()))
         {
           resourceGroups.Add(allResourceGroups[i].Name);
@@ -82,9 +140,9 @@ namespace Registry.Data.Services
       return result;
     }
 
-    private async Task CreateResourceRecord(CreateResourceRequest request, string resourceId)
+    private async Task CreateOrUpdateResourceRecord(CreateResourceRequest request, string resourceId)
     {
-      var resource = new Resource
+      var newResource = new Resource
       {
         Description = request.Description,
         FileName = request.FileName,
@@ -94,22 +152,38 @@ namespace Registry.Data.Services
         SaveDate = request.SaveDate
       };
 
-      string serializedResource = JsonConvert.SerializeObject(resource);
-      Console.WriteLine("Creation of resource : {0} - {1}", resourceId, serializedResource);
+      string serializedResource = Pack(newResource);
+      Tracer.TraceMessage($"Create/Update of resource : {resourceId} - {serializedResource}");
 
-      await RegistryCommon.RedisDb.HashSetAsync(
+      await Redis.HashSetAsync(
         ResourcesName,
         resourceId,
         serializedResource);
+
+      Tracer.TraceMessage("Resource has been created");
+    }
+
+    private async Task DeleteRelationsRecord(string table, string resourceId)
+    {
+      Dictionary<string, Resources> data = (await Redis.HashGetAllAsync(table))
+        .ToDictionary(x => x.Name.ToString(), x => Unpack<Resources>(x.Value))
+        .Where(x => x.Value.ResourcesIds.Contains(resourceId))
+        .ToDictionary(x => x.Key, x => x.Value);
+
+      foreach (var rel in data)
+      {
+        rel.Value.ResourcesIds.Remove(resourceId);
+        await Redis.HashSetAsync(table, rel.Key, Pack(rel.Value));
+      }
     }
 
     private async Task UpdateRelationsRecord(string table, string key, string resourceId)
     {
-      RedisValue res = await RegistryCommon.RedisDb.HashGetAsync(table, key);
+      RedisValue res = await Redis.HashGetAsync(table, key);
       Resources resources;
       if (res.HasValue)
       {
-        resources = JsonConvert.DeserializeObject<Resources>(res.ToString());
+        resources = Unpack<Resources>(res.ToString());
         resources.ResourcesIds.Add(resourceId);
       }
       else
@@ -120,53 +194,45 @@ namespace Registry.Data.Services
         };
       }
 
-      var serializedResource = JsonConvert.SerializeObject(resources);
-      Console.WriteLine("Update relation : {0} - {1} - {2}", table, key, serializedResource);
+      var serializedResource = Pack(resources);
+      Tracer.TraceInfo($"Added relation to table <{table}> : {key} - {serializedResource}");
 
-      await RegistryCommon.RedisDb.HashSetAsync(
+      await Redis.HashSetAsync(
           table,
           key,
           serializedResource);
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources(int count, int endId)
+    public async Task<GetAllResourcesResult[]> GetAllResources()
     {
-      RedisValue[] resourcesKeys = await RegistryCommon.RedisDb.HashKeysAsync(ResourcesName);
-      var query = resourcesKeys.OrderByDescending(item => int.Parse(item));
-      if (endId != -1)
-      {
-        resourcesKeys = query.Where(key => int.Parse(key) < endId).Take(count).ToArray();
-      }
-      else
-      {
-        resourcesKeys = query.Take(count).ToArray();
-      }
+      var resources = (await Redis.HashGetAllAsync(ResourcesName))
+        .ToDictionary(f => f.Name.ToString(), f => Unpack<Resource>(f.Value.ToString()))
+        .OrderBy(f  => f.Value.SaveDate)
+        .Select(f => new GetAllResourcesResult
+        {
+          Id = f.Key,
+          FileName = f.Value.FileName,
+          Url = f.Value.Url,
+          Name = f.Value.Name,
+          SaveDate = f.Value.SaveDate,
+          Description = f.Value.Description
+        });
 
-      RedisValue[] response = await RegistryCommon.RedisDb.HashGetAsync(ResourcesName, resourcesKeys);
-
-      var result = new List<GetAllResourcesResult>();
-      for (int i=0; i<response.Length; i++)
-      {
-        var res = JsonConvert.DeserializeObject<GetAllResourcesResult>(response[i].ToString());
-        res.Id = resourcesKeys[i];
-        result.Add(res);
-      }
-
-      return result.ToArray();
+      return resources.ToArray();
     }
 
-    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter, int count, int endId)
+    public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter)
     {
-      var resources = (await RegistryCommon.RedisDb.HashKeysAsync(ResourcesName)).Select(k => k.ToString()).ToList();
+      var resources = (await Redis.HashKeysAsync(ResourcesName)).Select(k => k.ToString()).ToList();
       RedisValue response;
       if (filter.Id.HasValue)
       {
-        response = await RegistryCommon.RedisDb.HashGetAsync(ResourcesName, filter.Id);
+        response = await Redis.HashGetAsync(ResourcesName, filter.Id);
         if (response.HasValue)
         {
-          GetAllResourcesResult result = JsonConvert.DeserializeObject<GetAllResourcesResult>(response.ToString());
+          GetAllResourcesResult result = Unpack<GetAllResourcesResult>(response.ToString());
           result.Id = filter.Id.ToString();
-          return new[] {result};
+          return new[] { result };
         }
 
         return new GetAllResourcesResult[0];
@@ -174,23 +240,20 @@ namespace Registry.Data.Services
 
       if (!string.IsNullOrEmpty(filter.Name))
       {
-        var filterByName = (await RegistryCommon.RedisDb.HashKeysAsync(Names)).Select(f => f.ToString())
-          .Where(f => f.ToString().ToLowerInvariant().Contains(filter.Name.ToLowerInvariant()));
-        var filterByNameValues = (await RegistryCommon.RedisDb.HashGetAsync(Names, filterByName.Select(f => (RedisValue)f).ToArray())).Select(f => f.ToString()).ToArray();
-        if (!filterByNameValues.Any())
-        {
-          resources.Clear();
-        }
+        var filterByName = (await Redis.HashGetAllAsync(Names))
+          .ToDictionary(f => f.Name.ToString(), f=> f.Value.ToString())
+          .Where(f => f.Value.ToString().ToLowerInvariant().Contains(filter.Name.ToLowerInvariant()))
+          .ToDictionary(x => x.Key, x => x.Value);
 
-        resources =  resources.Where(r => filterByNameValues.Contains(r)).ToList();
+        resources = resources.Where(r => filterByName.Values.Contains(r)).ToList();
       }
 
       if (filter.CategoryId.HasValue)
       {
-        response = await RegistryCommon.RedisDb.HashGetAsync(CategoriesName, filter.CategoryId.Value.ToString());
+        response = await Redis.HashGetAsync(CategoriesName, filter.CategoryId.Value.ToString());
         if (response.HasValue)
         {
-          var resourcesInCategory = JsonConvert.DeserializeObject<Resources>(response.ToString()).ResourcesIds;
+          var resourcesInCategory = Unpack<Resources>(response.ToString()).ResourcesIds;
           resources = resources.Where(r => resourcesInCategory.Contains(r)).ToList();
         }
         else
@@ -201,10 +264,10 @@ namespace Registry.Data.Services
 
       if (filter.ResourceGroupId.HasValue)
       {
-        response = await RegistryCommon.RedisDb.HashGetAsync(ResourceGroupsName, filter.ResourceGroupId.Value.ToString());
+        response = await Redis.HashGetAsync(ResourceGroupsName, filter.ResourceGroupId.Value.ToString());
         if (response.HasValue)
         {
-          var resourcesInGroup = JsonConvert.DeserializeObject<Resources>(response.ToString()).ResourcesIds;
+          var resourcesInGroup = Unpack<Resources>(response.ToString()).ResourcesIds;
           resources = resources.Where(r => resourcesInGroup.Contains(r)).ToList();
         }
         else
@@ -215,7 +278,7 @@ namespace Registry.Data.Services
 
       if (filter.Tags != null && filter.Tags.Length != 0)
       {
-        var allKeys = await RegistryCommon.RedisDb.HashKeysAsync(TagsName);
+        var allKeys = await Redis.HashKeysAsync(TagsName);
         var keys = new List<string>();
         foreach (string tag in filter.Tags)
         {
@@ -225,14 +288,14 @@ namespace Registry.Data.Services
         var filterByTags = new Dictionary<string, string[]>();
         foreach (var key in keys)
         {
-          response = await RegistryCommon.RedisDb.HashGetAsync(TagsName, key);
-          filterByTags.Add(key, JsonConvert.DeserializeObject<Resources>(response.ToString()).ResourcesIds.ToArray());
+          response = await Redis.HashGetAsync(TagsName, key);
+          filterByTags.Add(key, Unpack<Resources>(response.ToString()).ResourcesIds.ToArray());
         }
 
         var resourcesByTags = filterByTags.Select(f => f.Value).ToArray();
-        for (int i = 0; i < resourcesByTags.GetLength(0)-1; i++)
+        for (int i = 0; i < resourcesByTags.GetLength(0) - 1; i++)
         {
-          resourcesByTags[i+1] = resourcesByTags[i].Union(resourcesByTags[i + 1]).ToArray();
+          resourcesByTags[i + 1] = resourcesByTags[i].Union(resourcesByTags[i + 1]).ToArray();
         }
 
         if (!resourcesByTags.Any())
@@ -246,8 +309,8 @@ namespace Registry.Data.Services
       var allResourcesResults = new List<GetAllResourcesResult>();
       for (int i = 0; i < resources.Count; i++)
       {
-        response = await RegistryCommon.RedisDb.HashGetAsync(ResourcesName, resources[i]);
-        var res = JsonConvert.DeserializeObject<GetAllResourcesResult>(response.ToString());
+        response = await Redis.HashGetAsync(ResourcesName, resources[i]);
+        var res = Unpack<GetAllResourcesResult>(response.ToString());
         res.Id = resources[i];
         allResourcesResults.Add(res);
       }
@@ -259,5 +322,17 @@ namespace Registry.Data.Services
     {
       return ConfigurationManager.ConnectionStrings["AzureStorageConnection"].ConnectionString;
     }
+
+    private string Pack<T>(T obj)
+    {
+      return JsonConvert.SerializeObject(obj);
+    }
+
+    private T Unpack<T>(string obj)
+    {
+      return JsonConvert.DeserializeObject<T>(obj);
+    }
+
+    private IDatabase Redis => RegistryCommon.RedisDb;
   }
 }

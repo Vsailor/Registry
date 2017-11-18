@@ -129,6 +129,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateResource">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/UpdateResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteResource">
+      <soap12:operation soapAction="http://tempuri.org/IResourceRepository/DeleteResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateUser">
       <soap12:operation soapAction="http://tempuri.org/IUserRepository/CreateUser" style="document" />
       <wsdl:input>

@@ -111,7 +111,7 @@ namespace Registry.UI.UserControls
         using (var fileStream = new FileStream(FileNameTextBox.Text, FileMode.Open))
         {
           request.FileName = FileNameTextBox.Text.Substring(FileNameTextBox.Text.LastIndexOf("\\", StringComparison.Ordinal));
-          request.Url = await _resourceService.UploadToBlob(fileStream, $"{request.SaveDate.ToString(CultureInfo.InvariantCulture)}_{request.FileName}");
+          request.Url = await _resourceService.UploadToBlob(fileStream, Guid.NewGuid().ToString("N"));
         }
 
         await _resourceService.CreateResource(request);
