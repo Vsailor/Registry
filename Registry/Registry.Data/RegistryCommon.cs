@@ -7,6 +7,6 @@ namespace Registry.Data
   {
     public static UnityContainer Container { get; set; }
 
-    public static IDatabase RedisDb => ConnectionMultiplexer.Connect("localhost").GetDatabase();
+    public static IDatabase RedisDb => ConnectionMultiplexer.Connect("52.232.56.117:6379").GetDatabase();
   }
 }

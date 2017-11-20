@@ -267,7 +267,11 @@ namespace Registry.UI.UserControls
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Deleting;
 
       DeleteButton.IsEnabled = false;
-      await _resourceService.DeleteFromBlob(_selectedResource.Url);
+      if (!string.IsNullOrEmpty(_selectedResource.Url))
+      {
+        await _resourceService.DeleteFromBlob(_selectedResource.Url);
+      }
+
       await _resourceService.DeleteResource(_selectedResource.Id);
 
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
