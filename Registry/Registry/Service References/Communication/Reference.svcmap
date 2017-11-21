@@ -19,16 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8181/RegistryRemoteService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://registryremoteapp.azurewebsites.net/CommunicationService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CommunicationService.wsdl" MetadataType="Wsdl" ID="3703aa7d-12a5-46e5-bc9f-59aca2b8066f" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl" />
-    <MetadataFile FileName="RegistryRemoteService.xsd" MetadataType="Schema" ID="cdbd3a08-7ed3-4202-a54a-a41d7e7a6d27" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd1" />
-    <MetadataFile FileName="RegistryRemoteService1.xsd" MetadataType="Schema" ID="cc53ff87-0a29-4b3b-b32d-0f9dd6412509" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd3" />
-    <MetadataFile FileName="RegistryRemoteService.wsdl" MetadataType="Wsdl" ID="136c72de-86cd-4344-ac3e-9fb75d4e3bdc" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="RegistryRemoteService2.xsd" MetadataType="Schema" ID="c221ec34-e0f4-4651-a034-dd296712dc6b" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd0" />
-    <MetadataFile FileName="RegistryRemoteService.disco" MetadataType="Disco" ID="2cd55dcf-d688-4545-93e8-ccc5faac74c9" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?disco" />
-    <MetadataFile FileName="RegistryRemoteService3.xsd" MetadataType="Schema" ID="dab750c9-adcd-4655-8905-70d83bf2e420" SourceId="1" SourceUrl="http://localhost:8181/RegistryRemoteService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CommunicationService.disco" MetadataType="Disco" ID="9fbf7674-ac57-44fb-a2f2-302bee0014e0" SourceId="1" SourceUrl="http://registryremoteapp.azurewebsites.net/CommunicationService.svc?disco" />
+    <MetadataFile FileName="CommunicationService1.wsdl" MetadataType="Wsdl" ID="587e469f-5c5c-4c8b-bdfe-4cef11a72724" SourceId="1" SourceUrl="http://registryremoteapp.azurewebsites.net/CommunicationService.svc?wsdl" />
+    <MetadataFile FileName="CommunicationService.xsd" MetadataType="Schema" ID="bac955a5-2c0a-4030-a9b8-4359538a844c" SourceId="1" SourceUrl="http://registryremoteapp.azurewebsites.net/CommunicationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CommunicationService1.xsd" MetadataType="Schema" ID="a59a5ffe-a59d-4942-90c6-d6f0be127b5c" SourceId="1" SourceUrl="http://registryremoteapp.azurewebsites.net/CommunicationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CommunicationService2.xsd" MetadataType="Schema" ID="a46b6791-e48c-49ea-9954-dfb559dbc5ac" SourceId="1" SourceUrl="http://registryremoteapp.azurewebsites.net/CommunicationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CommunicationService3.xsd" MetadataType="Schema" ID="3ae0c3b8-302a-4689-8e25-495fed2526b1" SourceId="1" SourceUrl="http://registryremoteapp.azurewebsites.net/CommunicationService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

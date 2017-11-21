@@ -89,7 +89,19 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Service References\Communication\CommunicationService.wsdl" />
+    <None Include="Service References\Communication\CommunicationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Communication\CommunicationService1.wsdl" />
+    <None Include="Service References\Communication\CommunicationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Communication\CommunicationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Communication\CommunicationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Communication\Registry.Communication.GetAllCategoriesResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -111,19 +123,6 @@
     <None Include="Service References\Communication\Registry.Communication.GetUserByLoginResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Communication\RegistryRemoteService.wsdl" />
-    <None Include="Service References\Communication\RegistryRemoteService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Communication\RegistryRemoteService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Communication\RegistryRemoteService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Communication\RegistryRemoteService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -138,9 +137,6 @@
     <WCFMetadataStorage Include="Service References\Communication\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Communication\RegistryRemoteService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\Communication\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +147,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Communication\CommunicationService.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
