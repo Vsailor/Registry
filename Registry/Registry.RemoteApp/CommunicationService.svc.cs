@@ -85,9 +85,9 @@ namespace Registry.Data.Services
       Tracer.TraceExit();
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources()
+    public async Task<GetAllResourcesResult[]> GetAllResources(int skip, int take)
     {
-      return await _resourceRepository.GetAllResources();
+      return await _resourceRepository.GetAllResources(skip, take);
     }
 
     public string GetCloudBlobConnectionString()

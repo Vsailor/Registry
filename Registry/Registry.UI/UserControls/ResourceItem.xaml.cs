@@ -29,6 +29,8 @@ namespace Registry.UI.UserControls
       currentResource = res;
       ResourceName.Text = res.Name;
       ResourceDescription.Text = res.Description;
+      if (res.FileName != null)
+      ResourceFileName.Text = $"Файл ресурсу: {res.FileName.Substring(1)}";
     }
 
     public string ResourceId { get; set; }
@@ -46,19 +48,32 @@ namespace Registry.UI.UserControls
         return;
       }
 
-      using (WebClient client = new WebClient())
-      {
-        await Task.Run(() => 
-          client.DownloadFileAsync(new Uri(currentResource.Url), $"{dlg.SelectedPath}{currentResource.FileName}"));
-      }
+      await DownloadFile(dlg.SelectedPath, currentResource.FileName);
 
       Process.Start(dlg.SelectedPath);
+
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
+    }
+
+    private async Task DownloadFile(string path, string fileName)
+    {
+      using (WebClient client = new WebClient())
+      {
+        await Task.Run(() =>
+          client.DownloadFileAsync(new Uri(currentResource.Url), $"{path}{fileName}"));
+      }
     }
 
     private void ResourceItemMainGrid_OnClick(object sender, RoutedEventArgs e)
     {
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new UpdateResource(_allResources.First(r => r.Id == ResourceId)));
+    }
+
+    private async void OpenButton_OnClick(object sender, RoutedEventArgs e)
+    {
+      string fileName = currentResource.FileName.Insert(currentResource.FileName.LastIndexOf('.'), $"-{Guid.NewGuid().ToString("N")}");
+      await DownloadFile(RegistryCommon.Instance.CacheDirectory, fileName);
+      Process.Start($"{RegistryCommon.Instance.CacheDirectory}{fileName}");
     }
   }
 }

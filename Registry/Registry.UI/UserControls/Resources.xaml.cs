@@ -20,31 +20,24 @@ namespace Registry.UI.UserControls
     private GetAllGroupsResult _selectedGroup;
     private GetAllGroupsResult[] _allGroups;
     private GetAllResourcesResult[] _allResources;
+    private const int Take = 10;
+
+    private Button LoadButton = new Button
+    {
+      Content = $"Показати ще {Take} ресурсiв"
+    };
 
     private readonly IResourceGroupService _resourceGroupService = RegistryCommon.Instance.Container.Resolve<IResourceGroupService>();
 
     public Resources()
     {
       InitializeComponent();
+      LoadButton.Click += LoadButtonOnClick;
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
-    }
-
-    private async void LoadNextResourcesOnClick(object sender, RoutedEventArgs routedEventArgs)
-    {
-      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
-      _allResources = await _resourceService.GetAllResources();
-
-      foreach (var res in _allResources)
-      {
-        ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
-      }
-
-      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
 
     private void CategoriesTree_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
     {
-
     }
 
     private void AddNewResourceButton_OnClick(object sender, RoutedEventArgs e)
@@ -61,11 +54,13 @@ namespace Registry.UI.UserControls
     {
       RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
 
-      _allResources = await _resourceService.GetAllResources();
+      _allResources = await _resourceService.GetAllResources(0, Take);
       foreach (var res in _allResources)
       {
         ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
       }
+
+      ResourcesListBox.Items.Add(LoadButton);
 
       ResourcesListBox.SelectionChanged += ResourcesListBoxOnSelectionChanged;
 
@@ -89,7 +84,6 @@ namespace Registry.UI.UserControls
 
     private void ResourcesListBoxOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
     {
-     
     }
 
     private void FillCategories(
@@ -103,7 +97,6 @@ namespace Registry.UI.UserControls
         {
           Header = item.Name,
           Uid = item.Id.ToString(),
-          IsExpanded = true
         };
 
         baseItem.Items.Add(newItem);
@@ -119,25 +112,12 @@ namespace Registry.UI.UserControls
 
       if (!string.IsNullOrEmpty(UniqueIdentifier.Text))
       {
-        int id;
-        if (int.TryParse(UniqueIdentifier.Text, out id))
-        {
-          request.Id = id;
-        }
-        else
-        {
-          MessageBox.Show(
-            "Унікальний ідентифікатор має не вірний формат",
-            "Помилка",
-            MessageBoxButton.OK,
-            MessageBoxImage.Error);
-          return;
-        }
+        request.Id = UniqueIdentifier.Text;
       }
 
       if (CategoriesTree.SelectedItem != null)
       {
-        request.CategoryId = Guid.Parse(((TreeViewItem) CategoriesTree.SelectedItem).Uid);
+        request.CategoryId = Guid.Parse(((TreeViewItem)CategoriesTree.SelectedItem).Uid);
       }
 
       if (GroupsListBox.SelectedItems.Count != 0)
@@ -183,6 +163,23 @@ namespace Registry.UI.UserControls
     private void ClearFiltersButton_OnClick(object sender, RoutedEventArgs e)
     {
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Resources());
+    }
+
+
+    private async void LoadButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
+    {
+      ResourcesListBox.Items.Remove(LoadButton);
+      int oldCount = _allResources.Length;
+      _allResources = await _resourceService.GetAllResources(_allResources.Length, Take);
+      foreach (var res in _allResources)
+      {
+        ResourcesListBox.Items.Add(new ResourceItem(res, _allResources));
+      }
+
+      if (_allResources.Length - oldCount == Take)
+      {
+        ResourcesListBox.Items.Add(LoadButton);
+      }
     }
   }
 }

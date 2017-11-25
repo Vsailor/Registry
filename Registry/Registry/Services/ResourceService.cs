@@ -47,9 +47,10 @@ namespace Registry.Services
       await _resourceRepository.UpdateResourceAsync(request);
     }
 
-    public async Task<GetAllResourcesResult[]> GetAllResources()
+    public async Task<GetAllResourcesResult[]> GetAllResources(int skip, int take)
     {
-      return await _resourceRepository.GetAllResourcesAsync();
+      var result = await _resourceRepository.GetAllResourcesAsync(skip, take);
+      return result;
     }
 
     public async Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter)

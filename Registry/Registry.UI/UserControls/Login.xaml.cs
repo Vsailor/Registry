@@ -76,7 +76,7 @@ namespace Registry.UI.UserControls
 
       RegistryCommon.Instance.Login = result.Login;
       RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new MainMenu());
-      RegistryCommon.Instance.MainProgressBar.Text = $"Hi, {result.Name}";
+      RegistryCommon.Instance.MainProgressBar.Text = $"Привiт, {result.Name}";
     }
   }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,7 +39,6 @@ namespace Registry.UI.UserControls
     {
       InitializeComponent();
       _selectedResource = resource;
-      UniqueIdentifier.Text = _selectedResource.Id;
     }
 
     private void BackButton_OnClick(object sender, RoutedEventArgs e)
@@ -90,7 +90,8 @@ namespace Registry.UI.UserControls
         OwnerLogin = RegistryCommon.Instance.Login,
         CategoryId = Guid.Parse(selectedCategory.Uid),
         ResourceGroups = resourceGroups.ToArray(),
-        SaveDate = _selectedResource.Id
+        SaveDate = _selectedResource.Id,
+        Uid = UniqueIdentifier.Text
       };
 
       if (string.IsNullOrEmpty(ResourceTags.Text))
@@ -133,16 +134,34 @@ namespace Registry.UI.UserControls
                   $"{request.SaveDate.ToString(CultureInfo.InvariantCulture)}_{request.FileName}");
           }
         }
+        else
+        {
+          request.FileName = _selectedResource.FileName;
+          request.Url = _selectedResource.Url;
+        }
 
         await _resourceService.UpdateResource(request);
 
         RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Resources());
         RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
       }
+      catch (FaultException ex)
+      {
+        if (ex.Reason.ToString() == "UidExist")
+        {
+          MessageBox.Show("Такий iдентифiкатор вже існує", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+          SaveButton.IsEnabled = true;
+          RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
+          return;
+        }
+
+        throw;
+      }
       catch (Exception ex)
       {
         MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
         SaveButton.IsEnabled = true;
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
       }
     }
 
@@ -155,6 +174,17 @@ namespace Registry.UI.UserControls
           "Помилка",
           MessageBoxButton.OK,
           MessageBoxImage.Error);
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
+        return false;
+      }
+
+      if (string.IsNullOrEmpty(UniqueIdentifier.Text))
+      {
+        MessageBox.Show(
+         "Задайте ідентифiкатор ресурса",
+         "Помилка",
+         MessageBoxButton.OK,
+         MessageBoxImage.Error);
         RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
         return false;
       }
@@ -191,6 +221,8 @@ namespace Registry.UI.UserControls
       GetAllCategoriesResult[] result = await _categoryService.GetAllCategories();
       var baseItem = result.Single(item => item.ParentId == null);
       var resourceDetails = await _resourceService.GetResourceDetails(_selectedResource.Id);
+      UniqueIdentifier.Text = resourceDetails.Uid;
+
       var newTreeItem = new TreeViewItem
       {
         Header = baseItem.Name,
@@ -232,7 +264,6 @@ namespace Registry.UI.UserControls
         {
           Header = item.Name,
           Uid = item.Id.ToString(),
-          IsExpanded = true,
           IsSelected = selectedId == item.Id
         };
 

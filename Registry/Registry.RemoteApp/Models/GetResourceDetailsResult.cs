@@ -9,5 +9,7 @@ namespace Registry.Data.Models
     public Guid[] ResourceGroups { get; set; }
 
     public string[] Tags { get; set; }
+
+    public string Uid { get; set; }
   }
 }

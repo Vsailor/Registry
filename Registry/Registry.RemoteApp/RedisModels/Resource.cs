@@ -13,5 +13,7 @@
     public string Owner { get; set; }
 
     public string SaveDate { get; set; }
+
+    public string Uid { get; set; }
   }
 }

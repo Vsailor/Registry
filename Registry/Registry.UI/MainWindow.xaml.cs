@@ -12,6 +12,7 @@ namespace Registry.UI
     public MainWindow()
     {
       InitializeComponent();
+      WindowStartupLocation = WindowStartupLocation.CenterScreen;
       RegistryCommon.Instance.MainGrid = MainGrid;
       RegistryCommon.Instance.MainProgressBar = MainProgressBar;
       MainGrid.Children.Add(new Login());

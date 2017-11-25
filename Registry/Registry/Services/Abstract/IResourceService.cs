@@ -12,7 +12,7 @@ namespace Registry.Services.Abstract
 
     Task UpdateResource(UpdateResourceRequest request);
 
-    Task<GetAllResourcesResult[]> GetAllResources();
+    Task<GetAllResourcesResult[]> GetAllResources(int skip, int take);
 
     Task<GetAllResourcesResult[]> GetResources(UseFiltersRequest filter);
 

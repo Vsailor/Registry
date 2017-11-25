@@ -104,6 +104,7 @@
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ResourceGroups" nillable="true" type="q1:ArrayOfguid" />
       <xs:element minOccurs="0" name="SaveDate" nillable="true" type="xs:string" />
       <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Uid" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -121,6 +122,7 @@
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SaveDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Uid" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -128,7 +130,7 @@
   <xs:complexType name="UseFiltersRequest">
     <xs:sequence>
       <xs:element minOccurs="0" name="CategoryId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ResourceGroupId" nillable="true" type="ser:guid" />
       <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q3:ArrayOfstring" />
@@ -140,6 +142,7 @@
       <xs:element minOccurs="0" name="Category" type="ser:guid" />
       <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ResourceGroups" nillable="true" type="q4:ArrayOfguid" />
       <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q5:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Uid" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetResourceDetailsResult" nillable="true" type="tns:GetResourceDetailsResult" />

@@ -77,7 +77,8 @@ namespace Registry.UI.UserControls
         OwnerLogin = RegistryCommon.Instance.Login,
         CategoryId = Guid.Parse(selectedCategory.Uid),
         ResourceGroups = resourceGroups.ToArray(),
-        SaveDate = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds)).ToString()
+        SaveDate = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds)).ToString(),
+        Uid = UniqueIdentifier.Text
       };
 
       if (string.IsNullOrEmpty(ResourceTags.Text))
@@ -110,7 +111,8 @@ namespace Registry.UI.UserControls
       {
         using (var fileStream = new FileStream(FileNameTextBox.Text, FileMode.Open))
         {
-          request.FileName = FileNameTextBox.Text.Substring(FileNameTextBox.Text.LastIndexOf("\\", StringComparison.Ordinal));
+          request.FileName =
+            FileNameTextBox.Text.Substring(FileNameTextBox.Text.LastIndexOf("\\", StringComparison.Ordinal));
           request.Url = await _resourceService.UploadToBlob(fileStream, Guid.NewGuid().ToString("N"));
         }
 
@@ -119,10 +121,17 @@ namespace Registry.UI.UserControls
         RegistryCommon.Instance.MainGrid.OpenUserControlWithSignOut(new Resources());
         RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Saved;
       }
+      catch (ArgumentException ex)
+      {
+        MessageBox.Show("Такий iдентифiкатор вже існує", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+        SaveButton.IsEnabled = true;
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
+      }
       catch (Exception ex)
       {
         MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
         SaveButton.IsEnabled = true;
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
       }
     }
 
@@ -143,6 +152,17 @@ namespace Registry.UI.UserControls
       {
         MessageBox.Show(
          "Задайте ім'я ресурса",
+         "Помилка",
+         MessageBoxButton.OK,
+         MessageBoxImage.Error);
+        RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Failed;
+        return false;
+      }
+
+      if (string.IsNullOrEmpty(UniqueIdentifier.Text))
+      {
+        MessageBox.Show(
+         "Задайте ідентифiкатор ресурса",
          "Помилка",
          MessageBoxButton.OK,
          MessageBoxImage.Error);
@@ -204,7 +224,6 @@ namespace Registry.UI.UserControls
         {
           Header = item.Name,
           Uid = item.Id.ToString(),
-          IsExpanded = true
         };
 
         baseItem.Items.Add(newItem);

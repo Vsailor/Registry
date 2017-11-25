@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           DispatcherUnhandledException="Application_DispatcherUnhandledException"
              xmlns:local="clr-namespace:Registry.UI"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             Exit="App_OnExit">
     <Application.Resources>
             <Style x:Key="SimpleButton" TargetType="Button">
                 <Setter Property="OverridesDefaultStyle" Value="True" />

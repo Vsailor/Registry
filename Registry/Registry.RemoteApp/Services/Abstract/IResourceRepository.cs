@@ -11,7 +11,7 @@ namespace Registry.Data.Services.Abstract
     Task CreateResource(CreateResourceRequest request);
 
     [OperationContract]
-    Task<GetAllResourcesResult[]> GetAllResources();
+    Task<GetAllResourcesResult[]> GetAllResources(int skip, int take);
 
     [OperationContract]
     string GetCloudBlobConnectionString();

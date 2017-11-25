@@ -21,5 +21,7 @@ namespace Registry.Data.Models
     public Guid[] ResourceGroups { get; set; } 
 
     public string SaveDate { get; set; }
+
+    public string Uid { get; set; }
   }
 }

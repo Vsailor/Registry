@@ -31,7 +31,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0">Унікальний ідентифікатор:</TextBlock>
-            <TextBox Grid.Row="1" Name="UniqueIdentifier" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Row="1" Name="UniqueIdentifier"></TextBox>
             <TextBlock Grid.Row="2" Margin="0,10,0,0">Назва:</TextBlock>
             <TextBox Grid.Row="3" Name="ResourceTitle"></TextBox>
             <TextBlock Grid.Row="4" Margin="0,10,0,0">Опис:</TextBlock>

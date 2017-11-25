@@ -728,6 +728,9 @@ namespace Registry.Communication {
         private string[] TagsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UrlField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -845,6 +848,19 @@ namespace Registry.Communication {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Uid {
+            get {
+                return this.UidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UidField, value) != true)) {
+                    this.UidField = value;
+                    this.RaisePropertyChanged("Uid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Url {
             get {
                 return this.UrlField;
@@ -913,6 +929,9 @@ namespace Registry.Communication {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SaveDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UrlField;
@@ -993,6 +1012,19 @@ namespace Registry.Communication {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Uid {
+            get {
+                return this.UidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UidField, value) != true)) {
+                    this.UidField = value;
+                    this.RaisePropertyChanged("Uid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Url {
             get {
                 return this.UrlField;
@@ -1028,7 +1060,7 @@ namespace Registry.Communication {
         private System.Nullable<System.Guid> CategoryIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> IdField;
+        private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -1063,12 +1095,12 @@ namespace Registry.Communication {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Id {
+        public string Id {
             get {
                 return this.IdField;
             }
             set {
-                if ((this.IdField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
                 }
@@ -1142,6 +1174,9 @@ namespace Registry.Communication {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string[] TagsField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UidField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -1187,6 +1222,19 @@ namespace Registry.Communication {
                 if ((object.ReferenceEquals(this.TagsField, value) != true)) {
                     this.TagsField = value;
                     this.RaisePropertyChanged("Tags");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Uid {
+            get {
+                return this.UidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UidField, value) != true)) {
+                    this.UidField = value;
+                    this.RaisePropertyChanged("Uid");
                 }
             }
         }
@@ -1549,10 +1597,10 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task CreateResourceAsync(Registry.Communication.CreateResourceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetAllResources();
+        Registry.Communication.GetAllResourcesResult[] GetAllResources(int skip, int take);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync();
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int skip, int take);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         string GetCloudBlobConnectionString();
@@ -1620,12 +1668,12 @@ namespace Registry.Communication {
             return base.Channel.CreateResourceAsync(request);
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetAllResources() {
-            return base.Channel.GetAllResources();
+        public Registry.Communication.GetAllResourcesResult[] GetAllResources(int skip, int take) {
+            return base.Channel.GetAllResources(skip, take);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync() {
-            return base.Channel.GetAllResourcesAsync();
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int skip, int take) {
+            return base.Channel.GetAllResourcesAsync(skip, take);
         }
         
         public string GetCloudBlobConnectionString() {
@@ -1728,10 +1776,10 @@ namespace Registry.Communication {
         System.Threading.Tasks.Task CreateResourceAsync(Registry.Communication.CreateResourceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        Registry.Communication.GetAllResourcesResult[] GetAllResources();
+        Registry.Communication.GetAllResourcesResult[] GetAllResources(int skip, int take);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetAllResources", ReplyAction="http://tempuri.org/IResourceRepository/GetAllResourcesResponse")]
-        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync();
+        System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int skip, int take);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionString", ReplyAction="http://tempuri.org/IResourceRepository/GetCloudBlobConnectionStringResponse")]
         string GetCloudBlobConnectionString();
@@ -1917,12 +1965,12 @@ namespace Registry.Communication {
             return base.Channel.CreateResourceAsync(request);
         }
         
-        public Registry.Communication.GetAllResourcesResult[] GetAllResources() {
-            return base.Channel.GetAllResources();
+        public Registry.Communication.GetAllResourcesResult[] GetAllResources(int skip, int take) {
+            return base.Channel.GetAllResources(skip, take);
         }
         
-        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync() {
-            return base.Channel.GetAllResourcesAsync();
+        public System.Threading.Tasks.Task<Registry.Communication.GetAllResourcesResult[]> GetAllResourcesAsync(int skip, int take) {
+            return base.Channel.GetAllResourcesAsync(skip, take);
         }
         
         public string GetCloudBlobConnectionString() {

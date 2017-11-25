@@ -15,5 +15,7 @@ namespace Registry.Data.Models
     public string FileName { get; set; }
 
     public string SaveDate { get; set; }
+
+    public string Uid { get; set; }
   }
 }

@@ -31,9 +31,11 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock FontWeight="Bold" Grid.Row="0" Name="ResourceName"></TextBlock>
-                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Name="ResourceDescription"></TextBlock>
+                                        <TextBlock FontWeight="Bold" Grid.Row="0" Name="ResourceName" FontSize="13"></TextBlock>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Name="ResourceFileName" FontSize="11"></TextBlock>
+                                        <TextBlock Grid.Row="2" TextWrapping="Wrap" Name="ResourceDescription" FontSize="11"></TextBlock>
                                     </Grid>
                                 </Button>
                             </Grid>
@@ -41,7 +43,12 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Margin="10" Width="60" Height="20" Name="DownloadButton" Click="DownloadButton_Click">Скачати</Button>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Margin="10,2,2,0" Width="80" Height="20" Name="DownloadButton" Click="DownloadButton_Click">Скачати</Button>
+                    <Button Grid.Row="1" Margin="10,2,2,2" Width="80" Height="20" Name="OpenButton" Click="OpenButton_OnClick">Переглянути</Button>
                 </Grid>
             </Grid>
         </Border>
