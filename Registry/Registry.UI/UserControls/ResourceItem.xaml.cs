@@ -71,9 +71,16 @@ namespace Registry.UI.UserControls
 
     private async void OpenButton_OnClick(object sender, RoutedEventArgs e)
     {
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Loading;
+      OpenButton.IsEnabled = false;
       string fileName = currentResource.FileName.Insert(currentResource.FileName.LastIndexOf('.'), $"-{Guid.NewGuid().ToString("N")}");
+
       await DownloadFile(RegistryCommon.Instance.CacheDirectory, fileName);
+
       Process.Start($"{RegistryCommon.Instance.CacheDirectory}{fileName}");
+
+      OpenButton.IsEnabled = true;
+      RegistryCommon.Instance.MainProgressBar.Text = StatusBarState.Ready;
     }
   }
 }

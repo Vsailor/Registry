@@ -16,38 +16,49 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer CanContentScroll="True">
-                <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
+                <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged" FontSize="18">
                 </TreeView>
             </ScrollViewer>
             <Grid Grid.Column="1" Margin="10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Назва категорії:</TextBlock>
-                <TextBox IsEnabled="False" Grid.Row="1" Name="CategoryNameTextBox" TextChanged="CategoryNameTextBox_OnTextChanged"></TextBox>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button IsEnabled="False" Height="20" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteCategory" Click="DeleteCategory_Click">Видалити категорію</Button>
-                    <Button IsEnabled="False"  Height="20" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateCategory" Click="UpdateCategory_Click">Зберегти</Button>
-                </Grid>
-                <TextBlock Grid.Row="3">Назва нової підкатегорії:</TextBlock>
-                <TextBox IsEnabled="False" Grid.Row="4" Name="NewSubcategoryTextBox" TextChanged="NewSubcategoryTextBox_OnTextChanged"></TextBox>
-                <Grid Grid.Row="5">
-                    <Button Name="AddSubCategoryButton" IsEnabled="False" Height="20" Margin="10" Width="200" Click="AddSubCategoryButton_Click">Створити нову підкатегорію</Button>
-                </Grid>
+                <GroupBox Grid.Row="0" FontSize="14">
+                    <GroupBox.Header>
+                        Редагування категорії
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <TextBlock FontSize="16">Назва категорії:</TextBlock>
+                        <TextBox IsEnabled="False" Name="CategoryNameTextBox" TextChanged="CategoryNameTextBox_OnTextChanged" FontSize="16"></TextBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button IsEnabled="False" Height="30" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteCategory" Click="DeleteCategory_Click" FontSize="16">Видалити</Button>
+                            <Button IsEnabled="False"  Height="30" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateCategory" Click="UpdateCategory_Click" FontSize="16">Зберегти</Button>
+                        </Grid>
+                    </StackPanel>
+                    </GroupBox>
+                <GroupBox Grid.Row="1" FontSize="14">
+                    <GroupBox.Header>
+                        Створення нової підкатегорії
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <TextBlock FontSize="16">Назва:</TextBlock>
+                        <TextBox IsEnabled="False" Name="NewSubcategoryTextBox" TextChanged="NewSubcategoryTextBox_OnTextChanged" FontSize="16"></TextBox>
+                        <Grid>
+                            <Button Name="AddSubCategoryButton" IsEnabled="False" Height="30" Margin="10" Width="250" Click="AddSubCategoryButton_Click" FontSize="16">Створити нову підкатегорію</Button>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
 
         </Grid>
         <Grid Grid.Row="1">
-            <Button Margin="10" Width="100" Height="20" Name="BackButton" Click="BackButton_Click">Назад</Button>
+            <Button Margin="10" Width="100" Height="30" Name="BackButton" Click="BackButton_Click" FontSize="16">Назад</Button>
         </Grid>
     </Grid>
 </UserControl>

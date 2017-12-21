@@ -27,22 +27,22 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0">Унікальний ідентифікатор:</TextBlock>
-            <TextBox Grid.Row="1" Name="UniqueIdentifier"></TextBox>
-            <TextBlock Grid.Row="2" Margin="0,10,0,0">Назва:</TextBlock>
-            <TextBox Grid.Row="3" Name="ResourceTitle"></TextBox>
-            <TextBlock Grid.Row="4" Margin="0,10,0,0">Опис:</TextBlock>
-            <TextBox Grid.Row="5" TextWrapping="Wrap" Height="100" Name="ResourceDescription"></TextBox>
-            <TextBlock Grid.Row="6" Margin="0,10,0,0">Ключові слова:</TextBlock>
-            <TextBox Grid.Row="7" Name="ResourceTags"></TextBox>
-            <TextBlock Grid.Row="8" Margin="0,10,0,0">Файл ресурсу:</TextBlock>
+            <TextBlock Grid.Row="0" FontSize="16">Унікальний ідентифікатор:</TextBlock>
+            <TextBox Grid.Row="1" Name="UniqueIdentifier" FontSize="16"></TextBox>
+            <TextBlock Grid.Row="2" Margin="0,10,0,0" FontSize="16">Назва:</TextBlock>
+            <TextBox Grid.Row="3" Name="ResourceTitle" FontSize="16"></TextBox>
+            <TextBlock Grid.Row="4" Margin="0,10,0,0" FontSize="16">Опис:</TextBlock>
+            <TextBox Grid.Row="5" TextWrapping="Wrap" Height="100" Name="ResourceDescription" FontSize="16"></TextBox>
+            <TextBlock Grid.Row="6" Margin="0,10,0,0" FontSize="16">Ключові слова:</TextBlock>
+            <TextBox Grid.Row="7" Name="ResourceTags" FontSize="16"></TextBox>
+            <TextBlock Grid.Row="8" Margin="0,10,0,0" FontSize="16">Файл ресурсу:</TextBlock>
             <Grid Grid.Row="9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Name="FileNameTextBox"></TextBox>
-                <Button Grid.Column="1" Name="BrowseButton" Click="BrowseButton_OnClick">Вибрати</Button>
+                <TextBox Grid.Column="0" Name="FileNameTextBox" FontSize="16"></TextBox>
+                <Button Grid.Column="1" Name="BrowseButton" Click="BrowseButton_OnClick" FontSize="16">Вибрати</Button>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Margin="10,0,0,0" Grid.Row="0">
@@ -52,20 +52,20 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0">Категорія:</TextBlock>
+            <TextBlock Grid.Row="0" FontSize="16">Категорія:</TextBlock>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
+                <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged" FontSize="16">
                 </TreeView>
             </ScrollViewer>
-            <TextBlock Grid.Row="2" Margin="0,10,0,0">Групи ресурсів:</TextBlock>
-            <ListBox Name="GroupsListBox" Grid.Row="3">
+            <TextBlock Grid.Row="2" Margin="0,10,0,0" FontSize="16">Групи ресурсів:</TextBlock>
+            <ListBox Name="GroupsListBox" Grid.Row="3" FontSize="16">
             </ListBox>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
-            <Button Name="BackButton" Click="BackButton_OnClick" Width="100" Margin="0,10,0,0">Назад</Button>
+            <Button Name="BackButton" Click="BackButton_OnClick" Width="100" Margin="0,10,0,0" FontSize="16">Назад</Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
-            <Button Name="SaveButton" Width="100" Margin="0,10,0,0" Click="SaveButton_OnClick">Зберегти</Button>
+            <Button Name="SaveButton" Width="100" Margin="0,10,0,0" Click="SaveButton_OnClick" FontSize="16">Зберегти</Button>
         </Grid>
     </Grid>
 </UserControl>

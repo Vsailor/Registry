@@ -16,18 +16,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0">Введіть назву группи користувачів для пошуку:</TextBlock>
-                    <TextBox Name="GroupsFilterTextBox" Grid.Row="1" TextChanged="GroupsFilterTextBox_OnTextChanged"></TextBox>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontSize="16">Введіть назву группи користувачів для пошуку:</TextBlock>
+                <TextBox Name="GroupsFilterTextBox" Grid.Row="1" TextChanged="GroupsFilterTextBox_OnTextChanged" FontSize="16"></TextBox>
                 <ScrollViewer  Grid.Row="2" Margin="0,10,0,0" >
-                    <ListBox Name="GroupsListBox" SelectionMode="Single" SelectionChanged="GroupsListBox_OnSelectionChanged">
+                    <ListBox Name="GroupsListBox" SelectionMode="Single" SelectionChanged="GroupsListBox_OnSelectionChanged" FontSize="16">
                     </ListBox>
-                </ScrollViewer>    
-                
+                </ScrollViewer>
+
             </Grid>
             <Grid Grid.Column="1" Margin="10,0">
                 <Grid.RowDefinitions>
@@ -38,26 +38,26 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0">Відредагуйте назву групи:</TextBlock>
-                <TextBox IsEnabled="False" Grid.Row="1" Name="GroupNameTextBox" TextChanged="GroupNameTextBox_OnTextChanged"></TextBox>
+                <TextBlock Grid.Row="0" FontSize="16">Відредагуйте назву групи:</TextBlock>
+                <TextBox IsEnabled="False" Grid.Row="1" Name="GroupNameTextBox" TextChanged="GroupNameTextBox_OnTextChanged" FontSize="16"></TextBox>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button IsEnabled="False" Height="20" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteGroup" Click="DeleteGroup_OnClick">Видалити групу</Button>
-                    <Button IsEnabled="False"  Height="20" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateGroup" Click="UpdateGroup_OnClick">Зберегти</Button>
+                    <Button IsEnabled="False" Height="30" Grid.Column="0" Margin="0, 10, 10, 10" Name="DeleteGroup" Click="DeleteGroup_OnClick" FontSize="16">Видалити</Button>
+                    <Button IsEnabled="False"  Height="30" Grid.Column="1" Margin="10, 10, 0, 10" Name="UpdateGroup" Click="UpdateGroup_OnClick" FontSize="16">Зберегти</Button>
                 </Grid>
-                <TextBlock Grid.Row="3">Назва нової групи користувачів:</TextBlock>
-                <TextBox Grid.Row="4" Name="NewGroupTextBox" TextChanged="NewGroupTextBox_OnTextChanged"></TextBox>
+                <TextBlock Grid.Row="3" FontSize="16">Назва нової групи користувачів:</TextBlock>
+                <TextBox Grid.Row="4" Name="NewGroupTextBox" TextChanged="NewGroupTextBox_OnTextChanged" FontSize="16"></TextBox>
                 <Grid Grid.Row="5">
-                    <Button Name="AddGroupButton" IsEnabled="False" Height="20" Margin="10" Width="200" Click="AddGroupButton_OnClick">Створити нову групу</Button>
+                    <Button Name="AddGroupButton" IsEnabled="False" Height="30" Margin="10" Width="200" Click="AddGroupButton_OnClick" FontSize="16">Створити нову групу</Button>
                 </Grid>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
-            <Button Margin="10" Width="100" Height="20" Name="BackButton" Click="BackButton_OnClick">Назад</Button>
+            <Button Margin="10" Width="100" Height="30" Name="BackButton" Click="BackButton_OnClick" FontSize="16">Назад</Button>
         </Grid>
     </Grid>
 </UserControl>

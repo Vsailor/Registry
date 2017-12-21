@@ -52,7 +52,8 @@ namespace Registry.Data.Services
 
     public async Task UpdateResource(UpdateResourceRequest request)
     {
-      if ((await Redis.HashValuesAsync(ResourcesIds)).Select(x => x.ToString()).Contains(request.Uid))
+      if ((await Redis.HashGetAllAsync(ResourcesIds)).ToDictionary(x => x.Name.ToString(), x=> x.Value.ToString())
+        .Where(x => x.Value == request.Uid && x.Key != request.Id).Count() != 0)
       {
         throw new FaultException(new FaultReason("UidExist"));
       }

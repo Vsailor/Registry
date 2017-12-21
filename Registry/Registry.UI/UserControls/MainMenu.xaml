@@ -11,25 +11,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <GroupBox MaxWidth="200">
+            <GroupBox MaxWidth="300" FontSize="14">
                 <GroupBox.Header>
-                    Користувачі системи
+                    Робота з користувачами
                 </GroupBox.Header>
                 <StackPanel>
-                    <Button Name="ChangeUserButton" Margin="0,10,0,0" MaxWidth="150" Click="ChangeUserButton_Click">Всі користувачі</Button>
-                    <Button Name="UserGroupsButton" Margin="0,10,0,0" MaxWidth="150" Click="UserGroupsButton_OnClick">Групи користувачів</Button>
+                    <Button Name="ChangeUserButton" Margin="0,10,0,0" MaxWidth="250" Click="ChangeUserButton_Click" FontSize="16">Всі користувачі</Button>
+                    <Button Name="UserGroupsButton" Margin="0,10,0,0" MaxWidth="250" Click="UserGroupsButton_OnClick" FontSize="16">Групи користувачів</Button>
                 </StackPanel>
             </GroupBox>
         </Grid>
         <Grid Grid.Row="1" Margin="0,20,0,0">
-            <GroupBox  MaxWidth="200">
+            <GroupBox  MaxWidth="300" FontSize="14">
                 <GroupBox.Header>
                     Робота з ресурсами
                 </GroupBox.Header>
                 <StackPanel>
-                    <Button Name="CategoriesButton" MaxWidth="150" Margin="0,10,0,0" Click="CategoriesButton_Click">Категорії ресурсів</Button>
-                    <Button Name="ThemesButton"  MaxWidth="150" Margin="0,10,0,0" Click="ThemesButton_OnClick">Групи ресурсів</Button>
-                    <Button Name="ResourcesButton" MaxWidth="150" Margin="0,10,0,0" Click="ResourcesButton_OnClick">Ресурси</Button>
+                    <Button Name="CategoriesButton" MaxWidth="250" Margin="0,10,0,0" Click="CategoriesButton_Click" FontSize="16">Категорії ресурсів</Button>
+                    <Button Name="ThemesButton"  MaxWidth="250" Margin="0,10,0,0" Click="ThemesButton_OnClick" FontSize="16">Групи ресурсів</Button>
+                    <Button Name="ResourcesButton" MaxWidth="250" Margin="0,10,0,0" Click="ResourcesButton_OnClick" FontSize="16">Ресурси</Button>
                 </StackPanel>
             </GroupBox>
         </Grid>

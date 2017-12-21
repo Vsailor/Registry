@@ -12,11 +12,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0">Введіть ім'я користувача або логін для пошуку:</TextBlock>
-        <TextBox Name="UserFilterTextBox" Grid.Row="1" TextChanged="UserFilterTextBox_TextChanged"></TextBox>
+        <TextBlock Grid.Row="0" FontSize="16">Введіть ім'я користувача або логін для пошуку:</TextBlock>
+        <TextBox Name="UserFilterTextBox" Grid.Row="1" TextChanged="UserFilterTextBox_TextChanged" FontSize="16"></TextBox>
         <Grid Grid.Row="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
-                <ListView  Name="UsersListBox" SelectionChanged="UsersListBox_OnSelected">
+                <ListView  Name="UsersListBox" SelectionChanged="UsersListBox_OnSelected" FontSize="16">
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
@@ -34,8 +34,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="BackButton" Width="100" Grid.Column="0" Margin="0,10,5,0" HorizontalAlignment="Left" Click="BackButton_Click">Назад</Button>
-            <Button Name="NewUserButton" Width="150" Grid.Column="1" Margin="5,10,0,0" Click="NewUserButton_Click" HorizontalAlignment="Right">Створити користувача</Button>
+            <Button Name="BackButton" Width="100" Grid.Column="0" Margin="0,10,5,0" HorizontalAlignment="Left" Click="BackButton_Click" FontSize="16">Назад</Button>
+            <Button Name="NewUserButton" Width="250" Grid.Column="1" Margin="5,10,0,0" Click="NewUserButton_Click" HorizontalAlignment="Right" FontSize="16">Створити користувача</Button>
         </Grid>
     </Grid>
 </UserControl>

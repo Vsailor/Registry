@@ -13,10 +13,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0">Логін:</TextBlock>
-        <TextBox Grid.Row="1" Margin="0,10,0,10" Name="LoginTextBox">admin</TextBox>
-        <TextBlock Grid.Row="2">Пароль:</TextBlock>
-        <PasswordBox Grid.Row="3" Margin="0,10,0,10" Name="PasswordTextBox" Password="admin"></PasswordBox>
-        <Button Name="SignInButton" Grid.Row="4" Click="SignInButton_Click">Авторизуватися</Button>
+        <TextBlock Grid.Row="0" FontSize="16">Логін:</TextBlock>
+        <TextBox Grid.Row="1" Margin="0,10,0,10" Name="LoginTextBox" FontSize="16"></TextBox>
+        <TextBlock Grid.Row="2" FontSize="16">Пароль:</TextBlock>
+        <PasswordBox Grid.Row="3" Margin="0,10,0,10" Name="PasswordTextBox" Password="" FontSize="16"></PasswordBox>
+        <Button Name="SignInButton" Grid.Row="4" Click="SignInButton_Click" FontSize="16">Авторизуватися</Button>
     </Grid>
 </UserControl>

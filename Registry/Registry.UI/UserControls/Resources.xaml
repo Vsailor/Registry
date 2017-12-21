@@ -10,7 +10,7 @@
             <Grid HorizontalAlignment="Center" VerticalAlignment="Top" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Width="530">
                     <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"  FontSize="15">Ресурси:</TextBlock>
+                    <TextBlock Grid.Row="0"  FontSize="18">Ресурси:</TextBlock>
                     <ScrollViewer Grid.Row="1" VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden">
                         <ListBox Name="ResourcesListBox" VerticalAlignment="Top" HorizontalAlignment="Center">
                         </ListBox>
@@ -28,12 +28,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Width="100" Name="BackButton" Click="BackButton_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0">Назад</Button>
-                        <Button Grid.Column="1" Name="AddNewResourceButton" Click="AddNewResourceButton_OnClick" Margin="0,10,0,0" Width="150" HorizontalAlignment="Right">Створити новий ресурс</Button>
+                        <Button Grid.Column="0" Width="100" Name="BackButton" Click="BackButton_OnClick" HorizontalAlignment="Left" Margin="0,10,0,0" FontSize="16">Назад</Button>
+                        <Button Grid.Column="1" Name="AddNewResourceButton" Click="AddNewResourceButton_OnClick" Margin="0,10,0,0" Width="250" HorizontalAlignment="Right" FontSize="16">Створити новий ресурс</Button>
                     </Grid>
                 </Grid>
 
-                <Grid Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                <Grid Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0" MinWidth="310">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -49,29 +49,29 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" FontSize="15">Фільтри:</TextBlock>
+                    <TextBlock Grid.Row="0" FontSize="18">Фільтри:</TextBlock>
                     <Separator Grid.Row="1"/>
-                    <TextBlock Grid.Row="2">Унікальний ідентифікатор:</TextBlock>
-                    <TextBox Grid.Row="3" Name="UniqueIdentifier"></TextBox>
-                    <TextBlock Grid.Row="4" Margin="0,10,0,0">Назва:</TextBlock>
-                    <TextBox Grid.Row="5" Name="NameTextBox"></TextBox>
-                    <TextBlock Grid.Row="6" Margin="0,10,0,0">Ключові слова:</TextBlock>
-                    <TextBox Grid.Row="7" Name="TagsTextBox"></TextBox>
-                    <TextBlock Grid.Row="8" Margin="0,10,0,0">Категорії:</TextBlock>
+                    <TextBlock Grid.Row="2" FontSize="16">Унікальний ідентифікатор:</TextBlock>
+                    <TextBox Grid.Row="3" Name="UniqueIdentifier" FontSize="16"></TextBox>
+                    <TextBlock Grid.Row="4" Margin="0,10,0,0" FontSize="16">Назва:</TextBlock>
+                    <TextBox Grid.Row="5" Name="NameTextBox" FontSize="16"></TextBox>
+                    <TextBlock Grid.Row="6" Margin="0,10,0,0" FontSize="16">Ключові слова:</TextBlock>
+                    <TextBox Grid.Row="7" Name="TagsTextBox" FontSize="16"></TextBox>
+                    <TextBlock Grid.Row="8" Margin="0,10,0,0" FontSize="16">Категорії:</TextBlock>
                     <ScrollViewer Grid.Row="9" CanContentScroll="True">
-                        <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged">
+                        <TreeView Name="CategoriesTree" SelectedItemChanged="CategoriesTree_OnSelectedItemChanged" FontSize="16">
                         </TreeView>
                     </ScrollViewer>
-                    <TextBlock Grid.Row="10" Margin="0,10,0,0">Групи ресурсів:</TextBlock>
-                    <ListBox Name="GroupsListBox" Grid.Row="11"></ListBox>
+                    <TextBlock Grid.Row="10" Margin="0,10,0,0" FontSize="16">Групи ресурсів:</TextBlock>
+                    <ListBox Name="GroupsListBox" Grid.Row="11" FontSize="16"></ListBox>
                     <Grid Grid.Row="12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Width="150" Margin="0,10,10,0" HorizontalAlignment="Left" Name="ClearFiltersButton" Click="ClearFiltersButton_OnClick">Скинути фільтри</Button>
+                        <Button Grid.Column="0" Width="150" Margin="0,10,10,0" HorizontalAlignment="Left" Name="ClearFiltersButton" Click="ClearFiltersButton_OnClick" FontSize="16">Скинути фільтри</Button>
 
-                        <Button Grid.Column="1" Width="150" Margin="10,10,0,0" HorizontalAlignment="Right" Name="UseFiltersButton" Click="UseFiltersButton_Click">Застосувати фільтри</Button>
+                        <Button Grid.Column="1" Width="220" Margin="10,10,0,0" HorizontalAlignment="Right" Name="UseFiltersButton" Click="UseFiltersButton_Click" FontSize="16">Застосувати фільтри</Button>
                     </Grid>
                 </Grid>
             </Grid>
